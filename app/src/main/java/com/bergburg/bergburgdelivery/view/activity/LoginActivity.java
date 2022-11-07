@@ -126,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(usuarioAtual.getContaAtiva() != null){
                     if(usuarioAtual.getContaAtiva().equalsIgnoreCase(Constantes.NAO)){
                         calendar.setTimeInMillis(System.currentTimeMillis());
-                        System.out.println("Milisegundos: "+System.currentTimeMillis());
+                        System.out.println("Login -Milisegundos: "+System.currentTimeMillis());
 
                         btnLogin = false;
                         Long idUsuario = preferences.recuperarID();
@@ -312,30 +312,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        dialogInternet = new Dialog(binding.getRoot().getContext(),android.R.style.Theme_Material_Light_Dialog_Presentation);
-        if(!VerificadorDeConexao.isConnectionAvailable(binding.getRoot().getContext())){
-            dialogInternet.setContentView(R.layout.layout_sem_conexao);
-            Button btn = dialogInternet.findViewById(R.id.buttonAtualizar);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialogInternet.dismiss();
-                }
-            });
 
-           // dialogInternet.show();
-        }else{
-            dialogInternet.dismiss();
-        }
 
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
         ticker = false;
 
     }
@@ -343,18 +327,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 

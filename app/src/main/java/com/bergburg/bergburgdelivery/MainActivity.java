@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     private Boolean ticker = false;
     private String tokenUsuario = "";
     private Boolean  btnDeslogado = false;
+    public static Boolean statusActivity = false;
 
 
     private String[] permissoes = new String[]{
@@ -230,14 +231,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Resposta resposta) {
                 if(resposta.getStatus()){
-                    menu.setGroupVisible(R.id.deslogado,true);
-                    // Toast.makeText(MainActivity.this, resposta.getMensagem(), Toast.LENGTH_SHORT).show();
+                    if(resposta.getMensagem().equalsIgnoreCase(Constantes.DESLOGADO)){
+                        preferences.limpar();
+                        menu.setGroupVisible(R.id.deslogado,true);
+                    }
                 }else{
+                    if(resposta.getMensagem().equalsIgnoreCase(Constantes.USUARIO_NAO_ENCONTRADO)){
+                        preferences.limpar();
+                        menu.setGroupVisible(R.id.deslogado,true);
+                        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    }
                     //  snackbar(resposta.getMensagem());
                     Toast.makeText(MainActivity.this, resposta.getMensagem(), Toast.LENGTH_SHORT).show();
                     System.out.println("Error login "+resposta.getMensagem());
 
                 }
+
+
             }
         });
 
@@ -322,6 +332,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        String status = preferences.recuperarStatus();
+        System.out.println("Status recuperado: "+status);
+        if(status != null){
+            if(status.equalsIgnoreCase("Logado")){
+                logado = true;
+            }
+        }else{
+            logado = false;
+        }
+
+
         if(logado){
             ticker = true;
           //  startClock();
@@ -345,10 +367,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        statusActivity = true;
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
         ticker = false;
+        statusActivity = false;
     }
 
     @Override

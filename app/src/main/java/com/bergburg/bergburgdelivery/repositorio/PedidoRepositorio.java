@@ -44,7 +44,7 @@ public class PedidoRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
                     }
                 });
             }else{
@@ -73,7 +73,7 @@ public class PedidoRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                      //  listener.onFailures(Constantes.INSTABILIDADE);
                     }
                 });
             }else{
@@ -102,7 +102,7 @@ public class PedidoRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
                     }
                 });
             }else{
@@ -132,7 +132,7 @@ public class PedidoRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
                     }
                 });
             }else{
@@ -161,7 +161,7 @@ public class PedidoRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
                     }
                 });
             }else{
@@ -191,7 +191,7 @@ public class PedidoRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
                     }
                 });
             }else{
@@ -221,7 +221,7 @@ public class PedidoRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
                     }
                 });
             }else{
@@ -310,7 +310,7 @@ public class PedidoRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                      //  listener.onFailures(Constantes.INSTABILIDADE);
                     }
                 });
             }else{
@@ -343,7 +343,7 @@ public class PedidoRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                      //  listener.onFailures(Constantes.INSTABILIDADE);
                     }
                 });
             }else{

@@ -48,7 +48,7 @@ public class CadastroActivity extends AppCompatActivity  {
     private Runnable runnable;
     private Handler handler = new Handler();
     private Boolean ticker = false;
-    private  Dialog dialogInternet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,7 +136,7 @@ public class CadastroActivity extends AppCompatActivity  {
                 }
 
                         calendar.setTimeInMillis(System.currentTimeMillis());
-                        System.out.println("Milisegundos: "+System.currentTimeMillis());
+                        System.out.println("Cadastro -Milisegundos: "+System.currentTimeMillis());
 
                         Long idUsuario = preferences.recuperarID();
                         if(idUsuario != null){
@@ -279,21 +279,8 @@ public class CadastroActivity extends AppCompatActivity  {
     @Override
     protected void onResume() {
         super.onResume();
-        dialogInternet = new Dialog(binding.getRoot().getContext(),android.R.style.Theme_Material_Light_Dialog_Presentation);
-        if(!VerificadorDeConexao.isConnectionAvailable(binding.getRoot().getContext())){
-            dialogInternet.setContentView(R.layout.layout_sem_conexao);
-            Button btn = dialogInternet.findViewById(R.id.buttonAtualizar);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialogInternet.dismiss();
-                }
-            });
-
-          //  dialogInternet.show();
-        }else{
-            dialogInternet.dismiss();
-        }
+        ticker = true;
+        startClock();
 
     }
 
@@ -301,19 +288,19 @@ public class CadastroActivity extends AppCompatActivity  {
     protected void onStop() {
         super.onStop();
        // ticker = false;
-        dialogInternet.dismiss();
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        dialogInternet.dismiss();
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        dialogInternet.dismiss();
+
     }
 
     @Override

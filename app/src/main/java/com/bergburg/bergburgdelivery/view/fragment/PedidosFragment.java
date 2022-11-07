@@ -42,7 +42,7 @@ public class PedidosFragment extends Fragment {
     private Runnable runnable;
     private Handler handler = new Handler();
     private Boolean ticker = false;
-    private  Dialog dialogInternet;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,9 +82,7 @@ public class PedidosFragment extends Fragment {
 
         pedidoAdapter.attackListener(onListenerAcao);
 
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
         observe();
         return  binding.getRoot();
@@ -100,7 +98,7 @@ public class PedidosFragment extends Fragment {
                 }
 
                         calendar.setTimeInMillis(System.currentTimeMillis());
-                        System.out.println("Milisegundos: "+System.currentTimeMillis());
+                        System.out.println("Pedidos -Milisegundos: "+System.currentTimeMillis());
 
                         //ficar observando se tem alguma alteração
                         String statusLogado = preferences.recuperarStatus();
@@ -165,32 +163,16 @@ public class PedidosFragment extends Fragment {
         ticker = true;
         startClock();
 
-        dialogInternet = new Dialog(binding.getRoot().getContext(),android.R.style.Theme_Material_Light_Dialog_Presentation);
-        if(!VerificadorDeConexao.isConnectionAvailable(binding.getRoot().getContext())){
-            dialogInternet.setContentView(R.layout.layout_sem_conexao);
-            Button btn = dialogInternet.findViewById(R.id.buttonAtualizar);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialogInternet.dismiss();
-                }
-            });
-
-          //  dialogInternet.show();
-        }else{
-            dialogInternet.dismiss();
-        }
 
         String status = preferences.recuperarStatus();
         if(status != null){
-            if(status.equalsIgnoreCase(Constantes.DESLOGADO)){
+            if(status.isEmpty() || status.equalsIgnoreCase(Constantes.DESLOGADO)){
                 binding.imagemPedidos.setVisibility(View.VISIBLE);
                 binding.textPedido.setVisibility(View.VISIBLE);
                 binding.progressBarPedido.setVisibility(View.GONE);
+
             }
         }
-
-
 
 
     }
@@ -198,9 +180,7 @@ public class PedidosFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
 
     }
@@ -208,9 +188,7 @@ public class PedidosFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
         ticker = false;
 
     }
@@ -219,9 +197,7 @@ public class PedidosFragment extends Fragment {
     public void onStop() {
         super.onStop();
         ticker = false;
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 
@@ -229,9 +205,7 @@ public class PedidosFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         ticker = false;
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 }

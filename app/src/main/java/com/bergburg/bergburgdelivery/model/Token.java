@@ -6,6 +6,15 @@ public class Token {
     private String token;
 
 
+    @Override
+    public String toString() {
+        return "Token{" +
+                "id=" + id +
+                ", idUsuario=" + idUsuario +
+                ", token='" + token + '\'' +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

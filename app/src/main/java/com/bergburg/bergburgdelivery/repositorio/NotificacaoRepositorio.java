@@ -43,7 +43,7 @@ public class NotificacaoRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                          listener.onFailures(Constantes.INSTABILIDADE);
+                     //     listener.onFailures(Constantes.INSTABILIDADE);
                     }
                 });
             }else{
@@ -98,16 +98,18 @@ public class NotificacaoRepositorio {
                             public void onResponse(Call<NotificacaoDados> call, Response<NotificacaoDados> response) {
                                 if (response.isSuccessful()) {
                                     listener.onSuccess(response.body());
+                                    System.out.println("enviar a notificação");
                                 } else {
-                                    listener.onFailures("cod: " + response.code() +"\n "+ Constantes.INSTABILIDADE);
+                                    System.out.println("Não foi possível enviar a notificação");
+                                    listener.onFailures("cod: " + response.code() +"\n "+ response.message());
                                 }
-                                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxx "+response.code()+" - "+response.message());
+                                System.out.println(response.code()+" - "+response.message());
                             }
 
                             @Override
                             public void onFailure(Call<NotificacaoDados> call, Throwable t) {
                                 System.out.println("Error: "+t.getMessage());
-                                  listener.onFailures(Constantes.INSTABILIDADE);
+                               //   listener.onFailures(Constantes.INSTABILIDADE);
                             }
                         });
 
@@ -116,7 +118,7 @@ public class NotificacaoRepositorio {
                     }
 
                 }else{
-                    listener.onFailures(Constantes.INSTABILIDADE+" -2");
+                    listener.onFailures("não recebir os dados "+mensagem+" - "+titulo+" - "+" - "+token);
                 }
 
             }else{

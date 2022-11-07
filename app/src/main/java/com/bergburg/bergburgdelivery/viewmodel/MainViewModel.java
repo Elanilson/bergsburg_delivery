@@ -82,11 +82,7 @@ public class MainViewModel extends AndroidViewModel {
         APIListener<NotificacaoDados> listener = new APIListener<NotificacaoDados>() {
             @Override
             public void onSuccess(NotificacaoDados result) {
-                if(result.getTo() != null){
-                    _Resposta.setValue(new Resposta(result.getNotification().getTitle(),true));
-                }else{
-                    System.out.println("Não foi possível enviar a notificação");
-                }
+
             }
 
             @Override

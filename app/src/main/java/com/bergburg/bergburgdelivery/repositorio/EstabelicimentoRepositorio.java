@@ -38,7 +38,7 @@ public class EstabelicimentoRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                      //  listener.onFailures(Constantes.INSTABILIDADE);
                     }
                 });
             }else{

@@ -29,6 +29,7 @@ public class ConversasActivity extends AppCompatActivity {
     private ActivityConversasBinding binding;
     private ConversasViewModel viewModel;
     private ConversasAdapter adapter;
+    public static Boolean statusActivity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,8 +113,15 @@ public class ConversasActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
+        statusActivity = true;
 
     }
 }

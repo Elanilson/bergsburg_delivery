@@ -111,4 +111,19 @@ public class UsuarioPreferences {
     public String recuperarSenha(){
         return preferences.getString(CHAVE_SENHA, "");
     }
+    public void limpar(){
+        context.deleteSharedPreferences(NOME_ARQUIVO);
+        context.deleteSharedPreferences(CHAVE_ID);
+        context.deleteSharedPreferences(CHAVE_IDMENSAGEM);
+        context.deleteSharedPreferences(CHAVE_IDConversa);
+        context.deleteSharedPreferences(CHAVE_NOME);
+        context.deleteSharedPreferences(CHAVE_STATUS);
+        context.deleteSharedPreferences(CHAVE_IDSACOLA);
+        context.deleteSharedPreferences(CHAVE_LATITUDE);
+        context.deleteSharedPreferences(CHAVE_LONGITUDE);
+       // context.deleteSharedPreferences(CHAVE_EMAIL);
+       // context.deleteSharedPreferences(CHAVE_SENHA);
+        context.deleteSharedPreferences(CHAVE_ATIVADA);
+
+    }
 }

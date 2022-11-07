@@ -84,7 +84,7 @@ public class ExibirPedidoActivity extends AppCompatActivity {
                 }
 
                             calendar.setTimeInMillis(System.currentTimeMillis());
-                            System.out.println("Milisegundos: "+System.currentTimeMillis());
+                            System.out.println("ExibirPedido -Milisegundos: "+System.currentTimeMillis());
 
                             Handler handler = new Handler();
                             Bundle bundle = getIntent().getExtras() ;
@@ -169,7 +169,7 @@ public class ExibirPedidoActivity extends AppCompatActivity {
                         }else{
                             nome = "Chat";
                         }
-                        System.out.println("xxxx "+usuarioAtual.toString());
+                        System.out.println(usuarioAtual.toString());
                         Bundle bundle = new Bundle();
                         bundle.putString(Constantes.NOME,nome);
                         bundle.putLong(Constantes.ID_USUARIO,usuarioAtual.getId());
@@ -197,39 +197,21 @@ public class ExibirPedidoActivity extends AppCompatActivity {
         startClock();
         primeiroCarregamento = true;
 
-        dialogInternet = new Dialog(binding.getRoot().getContext(),android.R.style.Theme_Material_Light_Dialog_Presentation);
-        if(!VerificadorDeConexao.isConnectionAvailable(binding.getRoot().getContext())){
-            dialogInternet.setContentView(R.layout.layout_sem_conexao);
-            Button btn = dialogInternet.findViewById(R.id.buttonAtualizar);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialogInternet.dismiss();
-                }
-            });
 
-           // dialogInternet.show();
-        }else{
-            dialogInternet.dismiss();
-        }
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 
@@ -237,9 +219,7 @@ public class ExibirPedidoActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         ticker = false;
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 
@@ -247,9 +227,7 @@ public class ExibirPedidoActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         ticker = false;
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 }

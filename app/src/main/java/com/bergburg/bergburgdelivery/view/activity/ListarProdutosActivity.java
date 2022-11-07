@@ -105,21 +105,7 @@ public class ListarProdutosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        dialogInternet = new Dialog(binding.getRoot().getContext(),android.R.style.Theme_Material_Light_Dialog_Presentation);
-        if(!VerificadorDeConexao.isConnectionAvailable(binding.getRoot().getContext())){
-            dialogInternet.setContentView(R.layout.layout_sem_conexao);
-            Button btn = dialogInternet.findViewById(R.id.buttonAtualizar);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialogInternet.dismiss();
-                }
-            });
 
-          //  dialogInternet.show();
-        }else{
-            dialogInternet.dismiss();
-        }
         recuperar();
         viewModel.listarProdutosPorCategoria(idCategoria);
     }
@@ -127,27 +113,21 @@ public class ListarProdutosActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 }

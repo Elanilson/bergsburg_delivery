@@ -47,7 +47,7 @@ public class UsuarioRepositorio {
                 @Override
                 public void onFailure(Call<Dados> call, Throwable t) {
                     System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
 
                 }
             });
@@ -73,7 +73,7 @@ public class UsuarioRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
                         System.out.println("Erro UsuarioRepositorio - "+t.getLocalizedMessage());
 
 
@@ -104,7 +104,7 @@ public class UsuarioRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
                         System.out.println("Erro UsuarioRepositorio - "+t.getLocalizedMessage());
 
 
@@ -135,7 +135,7 @@ public class UsuarioRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
 
                     }
                 });
@@ -165,7 +165,7 @@ public class UsuarioRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
 
                     }
                 });
@@ -195,7 +195,7 @@ public class UsuarioRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
 
                     }
                 });
@@ -225,7 +225,7 @@ public class UsuarioRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
 
                     }
                 });
@@ -256,7 +256,7 @@ public class UsuarioRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                      //  listener.onFailures(Constantes.INSTABILIDADE);
 
                     }
                 });
@@ -307,7 +307,7 @@ public class UsuarioRepositorio {
                     @Override
                     public void onFailure(Call<Dados> call, Throwable t) {
                         System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
+                     //   listener.onFailures(Constantes.INSTABILIDADE);
 
                     }
                 });

@@ -186,12 +186,11 @@ public class LoginViewModel extends AndroidViewModel {
                     String status = result.getUsuario().getStatus();
                     preferences.salvarStatus(status.trim());
                     _Usuario.setValue(result.getUsuario());
-                    _Resposta.setValue(new Resposta("Deslogado",true));
+                    _Resposta.setValue(new Resposta(Constantes.DESLOGADO,true));
+                }else{
+                    _Resposta.setValue(new Resposta(Constantes.USUARIO_NAO_ENCONTRADO));
                 }
 
-                if(result.getError() != "" ){ // sem mensagem de error
-                    _Resposta.setValue(new Resposta(result.getError()));
-                }
             }
 
             @Override

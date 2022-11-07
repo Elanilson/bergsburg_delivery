@@ -56,7 +56,7 @@ public class ChatViewModel extends AndroidViewModel {
                        _Mensagens.setValue(result.getMensagens());
                    }else{// não tem mensagens
                        System.out.println("Mensagens não encontradas id-"+idUsuario);
-                    // _Resposta.setValue(new Resposta("Limpo "+idConversa));
+                     _Resposta.setValue(new Resposta(Constantes.SEM_MENSAGEM));
 
                    }
                 }
@@ -106,16 +106,13 @@ public class ChatViewModel extends AndroidViewModel {
                 APIListener<Dados>  listener = new APIListener<Dados>() {
                     @Override
                     public void onSuccess(Dados result) {
-                        if(result.getMensagem() != null){
-                            if(result.getMensagem().getId() != null){
-                                _Resposta.setValue(new Resposta(Constantes.ENVIADO,true));
-                                _Mensagen.setValue(result.getMensagem());
-                            }else{
-                                _Resposta.setValue(new Resposta(" Não foi possível enviar!"));
-                            }
+                        if(result.getStatus()){
+                            _Resposta.setValue(new Resposta(Constantes.ENVIADO,true));
+                            //System.out.println("");
                         }else{
                             _Resposta.setValue(new Resposta(" Não foi possível enviar!"));
                         }
+
                     }
 
                     @Override

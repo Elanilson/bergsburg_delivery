@@ -1,6 +1,7 @@
 package com.bergburg.bergburgdelivery.view.fragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -169,11 +170,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
             }
         };
-
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
-
+        //carregar dados do estabelicimento
+        viewModel.getEstabelicimento();
         observe();
 
         popularesAdapter.attackListener(produtoOnListenerAcao);
@@ -211,7 +209,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     public void run() {
 
                         calendar.setTimeInMillis(System.currentTimeMillis());
-                        System.out.println("Milisegundos: "+System.currentTimeMillis());
+                        System.out.println("Home -Milisegundos: "+System.currentTimeMillis());
 
                         //ficar observando se tem alguma alteração de status do estabelicimento
                         viewModel.getEstabelicimento();
@@ -309,21 +307,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         ticker = true;
         startClock();
 
-        dialogInternet = new Dialog(binding.getRoot().getContext(),android.R.style.Theme_Material_Light_Dialog_Presentation);
-        if(!VerificadorDeConexao.isConnectionAvailable(binding.getRoot().getContext())){
-            dialogInternet.setContentView(R.layout.layout_sem_conexao);
-            Button btn = dialogInternet.findViewById(R.id.buttonAtualizar);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialogInternet.dismiss();
-                }
-            });
-
-          //  dialogInternet.show();
-        }else{
-            dialogInternet.dismiss();
-        }
 
         viewModel.getCategorias();
         viewModel.produtosPopulares();
@@ -356,9 +339,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public void onStart() {
         super.onStart();
         mapView.onStart();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 
@@ -366,9 +347,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public void onPause() {
         super.onPause();
         mapView.onPause();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
         ticker = false;
     }
@@ -378,9 +357,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         super.onStop();
         mapView.onStop();
         ticker = false;
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 
@@ -389,27 +366,26 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         super.onDestroy();
         mapView.onDestroy();
         ticker = false;
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
+
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
-
+        ticker = false;
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
+        ticker = false;
         mapView.onLowMemory();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
 
 
     }
+
+
 }

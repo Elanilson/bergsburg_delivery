@@ -38,6 +38,8 @@ import com.bergburg.bergburgdelivery.viewmodel.PedidosViewModel;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ChatActivity extends AppCompatActivity {
     private ActivityChatBinding binding;
@@ -57,6 +59,7 @@ public class ChatActivity extends AppCompatActivity {
     private  String titulo = "";
     private Boolean verSacola = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +74,13 @@ public class ChatActivity extends AppCompatActivity {
         binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+               if(ConversasActivity.statusActivity){
+                    finish();
+                }else if(MainActivity.statusActivity){
+                    finish();
+                }else{
+                    startActivity(new Intent(ChatActivity.this,MainActivity.class));
+                }
             }
         });
        // viewModel.getMensagens();
@@ -97,6 +106,7 @@ public class ChatActivity extends AppCompatActivity {
                     if(mensagem != null && !mensagem.isEmpty()){
                         if(!mensagem.trim().isEmpty()){
                             System.out.println("passou");
+                            //esconde teclado
                           //  InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         //    imm.hideSoftInputFromWindow(editTextMensagem.getWindowToken(), 0);
                             String nome = preferences.recuperarNome();
@@ -105,6 +115,7 @@ public class ChatActivity extends AppCompatActivity {
                             if(nome != null){
                                 tituloMensagem = nome;
                             }
+
                             if(idUsuario != null){
                                 mensagemEnviada = mensagem;
                                 viewModel.enviarMensagem(idConversa,mensagem,idUsuario);
@@ -138,41 +149,37 @@ public class ChatActivity extends AppCompatActivity {
                 if(bundle != null){
                     idConversa = bundle.getLong(Constantes.ID_CONVERSA);
                     idUsuario = bundle.getLong(Constantes.ID_USUARIO);
-                   System.out.println("xxxxxxxxxxxxx cliente "+idUsuario);
+                  // System.out.println(" cliente "+idUsuario);
 
-                    if(preferences.recuperarID() != idUsuario){
-                        Handler handler = new Handler();
+                    if(preferences.recuperarID() != idUsuario){ // quando o admin enviar mensagem para o cliente
+                    /*    Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
-                            public void run() {
+                            public void run() {*/
                                 mainViewModel.getToken(idUsuario);
-                            }
-                        }, 30000);
+
+                          /*  }
+                        }, 30000);*/
 
                         titulo = bundle.getString(Constantes.NOME);
                         String nomeUsuario = preferences.recuperarNome();
                         if(titulo != null && nomeUsuario != null && !titulo.equalsIgnoreCase(nomeUsuario)){
                             binding.toolbarPersonalizada.textViewTituloToolbar.setText(titulo);
                         }
-                    }else{
-                        Handler handler = new Handler();
+                    }else{ // quando o cliente envia mensagem para o admin
+                      /*  Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
-                            public void run() {
+                            public void run() {*/
                                 mainViewModel.getToken(Constantes.ADMIN);
-                            }
-                        }, 30000);
+
+                           /* }
+                        }, 30000);*/
 
                     }
 
-                }else{
-                    //enviar notificação de mensagem para admin
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        public void run() {
-                            mainViewModel.getToken(Constantes.ADMIN);
-                        }
-                    }, 30000);
+                }else{// quando não venho de uma tela de usuario ( quando rebo dados para quem enviar) aqui e sempre pro admin
 
-                        System.out.println("xxxxxxxxxxxxx admin "+idUsuario);
+                        mainViewModel.getToken(Constantes.ADMIN);
+
                 }
 
                 if(idUsuario != null){
@@ -197,8 +204,12 @@ public class ChatActivity extends AppCompatActivity {
         mainViewModel.token.observe(this, new Observer<Token>() {
             @Override
             public void onChanged(Token token) {
+                tokenAtual.setId(token.getId());
+                tokenAtual.setIdUsuario(token.getIdUsuario());
+                tokenAtual.setToken(token.getToken());
 
-                tokenAtual = token;
+              //  System.out.println("Token Recuperado "+token.toString());
+
 
             }
         });
@@ -209,8 +220,9 @@ public class ChatActivity extends AppCompatActivity {
                 if(resposta.getStatus()){
                     System.out.println("Notificação enviada "+resposta.getMensagem());
                 }else{
-                    System.out.println("Button "+resposta.getStatus());
                     System.out.println("Notificação não enviada "+resposta.getMensagem());
+                    //tentar de novo
+                  //  mainViewModel.enviarNotificacao(tokenAtual.getToken(), tituloMensagem,mensagemEnviada,idUsuario,idConversa);
 
                 }
 
@@ -231,15 +243,16 @@ public class ChatActivity extends AppCompatActivity {
                     Long idUsuario = preferences.recuperarID();
                     if(mensagems != null){
                         if(mensagems.size() > 0) {
-                            binding.progressBarMensagens.setVisibility(View.GONE);
+                           // binding.progressBarMensagens.setVisibility(View.GONE);
                             if (idUsuario != null) {
                                 if (mensagems.get(mensagems.size() - 1).getIdUsuario() != idUsuario) {
                                     viewModel.visualizarMensagem(mensagems.get(mensagems.size() - 1).getId());
                                     preferences.salvarIdUltimaMensagemLida(mensagems.get(mensagems.size() - 1).getId());
-                                    System.out.println("SAlvando o id da ultima mensagem "+mensagems.get(mensagems.size() - 1).getId());
+                                   // System.out.println("SAlvando o id da ultima mensagem "+mensagems.get(mensagems.size() - 1).getId());
                                 }
                             }
                         }
+                            binding.progressBarMensagens.setVisibility(View.GONE);
                     }
                 }
 
@@ -247,15 +260,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.mensagen.observe(this, new Observer<Mensagem>() {
-            @Override
-            public void onChanged(Mensagem mensagem) {
-                if(!mensagem.getVisualizado().equalsIgnoreCase(Constantes.SIM)){
-                    mainViewModel.enviarNotificacao(tokenAtual.getToken(), tituloMensagem,mensagemEnviada,idUsuario,idConversa);
-                }
-                System.out.println("visualizado ?? "+mensagem.toString());
-            }
-        });
+
 
         viewModel.resposta.observe(this, new Observer<Resposta>() {
             @Override
@@ -263,12 +268,16 @@ public class ChatActivity extends AppCompatActivity {
                 if(resposta.getStatus()){
                     if(resposta.getMensagem().equalsIgnoreCase(Constantes.ENVIADO)){
                       binding.textViewInfo.setVisibility(View.GONE);
-                     // mainViewModel.enviarNotificacao(tokenAtual.getToken(), tituloMensagem,mensagemEnviada,idUsuario,idConversa);
+                      mainViewModel.enviarNotificacao(tokenAtual.getToken(), tituloMensagem,mensagemEnviada,idUsuario,idConversa);
                     }else{
                         binding.textViewInfo.setText("Aguardando conexão..");
                     }
                 }else{
+                    if(resposta.getMensagem().equalsIgnoreCase(Constantes.SEM_MENSAGEM)){
+                        binding.progressBarMensagens.setVisibility(View.GONE);
+                    }else{
                     Toast.makeText(ChatActivity.this, resposta.getMensagem(), Toast.LENGTH_SHORT).show();
+                    }
                 }
                     binding.textViewInfo.setVisibility(View.GONE);
                     binding.textViewInfo.setText("");
@@ -312,8 +321,9 @@ public class ChatActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         ticker = false;
+
        if(!verSacola){
-           finish();
+         //  finish();
        }
     }
 
@@ -321,5 +331,11 @@ public class ChatActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ticker = false;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
     }
 }

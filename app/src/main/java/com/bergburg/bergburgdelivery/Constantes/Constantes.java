@@ -5,6 +5,7 @@ public class Constantes {
     public static String NAO = "NAO";
     public static String LOGADO = "Logado";
     public static String MENSAGEM = "Mensagem";
+    public static String SEM_MENSAGEM = "Sem_mensagem";
     public static String DESLOGADO = "Deslogado";
     public static String ENVIADO = "Envidado";
     public static String ID_CATEGORIA = "idCategoria";
@@ -12,6 +13,7 @@ public class Constantes {
     public static String ID_PEDIDO = "idPedido";
     public static String ID_USUARIO = "idUsuario";
     public static String ID_CONVERSA = "idConversa";
+    public static String USUARIO_NAO_ENCONTRADO = "Usuario não entrado";
     public static String NOME = "nome";
     public static String SEM_INTERNET = "Sem internet";
     public static String INSTABILIDADE = "Instabilidade na conexão";

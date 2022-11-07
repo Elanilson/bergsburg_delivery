@@ -209,9 +209,7 @@ public class SacolaFragment extends Fragment {
             }
         };
 
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
         sacolaAdapter.attackListener(onListenerAcao);
         observer();
@@ -230,10 +228,14 @@ public class SacolaFragment extends Fragment {
                 }
 
                         calendar.setTimeInMillis(System.currentTimeMillis());
-                        System.out.println("Milisegundos: "+System.currentTimeMillis());
+                        System.out.println("Sacola-Milisegundos: "+System.currentTimeMillis());
 
                         //ficar observando se tem alguma alteração de status do estabelicimento
                          viewModel.getEstabelicimento();
+                        idSacola = preferences.recuperarIDSacola();
+                        if (idSacola != null) {
+                            viewModel.getItensSacola(idSacola);
+                        }
 
                         Long now = SystemClock.uptimeMillis();
                         Long next = now + (1000 - (now % 1000));
@@ -429,17 +431,19 @@ public class SacolaFragment extends Fragment {
             @Override
             public void onChanged(Endereco endereco) {
                 taxa_de_entrega =  0f;
-                enderecoUsuario.setRua(endereco.getRua());
-                enderecoUsuario.setBairro(endereco.getBairro());
-                enderecoUsuario.setCidade(endereco.getCidade());
-                enderecoUsuario.setEstado(endereco.getEstado());
-                enderecoUsuario.setCep(endereco.getCep());
-                enderecoUsuario.setNumeroCasa(endereco.getNumeroCasa());
-                enderecoUsuario.setComplemento(endereco.getComplemento());
-                enderecoUsuario.setLatitude(endereco.getLatitude());
-                enderecoUsuario.setLongitude(endereco.getLongitude());
-                //recebe as cordenadas do endereço para gerar o valor da taxa de entrega
-                taxa_de_entrega = calcularTaxaDeEntrega();
+                if(endereco != null){
+                    enderecoUsuario.setRua(endereco.getRua());
+                    enderecoUsuario.setBairro(endereco.getBairro());
+                    enderecoUsuario.setCidade(endereco.getCidade());
+                    enderecoUsuario.setEstado(endereco.getEstado());
+                    enderecoUsuario.setCep(endereco.getCep());
+                    enderecoUsuario.setNumeroCasa(endereco.getNumeroCasa());
+                    enderecoUsuario.setComplemento(endereco.getComplemento());
+                    enderecoUsuario.setLatitude(endereco.getLatitude());
+                    enderecoUsuario.setLongitude(endereco.getLongitude());
+                    //recebe as cordenadas do endereço para gerar o valor da taxa de entrega
+                    taxa_de_entrega = calcularTaxaDeEntrega();
+                }
             }
         });
         viewModel.itensSacola.observe(getViewLifecycleOwner(), new Observer<List<ItensSacola>>() {
@@ -448,6 +452,7 @@ public class SacolaFragment extends Fragment {
 
                 if(itensSacola != null){
                     if(itensSacola.size() > 0){
+                        binding.progressBarSacola.setVisibility(View.GONE);
                         binding.imageView3Lanches.setVisibility(View.GONE);
                         binding.textView3InfoLances.setVisibility(View.GONE);
                         binding.carviewTotal.setVisibility(View.VISIBLE);
@@ -477,6 +482,7 @@ public class SacolaFragment extends Fragment {
 
 
                 }else{
+                    binding.progressBarSacola.setVisibility(View.GONE);
                     sacolaAdapter.limpar();
                     binding.imageView3Lanches.setVisibility(View.VISIBLE);
                     binding.textView3InfoLances.setVisibility(View.VISIBLE);
@@ -573,9 +579,7 @@ public class SacolaFragment extends Fragment {
     public void onStop() {
         super.onStop();
         ticker = false;
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 
@@ -583,9 +587,7 @@ public class SacolaFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         ticker = false;
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
 
     }
 
@@ -595,36 +597,14 @@ public class SacolaFragment extends Fragment {
         ticker = true;
         startClock();
 
-        dialogInternet = new Dialog(binding.getRoot().getContext(),android.R.style.Theme_Material_Light_Dialog_Presentation);
-        if(!VerificadorDeConexao.isConnectionAvailable(binding.getRoot().getContext())){
-            dialogInternet.setContentView(R.layout.layout_sem_conexao);
-            Button btn = dialogInternet.findViewById(R.id.buttonAtualizar);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialogInternet.dismiss();
-                }
-            });
-
-            binding.imageView3Lanches.setVisibility(View.VISIBLE);
-            binding.textView3InfoLances.setVisibility(View.VISIBLE);
-
-           // dialogInternet.show();
-        }else{
-            dialogInternet.dismiss();
-        }
-
         String statusLogado = preferences.recuperarStatus();
         if (statusLogado != null && !statusLogado.equalsIgnoreCase(getString(R.string.deslogado))) {
-            idSacola = preferences.recuperarIDSacola();
             idUsuario = preferences.recuperarID();
             if (idUsuario != null) {
                 exibirPedidoViewModel.getUsuario(idUsuario);
                 viewModel.buscarEnderecoSalvo(idUsuario);
             }
-            if (idSacola != null) {
-                viewModel.getItensSacola(idSacola);
-            }
+
         }else{
             binding.imageView3Lanches.setVisibility(View.VISIBLE);
             binding.textView3InfoLances.setVisibility(View.VISIBLE);
@@ -634,9 +614,7 @@ public class SacolaFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
         ticker = false;
 
     }
@@ -644,9 +622,7 @@ public class SacolaFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if(dialogInternet != null){
-            dialogInternet.dismiss();
-        }
+
         ticker = false;
 
     }

@@ -8,6 +8,8 @@ import android.app.Dialog;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +26,7 @@ import com.bergburg.bergburgdelivery.model.Usuario;
 import com.bergburg.bergburgdelivery.viewmodel.PerfilViewModel;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,6 +41,11 @@ public class PerfilActivity extends AppCompatActivity {
     private  Dialog dialogAlterarDadosUsuario;
     private Double latitude = 0.0;
     private Double longitude = 0.0;
+    private Runnable runnable;
+    private Handler handler = new Handler();
+    private Boolean ticker = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +62,6 @@ public class PerfilActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
         preferences = new UsuarioPreferences(this);
 
-        idUsuario = preferences.recuperarID();
-        if(idUsuario != null){
-            viewModel.buscarUsuario(idUsuario);
-            viewModel.buscarEnderecoSalvo(idUsuario);
-        }
 
         binding.layoutAlterarDadosUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,6 +264,10 @@ public class PerfilActivity extends AppCompatActivity {
                 }catch (Exception e){
                     System.out.println(e.getMessage());
                 }
+                    if(usuario.getNome() != null){
+                        preferences.salvarNome(usuario.getNome());
+                        preferences.salvarIdUsuario(usuario.getId());
+                    }
                     usuarioAtual.setEmail(usuario.getEmail());
                     usuarioAtual.setId(usuario.getId());
                     usuarioAtual.setNome(usuario.getNome());
@@ -325,5 +332,67 @@ public class PerfilActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void startClock(){
+
+        final Calendar calendar = Calendar.getInstance();
+        this.runnable = new Runnable() {
+            @Override
+            public void run() {
+                if(!ticker){
+                    return;
+                }
+
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                System.out.println("Perfil-Milisegundos: "+System.currentTimeMillis());
+
+                idUsuario = preferences.recuperarID();
+                if(idUsuario != null){
+                    viewModel.buscarUsuario(idUsuario);
+                    viewModel.buscarEnderecoSalvo(idUsuario);
+                }
+
+
+                Long now = SystemClock.uptimeMillis();
+                Long next = now + (1000 - (now % 1000));
+                handler.postAtTime(runnable,next);
+
+            }
+        };
+        this.runnable.run();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ticker = true;
+        startClock();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ticker = false;
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ticker = false;
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ticker = false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ticker = false;
     }
 }
