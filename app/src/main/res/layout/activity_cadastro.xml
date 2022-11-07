@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollViewCadas"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey11"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    tools:context=".view.activity.CadastroActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey11"
+        android:orientation="vertical"
+        tools:context=".view.activity.CadastroActivity">
+        <include
+            android:id="@+id/toolbarPersonalizada"
+            layout="@layout/toolbar_amarelo"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/amarelo"
+            android:gravity="center|right">
+
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/quicksand_bold"
+                android:gravity="center"
+                android:text="@string/criar_uma_conta"
+                android:textColor="@color/black"
+                android:textSize="34sp" />
+
+            <ImageView
+                android:id="@+id/imageViewLogo"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/logoburgs" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/wave" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="25dp">
+
+            <TextView
+                android:id="@+id/textView44c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/quicksand_bold"
+                android:gravity="center"
+                android:text="@string/cadastro"
+                android:textColor="@color/GhostWhite"
+                android:textSize="48sp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="@string/nome"
+                android:textColor="@color/GhostWhite"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editCampoLoginCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_campo"
+                android:drawableLeft="@drawable/ic_usuario_24"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="@color/grey31"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView3cvv9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="2dp"
+                android:text="@string/email"
+                android:textColor="@color/GhostWhite"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editCampoE_mailCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/background_campo"
+                android:drawableLeft="@drawable/ic_baseline_email_24"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:inputType="textWebEmailAddress"
+                android:padding="10dp"
+                android:textColor="@color/grey31"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView39"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="@string/senha"
+                        android:textColor="@color/GhostWhite"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editCampoSenha1Cadastro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/background_campo"
+                        android:drawableLeft="@drawable/ic_lock_24"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:textColor="@color/grey31"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView40"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="@string/confirmarSenha"
+                        android:textColor="@color/GhostWhite"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editCampoSenha2Cadastro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/background_campo"
+                        android:drawableLeft="@drawable/ic_lock_24"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:textColor="@color/grey31"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView4dfdf7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="@string/ddd"
+                        android:textColor="@color/GhostWhite"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editTextTextCadatroDDDCadastro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_campo"
+                        android:drawableLeft="@drawable/ic_baseline_assistant_photo_24"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:enabled="true"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView4dd8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="@string/telefone"
+                        android:textColor="@color/GhostWhite"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editTextTextNumeroTelefoneCadastro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_campo"
+                        android:drawableLeft="@drawable/ic_baseline_phone_android_24"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:inputType="phone"
+                        android:padding="10dp"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView47"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="@string/cep"
+                        android:textColor="@color/GhostWhite"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editTextTextCadatroCepCadastro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_campo"
+                        android:drawableLeft="@drawable/ic_baseline_view_compact_24"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView48"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="@string/numeroDaCasa"
+                        android:textColor="@color/GhostWhite"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editTextTextNumeroCasaCadastro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_campo"
+                        android:drawableLeft="@drawable/ic_baseline_home_24"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView58"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="Rua"
+                        android:textColor="@color/GhostWhite"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editTextTextRua"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_campo"
+                        android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:enabled="true"
+                        android:inputType="textMultiLine"
+                        android:maxLines="3"
+                        android:padding="10dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textdfdView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="Bairro"
+                        android:textColor="@color/GhostWhite"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editTextTextBairro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_campo"
+                        android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:enabled="true"
+                        android:inputType="textMultiLine"
+                        android:maxLines="3"
+                        android:padding="10dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView4ds"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="Cidade"
+                        android:textColor="@color/GhostWhite"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editTextTextCidade"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_campo"
+                        android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:enabled="true"
+                        android:inputType="textMultiLine"
+                        android:maxLines="3"
+                        android:padding="10dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textVifsfew"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="Estado"
+                        android:textColor="@color/GhostWhite"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editTextTextEstado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_campo"
+                        android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:enabled="true"
+                        android:inputType="textMultiLine"
+                        android:maxLines="3"
+                        android:padding="10dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="2dp"
+                android:text="@string/complemento"
+                android:textColor="@color/GhostWhite"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextTextComplementoCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_campo"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:enabled="true"
+                android:gravity="start"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:maxLines="5"
+                android:padding="10dp"
+                android:textSize="16sp" />
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/amarelo"
+                app:cardCornerRadius="10dp">
+
+                <FrameLayout
+                    android:id="@+id/layoutCadastrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ProgressBar
+                        android:id="@+id/progressBarEnvioProduto"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:indeterminateTint="@color/grey11"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/textView41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawableRight="@drawable/ic_baseline_login_24"
+                        android:drawableTint="@color/grey31"
+                        android:gravity="center"
+                        android:paddingLeft="50dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="50dp"
+                        android:paddingBottom="8dp"
+                        android:text="@string/cadastrar"
+                        android:textColor="@color/grey11"
+                        android:textSize="16sp" />
+
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

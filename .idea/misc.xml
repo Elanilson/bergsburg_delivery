@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable-v24/background_campo.xml" value="0.2105" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable-v24/btn_bg.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable-v24/ic_baseline_login_24.xml" value="0.2105" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable-v24/ic_lock_24.xml" value="0.2105" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable-v24/ic_usuario_24.xml" value="0.2105" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable-v24/wave.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/background_campo_text.xml" value="0.2105" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/bg_balao.xml" value="0.1" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/bg_overlay.xml" value="0.2095" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/fundo_mensagem_chat.xml" value="0.1655" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.2095" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_15.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_attach_money_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_double_arrow_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.2105" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_expand_more_24.xml" value="0.2095" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_fiber_manual_record_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2095" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_message_15.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2105" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_phone_android_24.xml" value="0.2105" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_view_compact_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_bolinha_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_chat_24.xml" value="0.165" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_faz_pedido.xml" value="0.1" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_item_sacola.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_mais_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_menos_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_pedidos24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_remover_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_sacola_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_termo_24.xml" value="0.165" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_versao_24.xml" value="0.165" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/radio_button_peronalizado_amarelo.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout-w1240dp/layout_email_enviado.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_cadastro.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_chat.xml" value="0.2" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_conversas.xml" value="0.15304054054054053" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_editar_produto.xml" value="0.2" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_exibir_item.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_exibir_pedido.xml" value="0.2" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_exibir_produto.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_gerencial_produtos.xml" value="0.176" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_listar_itens.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_listar_produtos.xml" value="0.2" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_main.xml" value="0.152" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_maps.xml" value="0.25" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_meus_pedidos.xml" value="0.16216216216216217" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_perfil.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/adapter_mensagem_destinatario.xml" value="0.25" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/adapter_mensagem_remetente.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/bootsheer_total_sacola.xml" value="0.24635416666666668" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/bottom_sheet_sacola.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/content_scrolling.xml" value="0.2644110275689223" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_conta.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_maps.xml" value="0.25" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_pedidos.xml" value="0.176" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_sacola.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_sacola2.xml" value="0.25" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/image_slider_layout_item.xml" value="0.25" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout__pedido_enviado_com_sucesso.xml" value="0.25" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_alterar_dados_endereco.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_alterar_dados_usuario.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_artesanais.xml" value="0.536" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_categoria.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_confirmacao_email.xml" value="0.3657289002557545" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_confirmar_pedido.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_conversa.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_dados_alterar_senha.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_entradas.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_enviar_email.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_exibir_pedido.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_hamburger.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_item_sacola.xml" value="0.536" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_item_status.xml" value="0.536" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_observacao.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_pedido.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_pizza.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_retirada_ou_entegra.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_sem_conexao.xml" value="0.25" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_teste.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_view_dados_usuario.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_view_item_pedido.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/laytout_esqueci_minha_senha.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/toolbar.xml" value="0.536" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/toolbar_amarelo.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/menu/menu_admin.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/menu/menu_conversa.xml" value="0.16216216216216217" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/menu/menu_opcoes.xml" value="0.25" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/menu/menu_principal.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/menu/menu_view_item.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Home" />
+        <item
+            android:id="@+id/sacola"
+            android:icon="@drawable/ic_sacola_24"
+            android:title="Sacola" />
+        <item
+            android:id="@+id/pedidos"
+            android:icon="@drawable/ic_pedidos24"
+            android:title="Pedidos" />
+        <item
+            android:id="@+id/conta"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Conta" />
+
+
+</menu>
