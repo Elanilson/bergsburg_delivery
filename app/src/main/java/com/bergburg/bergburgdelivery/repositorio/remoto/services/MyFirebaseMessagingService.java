@@ -38,7 +38,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     @Override
-    public void onMessageReceived(@NonNull RemoteMessage notificacao) {
+    public void onMessageReceived(@NonNull RemoteMessage notificacao) { // aqui você não consegue abrir notificação com app encerrado
         //chamado quando recebe uma notificação
         if(notificacao.getNotification() != null){
           /*  String titulo = notificacao.getNotification().getTitle();
@@ -67,7 +67,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         System.out.println(":  Notificação recebida! -"+notificacao.getData());
     }
 
-    @Override
+    @Override // aqui abre a notificação mesmo com app encerrado
     public boolean handleIntentOnMainThread(Intent intent) {
         remoto = RetrofitClient.classService(BergburgService.class);
         String titulo = intent.getStringExtra("gcm.notification.title");
@@ -75,7 +75,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         idUsuario = intent.getStringExtra("idUsuario");
         idConversa = intent.getStringExtra("idConversa");
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxx mensagem recebida");
+        System.out.println(" mensagem recebida");
 
         if(idUsuario != null && idConversa != null){
             Long idConv = Long.parseLong(idConversa);
@@ -88,20 +88,21 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             //vai esperar 2 segundos para enviar a notificaçao
             //ele vai espera o tempo acaba para consultar se a mensagem foi lida ou não
             //para assim enviar a notificação
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Call<Dados> call = remoto.getMensagens(idUser);
-                    call.enqueue(new Callback<Dados>() {
-                        @Override
-                        public void onResponse(Call<Dados> call, Response<Dados> response) {
-                            if (response.isSuccessful()) {
-                                int totalMensagens = 0 ;
-                                totalMensagens =  response.body().getMensagens().size(); // total
-                                if(totalMensagens != 0){
-                                    Mensagem mMensagem = new Mensagem();
-                                    mMensagem.setIdUsuario(response.body().getMensagens().get(totalMensagens - 1).getIdUsuario());
-                                    mMensagem.setVisualizado(response.body().getMensagens().get(totalMensagens - 1).getVisualizado());
+            try{
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Call<Dados> call = remoto.getMensagens(idUser);
+                        call.enqueue(new Callback<Dados>() {
+                            @Override
+                            public void onResponse(Call<Dados> call, Response<Dados> response) {
+                                if (response.isSuccessful()) {
+                                    int totalMensagens = 0 ;
+                                    totalMensagens =  response.body().getMensagens().size(); // total
+                                    if(totalMensagens != 0){
+                                        Mensagem mMensagem = new Mensagem();
+                                        mMensagem.setIdUsuario(response.body().getMensagens().get(totalMensagens - 1).getIdUsuario());
+                                        mMensagem.setVisualizado(response.body().getMensagens().get(totalMensagens - 1).getVisualizado());
 
                                         if(mMensagem.getVisualizado() != null){
                                             if(mMensagem.getVisualizado().equalsIgnoreCase(Constantes.NAO)){ // mensagem nao lida
@@ -114,26 +115,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                                             System.out.println("CORPO MENSAGEM  "+response.body().getMensagens().get(totalMensagens - 1).toString());
                                         }
 
-                                       // System.out.println(mMensagem.getIdUsuario()+" USUÁRIO DIFERENTE "+idUser);
+                                        // System.out.println(mMensagem.getIdUsuario()+" USUÁRIO DIFERENTE "+idUser);
 
 
-                                }else{
-                                    System.out.println("NOTIFICACAO - SEM MENSAGENS = "+totalMensagens);
+                                    }else{
+                                        System.out.println("NOTIFICACAO - SEM MENSAGENS = "+totalMensagens);
+                                    }
+
                                 }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Dados> call, Throwable t) {
+                                System.out.println("Error ao receber notificação "+t.getMessage());
+                                //    listener.onFailures(Constantes.INSTABILIDADE);
 
                             }
-                        }
+                        });
 
-                        @Override
-                        public void onFailure(Call<Dados> call, Throwable t) {
-                            System.out.println("Error ao receber notificação "+t.getMessage());
-                            //    listener.onFailures(Constantes.INSTABILIDADE);
+                    }
+                }, 2000);
+            }catch (Exception e){
 
-                        }
-                    });
+            }
 
-                }
-            }, 2000);
 
 
 

@@ -200,26 +200,29 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     return;
                 }
 
+                try {
+                    int delay = 5000;   // delay de 5 seg.
+                    int interval = 60000;  // intervalo de 1 seg.
+                    Timer timer = new Timer();
 
-                int delay = 5000;   // delay de 5 seg.
-                int interval = 60000;  // intervalo de 1 seg.
-                Timer timer = new Timer();
+                    timer.scheduleAtFixedRate(new TimerTask() {
+                        public void run() {
 
-                timer.scheduleAtFixedRate(new TimerTask() {
-                    public void run() {
+                            calendar.setTimeInMillis(System.currentTimeMillis());
+                            System.out.println("Home -Milisegundos: "+System.currentTimeMillis());
 
-                        calendar.setTimeInMillis(System.currentTimeMillis());
-                        System.out.println("Home -Milisegundos: "+System.currentTimeMillis());
+                            //ficar observando se tem alguma alteração de status do estabelicimento
+                            viewModel.getEstabelicimento();
 
-                        //ficar observando se tem alguma alteração de status do estabelicimento
-                        viewModel.getEstabelicimento();
+                            Long now = SystemClock.uptimeMillis();
+                            Long next = now + (1000 - (now % 1000));
+                            handler.postAtTime(runnable,next);
 
-                        Long now = SystemClock.uptimeMillis();
-                        Long next = now + (1000 - (now % 1000));
-                        handler.postAtTime(runnable,next);
-
-                    }
-                }, delay, interval);
+                        }
+                    }, delay, interval);
+                }catch (Exception e){
+                    System.out.println("Error "+e.getMessage());
+                }
 
 
 

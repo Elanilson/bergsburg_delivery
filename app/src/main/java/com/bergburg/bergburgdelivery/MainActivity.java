@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         idUsuario = preferences.recuperarID();
-        System.out.println("Id_usuario.... "+idUsuario);
+      //  System.out.println("Id_usuario.... "+idUsuario);
         bottomNavigationView = binding.bottomnavigation;
         if(idUsuario != null && status != null){
             if(idUsuario == Constantes.ADMIN && !status.equalsIgnoreCase(Constantes.DESLOGADO)){
@@ -205,17 +205,21 @@ public class MainActivity extends AppCompatActivity {
                 usuarioAtual = usuario;
                 if(usuario != null){
                     if(usuario.getStatus() != null){
-                        if(usuario.getStatus().equalsIgnoreCase("Deslogado")){
+                        if(usuario.getStatus().equalsIgnoreCase(Constantes.DESLOGADO)){
                             preferences.salvarContaAtivada("");
                             logado = false;
                         }else{
+                            preferences.salvarIdConversa(usuario.getId());
+                            preferences.salvarIdUsuario(usuario.getId());
+                            preferences.salvarNome(usuario.getNome());
+
                             logado = true;
                         }
                         String status = preferences.recuperarStatus();
                         Long idUsuario = preferences.recuperarID();
                         if(status != null){
                             if(idUsuario != null){
-                                if(status.equalsIgnoreCase("Deslogado")){
+                                if(status.equalsIgnoreCase(Constantes.DESLOGADO)){
                                     if(!status.equalsIgnoreCase(usuario.getStatus())){
                                         System.out.println("Entrei para deslogar telefone-status "+status+" - online "+usuario.getStatus());
                                         loginViewModel.deslogar(idUsuario);
@@ -336,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
         String status = preferences.recuperarStatus();
         System.out.println("Status recuperado: "+status);
         if(status != null){
-            if(status.equalsIgnoreCase("Logado")){
+            if(status.equalsIgnoreCase(Constantes.LOGADO)){
                 logado = true;
             }
         }else{

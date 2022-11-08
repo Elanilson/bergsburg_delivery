@@ -18,7 +18,7 @@ import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.model.Usuario;
 import com.bergburg.bergburgdelivery.view.activity.ChatActivity;
 import com.bergburg.bergburgdelivery.view.activity.ConversasActivity;
-
+//não ta mais sendo utilizando
 public class NotificationHelper extends ContextWrapper {
     private NotificationManager notifManager;
 

@@ -48,22 +48,5 @@ public class ListarProdutosViewModel extends AndroidViewModel {
 
     }
 
-    public void listarProdutosPopulares(){
-        APIListener<Dados> listener = new APIListener<Dados>() {
-            @Override
-            public void onSuccess(Dados result) {
-                _Produtos.setValue(result.getProdutos());
-
-            }
-
-            @Override
-            public void onFailures(String mensagem) {
-                _Resposta.setValue(new Resposta(mensagem));
-
-            }
-        };
-        repositorio.produtosPopulares(listener);
-
-    }
 
 }

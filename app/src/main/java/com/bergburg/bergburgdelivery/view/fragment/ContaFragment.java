@@ -70,6 +70,8 @@ public class ContaFragment extends Fragment {
         binding = FragmentContaBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(this).get(CadastroViewModel.class);
          idUsuario = preferences.recuperarID();
+         //versão do aplicativo
+         binding.textVisdewVersaoApp.setText(getString(R.string.versaoApp));
 
         String statusLogado = preferences.recuperarStatus();
         if (statusLogado != null && !statusLogado.equalsIgnoreCase(getString(R.string.deslogado))) {
@@ -87,7 +89,6 @@ public class ContaFragment extends Fragment {
             }else{
                 binding.layoutGencialProdutos.setVisibility(View.GONE);
                 binding.view12.setVisibility(View.GONE);
-
             }
         }
 
@@ -101,6 +102,24 @@ public class ContaFragment extends Fragment {
                 }else{
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
+            }
+        });
+        binding.layoutPrivacidade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://apkdoandroidonline.com/bergs_burg_delivery/documents/politica_de_privacidade_bergs_burg.pdf";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+        binding.layoutTermoDeUso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://apkdoandroidonline.com/bergs_burg_delivery/documents/termos_de_uso_bergs_burg.pdf";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
             }
         });
         binding.layoutWhatsapp.setOnClickListener(new View.OnClickListener() {

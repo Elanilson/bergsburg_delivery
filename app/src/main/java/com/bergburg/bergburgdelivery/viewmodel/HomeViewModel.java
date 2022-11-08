@@ -79,22 +79,6 @@ public class HomeViewModel extends AndroidViewModel {
         estabelicimentoRepositorio.getEstabelicimento(listener);
     }
 
-    public void getEntradas(){
-        APIListener<Dados> listener = new APIListener<Dados>() {
-            @Override
-            public void onSuccess(Dados result) {
-                _Entradas.setValue(result.getEntradas());
-            }
-
-            @Override
-            public void onFailures(String mensagem) {
-                _Resposta.setValue(new Resposta(mensagem));
-            }
-        };
-
-      //  produtoRepositorio.getEntradasHome(listener);
-
-    }
     public void produtosPopulares(){
         APIListener<Dados> listener = new APIListener<Dados>() {
             @Override

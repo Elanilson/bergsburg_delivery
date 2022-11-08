@@ -193,26 +193,4 @@ public class SacolaViewModel extends AndroidViewModel {
         estabelicimentoRepositorio.getEstabelicimento(listener);
     }
 
-  /*  public  void adicionarItemPedido(Long idSPedido,Long idSacola){
-
-        APIListener<Dados> listener = new APIListener<Dados>() {
-            @Override
-            public void onSuccess(Dados result) {
-                if(result.getStatus()){
-                    _Resposta.setValue(new Resposta("Adicionado",true));
-                }else{
-                    _Resposta.setValue(new Resposta("aquiii"+result.getError()));
-                }
-            }
-
-            @Override
-            public void onFailures(String mensagem) {
-                _Resposta.setValue(new Resposta(mensagem));
-
-            }
-        };
-
-        pedidoRepositorio.adicionarItemPedido(listener,idSPedido,idSacola);
-
-    }*/
 }

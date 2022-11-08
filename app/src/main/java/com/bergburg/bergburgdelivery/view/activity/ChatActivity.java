@@ -52,7 +52,7 @@ public class ChatActivity extends AppCompatActivity {
     private Boolean ticker = false;
     private List<Mensagem> mensagensLocal = new ArrayList<>();
     private UsuarioPreferences preferences;
-    private  Long idUsuario,idConversa;
+    private Long idUsuario,idConversa;
     private Token tokenAtual = new Token();
     private String mensagemEnviada = "";
     private String tituloMensagem = "Nova mensagem";

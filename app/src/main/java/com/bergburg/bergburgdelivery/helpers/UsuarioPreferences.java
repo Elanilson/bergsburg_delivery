@@ -6,9 +6,12 @@ import android.content.SharedPreferences;
 public class UsuarioPreferences {
     private Context context;
     private SharedPreferences preferences;
+    private SharedPreferences preferencesEmail_Senha ;
     private SharedPreferences.Editor editor;
+    private SharedPreferences.Editor editorEmail_Senha;
 
     private final String NOME_ARQUIVO = "usuario.preferencias";
+    private final String ARQUIVO_EMAIL_SENHA = "login.preferencias";
     private final String CHAVE_ID = "idUsuario";
     private final String CHAVE_IDMENSAGEM = "idMensagem";
     private final String CHAVE_IDConversa = "idUConversa";
@@ -25,7 +28,9 @@ public class UsuarioPreferences {
         this.context = context;
 
         preferences = context.getSharedPreferences(NOME_ARQUIVO,0);
+        preferencesEmail_Senha = context.getSharedPreferences(ARQUIVO_EMAIL_SENHA,0);
         editor = preferences.edit();
+        editorEmail_Senha = preferencesEmail_Senha.edit();
     }
 
     public void salvar(Long id,Long idSacola,String nome,String status){
@@ -60,9 +65,9 @@ public class UsuarioPreferences {
     }
 
     public void salvarEmailSenha(String email,String senha){
-        editor.putString(CHAVE_EMAIL, email );
-        editor.putString(CHAVE_SENHA, senha );
-        editor.commit();
+        editorEmail_Senha.putString(CHAVE_EMAIL, email );
+        editorEmail_Senha.putString(CHAVE_SENHA, senha );
+        editorEmail_Senha.commit();
     }
     public void salvarStatus(String status){
         editor.putString(CHAVE_STATUS, status );
@@ -106,14 +111,14 @@ public class UsuarioPreferences {
         return preferences.getString(CHAVE_STATUS, "");
     }
     public String recuperarEmail(){
-        return preferences.getString(CHAVE_EMAIL, "");
+        return preferencesEmail_Senha.getString(CHAVE_EMAIL, "");
     }
     public String recuperarSenha(){
-        return preferences.getString(CHAVE_SENHA, "");
+        return preferencesEmail_Senha.getString(CHAVE_SENHA, "");
     }
     public void limpar(){
         context.deleteSharedPreferences(NOME_ARQUIVO);
-        context.deleteSharedPreferences(CHAVE_ID);
+     /*   context.deleteSharedPreferences(CHAVE_ID);
         context.deleteSharedPreferences(CHAVE_IDMENSAGEM);
         context.deleteSharedPreferences(CHAVE_IDConversa);
         context.deleteSharedPreferences(CHAVE_NOME);
@@ -121,9 +126,9 @@ public class UsuarioPreferences {
         context.deleteSharedPreferences(CHAVE_IDSACOLA);
         context.deleteSharedPreferences(CHAVE_LATITUDE);
         context.deleteSharedPreferences(CHAVE_LONGITUDE);
-       // context.deleteSharedPreferences(CHAVE_EMAIL);
-       // context.deleteSharedPreferences(CHAVE_SENHA);
-        context.deleteSharedPreferences(CHAVE_ATIVADA);
+        context.deleteSharedPreferences(CHAVE_EMAIL);
+        context.deleteSharedPreferences(CHAVE_SENHA);
+        context.deleteSharedPreferences(CHAVE_ATIVADA);*/
 
     }
 }

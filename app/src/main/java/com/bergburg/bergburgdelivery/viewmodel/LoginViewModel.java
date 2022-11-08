@@ -204,29 +204,7 @@ public class LoginViewModel extends AndroidViewModel {
 
 
     }
-    public void salvarUsuario(Usuario usuario){
-        APIListener<Dados> listener = new APIListener<Dados>() {
-            @Override
-            public void onSuccess(Dados result) {
-                if(result.getError() != "" ){ // sem mensagem de error
-                    _Resposta.setValue(new Resposta(result.getError()));
-                }else{
-                    _Usuario.setValue(result.getUsuario());
-                    _Resposta.setValue(new Resposta("Sucesso",true));
-                }
-            }
 
-            @Override
-            public void onFailures(String mensagem) {
-                _Resposta.setValue(new Resposta(mensagem));
-
-            }
-        };
-
-       // repositorio.salvarUsuario(listener,usuario);
-
-
-    }
 
 
 }

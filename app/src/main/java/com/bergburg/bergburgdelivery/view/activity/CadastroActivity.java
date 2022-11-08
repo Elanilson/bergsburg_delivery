@@ -39,8 +39,8 @@ public class CadastroActivity extends AppCompatActivity  {
     private CadastroViewModel viewModel;
     private UsuarioPreferences preferences;
     private Endereco enderecoUsuario = new Endereco();
-    Double latitude = 0.0;
-    Double longitude = 0.0;
+    private Double latitude = 0.0;
+    private Double longitude = 0.0;
     private Boolean contaCriadoComSucesso = false;
     private Boolean enderecoSalvaComSucesso = false;
     private Dialog dialog;
@@ -248,9 +248,6 @@ public class CadastroActivity extends AppCompatActivity  {
         dialog.show();
 
     }
-
-
-
     public Boolean buscarLozalização(String stringEndereco){
         // busca o a localização pelo endereco
         Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());

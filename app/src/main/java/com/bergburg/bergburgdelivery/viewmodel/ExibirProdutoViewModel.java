@@ -79,26 +79,5 @@ public class ExibirProdutoViewModel extends AndroidViewModel {
 
     }
 
-    public  void atualizarQuantidadeItemSacola(Long idSacola,Long idProduto,int quantidade){
 
-        APIListener<Dados> listener = new APIListener<Dados>() {
-            @Override
-            public void onSuccess(Dados result) {
-                if(result.getStatus()){
-                   // _Resposta.setValue(new Resposta("Adicionado",true));
-                }else{
-                    _Resposta.setValue(new Resposta(result.getError()));
-                }
-            }
-
-            @Override
-            public void onFailures(String mensagem) {
-                _Resposta.setValue(new Resposta(mensagem));
-
-            }
-        };
-
-        pedidoRepositorio.atualizarQuantidadeItemSacola(listener,idSacola,idProduto,quantidade);
-
-    }
 }

@@ -100,5 +100,7 @@
     <string name="produto_ativo">Produto ativo</string>
     <string name="produto_desativado">Produto desativado</string>
 
+    <string name="versaoApp">versão 1.0</string>
+
 
 </resources>

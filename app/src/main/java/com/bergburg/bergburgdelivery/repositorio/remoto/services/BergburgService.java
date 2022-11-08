@@ -83,13 +83,14 @@ public interface BergburgService {
     @FormUrlEncoded
     Call<Dados> visualizarMensagem(
             @Field("idMensagem") Long idMensagem);
-
+    //ok
     @PUT("alterarSenha.php/")
     @FormUrlEncoded
     Call<Dados> alterarSenha(
             @Field("email") String email,
             @Field("senha") String senha);
 
+    //ok
     @PUT("alterarDadosUsuario.php/")
     @FormUrlEncoded
     Call<Dados> alterarDadosUsuario(
@@ -165,6 +166,7 @@ public interface BergburgService {
             @Field("ativo") String ativo
           //  @Field("urlImagem") String urlImagem
     );
+    //ok
     @PUT("atualizarEnderecov2.php/")
     @FormUrlEncoded
     Call<Dados> atualizarEnderecov2(
@@ -231,7 +233,7 @@ public interface BergburgService {
     Call<Dados> deletarItemDaSacola(
             @Field("idItem") Long idItem
     );
-
+    //ok
     @POST("adicionarItemSacola.php/")
     @FormUrlEncoded
     Call<Dados> adicionarItemSacola(
@@ -241,7 +243,7 @@ public interface BergburgService {
             @Field("preco") Float preco,
             @Field("observacao") String observacao
     );
-
+    //ok
     @POST("adicionarItemPedido2.php/")
     @FormUrlEncoded
     Call<Dados> adicionarItemPedido(
@@ -257,6 +259,7 @@ public interface BergburgService {
             @Field("quantidade") int quantidade
     );
 
+    //ok
     @PUT("atualizarObservacaoItemSacola.php/")
     @FormUrlEncoded
     Call<Dados> atualizarObservacaoItemSacola(

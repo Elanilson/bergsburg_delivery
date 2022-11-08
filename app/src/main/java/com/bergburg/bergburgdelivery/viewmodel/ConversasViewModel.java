@@ -66,61 +66,6 @@ public class ConversasViewModel extends AndroidViewModel {
 
     }
 
-    public void getMensagens(Long idUsuario ){
-        if(idUsuario != null){
-            APIListener<Dados>  listener = new APIListener<Dados>() {
-                @Override
-                public void onSuccess(Dados result) {
-                    if(result.getMensagens() != null){
-                        _Mensagens.setValue(result.getMensagens());
-                    }else{// não tem mensagens
-                        // _Resposta.setValue(new Resposta("Limpo "+idConversa));
-
-                    }
-                }
-
-                @Override
-                public void onFailures(String mensagem) {
-                    _Resposta.setValue(new Resposta(mensagem));
-
-                }
-            };
-            mensagensRepositorio.getMensagens(listener,idUsuario);
-        }else{
-            _Resposta.setValue(new Resposta("Verifique sua conexão"));
-
-        }
-    }
-
-    public void enviarMensagem(String texto ){
-        Long idUsuario = preferences.recuperarID();
-        Long idConversa = preferences.recuperarIDConversa();
-        if(idUsuario != null && idConversa != null){
-            if(texto != null && !texto.isEmpty() && !texto.equalsIgnoreCase(" ")){
-                APIListener<Dados>  listener = new APIListener<Dados>() {
-                    @Override
-                    public void onSuccess(Dados result) {
-                        if(result.getStatus()){
-                            _Resposta.setValue(new Resposta(Constantes.ENVIADO,true));
-                        }else{
-                            _Resposta.setValue(new Resposta(idUsuario+"- Não foi possível enviar! "+idConversa));
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailures(String mensagem) {
-                        _Resposta.setValue(new Resposta(mensagem));
-
-                    }
-                };
-                //repositorio.enviarMensagem(listener,idUsuario,texto,idConversa);
-            }
-        }else{
-            _Resposta.setValue(new Resposta("Algo deu errado!"));
-
-        }
-    }
 
 
 
