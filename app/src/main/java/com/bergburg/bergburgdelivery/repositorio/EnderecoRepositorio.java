@@ -35,7 +35,7 @@ public class EnderecoRepositorio {
                             if (response.code() == 200) {
                                 listener.onSuccess(response.body());
                             } else {
-                                listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                               listener.onFailures(Constantes.INSTABILIDADE);
                             }
                         }
 
@@ -84,7 +84,7 @@ public class EnderecoRepositorio {
                                 listener.onFailures(response.body().getError());
                             }
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                           listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
@@ -132,7 +132,7 @@ public class EnderecoRepositorio {
                                 listener.onFailures(response.body().getError());
                             }
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                           listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 

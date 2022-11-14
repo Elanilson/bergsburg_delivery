@@ -37,7 +37,7 @@ public class PedidoRepositorio {
                                 listener.onFailures(response.body().getError());
                             }
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
@@ -66,7 +66,7 @@ public class PedidoRepositorio {
                         if (response.isSuccessful()) {
                             listener.onSuccess(response.body());
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
@@ -95,7 +95,7 @@ public class PedidoRepositorio {
                         if (response.isSuccessful()) {
                             listener.onSuccess(response.body());
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
@@ -125,7 +125,7 @@ public class PedidoRepositorio {
                         if (response.isSuccessful()) {
                             listener.onSuccess(response.body());
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
@@ -154,7 +154,7 @@ public class PedidoRepositorio {
                         if (response.isSuccessful()) {
                             listener.onSuccess(response.body());
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
@@ -184,7 +184,7 @@ public class PedidoRepositorio {
                         if (response.isSuccessful()) {
                             listener.onSuccess(response.body());
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
@@ -214,7 +214,7 @@ public class PedidoRepositorio {
                         if (response.isSuccessful()) {
                             listener.onSuccess(response.body());
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
@@ -244,36 +244,7 @@ public class PedidoRepositorio {
                         if (response.isSuccessful()) {
                             listener.onSuccess(response.body());
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Dados> call, Throwable t) {
-                        System.out.println("Error: "+t.getMessage());
-                        listener.onFailures(Constantes.INSTABILIDADE);
-                    }
-                });
-            }else{
-              // listener.onFailures(Constantes.SEM_INTERNET);
-            }
-        }catch (Exception e){
-            System.out.println("Error: "+e.getMessage());
-        }
-
-    }
-    public void adicionarItemPedido(APIListener<Dados> listener,Long idPedido,Long idSacola){
-        try{
-            if(VerificadorDeConexao.isConnectionAvailable(context)) {
-                Call<Dados> call = remoto.adicionarItemPedido(idPedido, idSacola);
-
-                call.enqueue(new Callback<Dados>() {
-                    @Override
-                    public void onResponse(Call<Dados> call, Response<Dados> response) {
-                        if (response.isSuccessful()) {
-                            listener.onSuccess(response.body());
-                        } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
@@ -303,7 +274,7 @@ public class PedidoRepositorio {
                         if (response.isSuccessful()) {
                             listener.onSuccess(response.body());
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
@@ -336,7 +307,7 @@ public class PedidoRepositorio {
                                 listener.onFailures(response.body().getError());
                             }
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 

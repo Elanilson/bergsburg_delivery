@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                             preferences.salvarContaAtivada("");
                             logado = false;
                         }else{
-                            preferences.salvarIdConversa(usuario.getId());
+                            preferences.salvarIdConversa(usuario.getIdConversa());
                             preferences.salvarIdUsuario(usuario.getId());
                             preferences.salvarNome(usuario.getNome());
 

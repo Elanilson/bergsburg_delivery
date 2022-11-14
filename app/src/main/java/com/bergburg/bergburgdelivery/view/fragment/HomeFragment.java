@@ -66,6 +66,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private Handler handler = new Handler();
     private Boolean ticker = false;
     private  Dialog dialogInternet;
+    private Timer timer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -203,7 +204,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 try {
                     int delay = 5000;   // delay de 5 seg.
                     int interval = 60000;  // intervalo de 1 seg.
-                    Timer timer = new Timer();
+                     if(timer == null){
+                           timer = new Timer();
+                     }
+
 
                     timer.scheduleAtFixedRate(new TimerTask() {
                         public void run() {

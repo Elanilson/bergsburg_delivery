@@ -36,7 +36,7 @@ public class NotificacaoRepositorio {
                         if (response.isSuccessful()) {
                             listener.onSuccess(response.body());
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+ Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
@@ -65,7 +65,7 @@ public class NotificacaoRepositorio {
                         if (response.isSuccessful()) {
                             listener.onSuccess(response.body());
                         } else {
-                            listener.onFailures("cod: " + response.code() +"\n "+ Constantes.INSTABILIDADE);
+                            listener.onFailures(Constantes.INSTABILIDADE);
                         }
                     }
 
