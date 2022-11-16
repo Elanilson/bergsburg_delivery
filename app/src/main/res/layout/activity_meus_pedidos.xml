@@ -22,5 +22,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizada" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/textViewSemPedidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sem pedidos"
+        android:textColor="@color/grey11"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewMeusPedidos"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerViewMeusPedidos"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewMeusPedidos"
         app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizada" />
 </androidx.constraintlayout.widget.ConstraintLayout>

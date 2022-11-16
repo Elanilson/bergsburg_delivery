@@ -82,8 +82,15 @@ public class MeusPedidosActivity extends AppCompatActivity {
                 try {
                     if(pedidos != null){
                         if(pedidos.size() > 0){
+                            binding.textViewSemPedidos.setVisibility(View.GONE);
                             pedidoAdapter.attackPedidos(pedidos);
+                        }else{
+
+                            binding.textViewSemPedidos.setVisibility(View.VISIBLE);
                         }
+                    }else{
+                            binding.textViewSemPedidos.setVisibility(View.VISIBLE);
+
                     }
                 }catch (Exception e){
                     System.out.println(e.getMessage());

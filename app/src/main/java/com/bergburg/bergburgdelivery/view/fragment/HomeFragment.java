@@ -201,7 +201,41 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     return;
                 }
 
-                try {
+                try{
+
+
+                    long TEMPO = (1000 * 5); // chama o método a cada 5 segundos
+
+                    if (timer == null) {
+                        timer = new Timer();
+                        TimerTask tarefa = new TimerTask() {
+
+                            public void run() {
+                                try {
+                                    calendar.setTimeInMillis(System.currentTimeMillis());
+                                    System.out.println("Home -Milisegundos: "+System.currentTimeMillis());
+
+                                    //ficar observando se tem alguma alteração de status do estabelicimento
+                                    viewModel.getEstabelicimento();
+
+                                    Long now = SystemClock.uptimeMillis();
+                                    Long next = now + (1000 - (now % 1000));
+                                    handler.postAtTime(runnable,next);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        };
+                        timer.scheduleAtFixedRate(tarefa, TEMPO, TEMPO);
+                    }
+
+
+
+                }catch (Exception e){
+
+                }
+
+            /*    try {
                     int delay = 5000;   // delay de 5 seg.
                     int interval = 60000;  // intervalo de 1 seg.
                      if(timer == null){
@@ -226,7 +260,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     }, delay, interval);
                 }catch (Exception e){
                     System.out.println("Error "+e.getMessage());
-                }
+                }*/
+
+                System.out.println("Home - fora");
 
 
 
@@ -237,6 +273,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         };
         this.runnable.run();
+
     }
 
 
@@ -245,6 +282,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onChanged(List<Categoria> categorias) {
                 if(categorias != null){
+                    System.out.println("Home - categorias total "+categorias.size());
                     if(categorias.size() > 0){
                         binding.progressBarCategorias.setVisibility(View.GONE);
                         categoriaAdapter.attackCategorias(categorias);
@@ -262,6 +300,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onChanged(List<Produto> produtos) {
                if(produtos != null){
+                   System.out.println("Home - produtos total "+produtos.size());
                    if(produtos.size() > 0) {
                        binding.progressBarProdutosPopulares.setVisibility(View.GONE);
                        popularesAdapter.attackProdutos(produtos);
@@ -277,6 +316,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onChanged(Estabelicimento estabelicimento) {
                 if(estabelicimento != null){
+                    System.out.println("Home - "+estabelicimento.toString());
                     nomeEstabelicimento.setText(estabelicimento.getNome());
                     ramoEstabelicimento.setText(estabelicimento.getRamo());
                    // enderecoEstabelicimento.setText(estabelicimento.getEndereco());
@@ -318,6 +358,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         viewModel.getCategorias();
         viewModel.produtosPopulares();
 
+
         mapView.onResume();
 
     }
@@ -336,7 +377,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng BergsBurg = new LatLng(-1.3774531415796394, -48.43608019913573);
+      //  LatLng BergsBurg = new LatLng(-1.3774531415796394, -48.43608019913573);
+        LatLng BergsBurg = new LatLng(-1.377264747242989, -48.43608930925187);
        // mMap.addMarker(new MarkerOptions().position(BergsBurg).title("Berg's Burg"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BergsBurg, 18));
 
@@ -346,6 +388,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public void onStart() {
         super.onStart();
         mapView.onStart();
+        viewModel.getCategorias();
+        viewModel.produtosPopulares();
 
 
     }

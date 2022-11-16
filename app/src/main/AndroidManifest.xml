@@ -19,32 +19,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BergBurgDelivery"
+        android:screenOrientation="portrait"
         tools:targetApi="31">
         <activity
             android:name=".view.activity.MeusPedidosActivity"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.activity.EditarProdutoActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.GerencialProdutosActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.ConversasActivity"
             android:exported="false"
             android:label="Conversas"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.ChatActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.PerfilActivity"
             android:exported="false"
             android:label="Perfil"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
 
         <meta-data
@@ -54,28 +61,34 @@
         <activity
             android:name=".view.activity.ExibirPedidoActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.CadastroActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:parentActivityName=".view.activity.LoginActivity"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.LoginActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.ExibirProdutoActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.ListarProdutosActivity"
             android:exported="false"
             android:label="Voltar"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

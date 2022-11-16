@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:gravity="right"
             android:text="TextView"
-            android:textSize="13sp" />
+            android:textSize="11sp" />
 
     </LinearLayout>
 
