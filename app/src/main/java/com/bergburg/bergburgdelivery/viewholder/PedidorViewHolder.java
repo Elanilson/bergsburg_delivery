@@ -1,19 +1,24 @@
 package com.bergburg.bergburgdelivery.viewholder;
 
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.R;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
 import com.bergburg.bergburgdelivery.model.Pedido;
 
 public class PedidorViewHolder extends RecyclerView.ViewHolder {
-    private TextView textViewIdPedido,textViewDataPedido,textViewStatus,textViewHorarioStatus,textViewTotal;
+    private TextView textViewIdPedido,textViewDataPedido,textViewStatus,textViewHorarioStatus,textViewTotal,textViewlabelStatus;
     private CardView cardView;
+    private LinearLayout layoutPedido;
+    private DadosPreferences preferences;
 
 
     public PedidorViewHolder(@NonNull View itemView) {
@@ -24,6 +29,9 @@ public class PedidorViewHolder extends RecyclerView.ViewHolder {
         textViewHorarioStatus = itemView.findViewById(R.id.textViewHorarioPedido);
         textViewTotal = itemView.findViewById(R.id.textViewTotalPedido);
         cardView = itemView.findViewById(R.id.cardViewPedido);
+        layoutPedido = itemView.findViewById(R.id.layoutPedido);
+        textViewlabelStatus = itemView.findViewById(R.id.textViewStatusLabel);
+        preferences = new DadosPreferences(itemView.getContext());
     }
 
     public void bind(Pedido pedido, OnListenerAcao<Pedido> onListenerAcao){
@@ -32,6 +40,24 @@ public class PedidorViewHolder extends RecyclerView.ViewHolder {
         textViewStatus.setText(pedido.getStatus());
         textViewHorarioStatus.setText(pedido.getData_status());
         textViewTotal.setText("R$ "+String.format("%.2f",pedido.getTotal()));
+
+
+        Long idUsuario = preferences.recuperarID();
+        if(idUsuario != null){
+            if(idUsuario == Constantes.ADMIN){
+                if(pedido.getVisualizado().equalsIgnoreCase(Constantes.SIM)){
+                    layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.amarelo_pedido_lido));
+                    //  textViewlabelStatus.setBackgroundColor(itemView.getResources().getColor(R.color.amarelo_pedido_lido));
+                }else{
+                    // textViewlabelStatus.setBackgroundColor(itemView.getResources().getColor(R.color.verde_Pedido_novo));
+                    layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.verde_Pedido_novo));
+                }
+            }
+        }
+
+
+
+        System.out.println("Holder "+pedido.toString());
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

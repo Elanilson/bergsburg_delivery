@@ -23,10 +23,10 @@ public class PedidoRepositorio {
 
 
 
-    public void criarPedido(APIListener<Dados> listener, Long idUsuario, Long idSacola, String opcaoEntrega, Float total, Float taxa_entrega, Float subTotal){
+    public void criarPedido(APIListener<Dados> listener,String formaDePagamento, Long idUsuario, Long idSacola, String opcaoEntrega, Float total, Float taxa_entrega, Float subTotal){
         try{
             if(VerificadorDeConexao.isConnectionAvailable(context)) {
-                Call<Dados> call = remoto.criarPedido(idUsuario, idSacola, opcaoEntrega, total, taxa_entrega, subTotal);
+                Call<Dados> call = remoto.criarPedido(formaDePagamento,idUsuario, idSacola, opcaoEntrega, total, taxa_entrega, subTotal);
                 call.enqueue(new Callback<Dados>() {
                     @Override
                     public void onResponse(Call<Dados> call, Response<Dados> response) {
@@ -196,6 +196,36 @@ public class PedidoRepositorio {
                 });
             }else{
               // listener.onFailures(Constantes.SEM_INTERNET);
+            }
+        }catch (Exception e){
+            System.out.println("Error: "+e.getMessage());
+        }
+
+    }
+
+    public void visualizarPedido(APIListener<Dados> listener,Long idPedido){
+        try{
+            if(VerificadorDeConexao.isConnectionAvailable(context)) {
+                Call<Dados> call = remoto.visualizarPedido(idPedido);
+
+                call.enqueue(new Callback<Dados>() {
+                    @Override
+                    public void onResponse(Call<Dados> call, Response<Dados> response) {
+                        if (response.isSuccessful()) {
+                            listener.onSuccess(response.body());
+                        } else {
+                            listener.onFailures(Constantes.INSTABILIDADE);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Dados> call, Throwable t) {
+                        System.out.println("Error: "+t.getMessage());
+                        //   listener.onFailures(Constantes.INSTABILIDADE);
+                    }
+                });
+            }else{
+                // listener.onFailures(Constantes.SEM_INTERNET);
             }
         }catch (Exception e){
             System.out.println("Error: "+e.getMessage());

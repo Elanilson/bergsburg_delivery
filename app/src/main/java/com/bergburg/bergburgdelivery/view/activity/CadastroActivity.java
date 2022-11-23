@@ -14,20 +14,17 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.databinding.ActivityCadastroBinding;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
-import com.bergburg.bergburgdelivery.helpers.VerificadorDeConexao;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.model.Endereco;
 import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.model.Usuario;
 import com.bergburg.bergburgdelivery.viewmodel.CadastroViewModel;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -37,7 +34,7 @@ import java.util.Locale;
 public class CadastroActivity extends AppCompatActivity  {
     private ActivityCadastroBinding binding;
     private CadastroViewModel viewModel;
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
     private Endereco enderecoUsuario = new Endereco();
     private Double latitude = 0.0;
     private Double longitude = 0.0;
@@ -53,7 +50,7 @@ public class CadastroActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCadastroBinding.inflate(getLayoutInflater());
-        preferences = new UsuarioPreferences(this);
+        preferences = new DadosPreferences(this);
         setContentView(binding.getRoot());
 
         binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {

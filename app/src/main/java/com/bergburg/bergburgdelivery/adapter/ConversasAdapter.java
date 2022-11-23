@@ -9,11 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bergburg.bergburgdelivery.R;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
 import com.bergburg.bergburgdelivery.model.Conversas;
-import com.bergburg.bergburgdelivery.model.Mensagem;
-import com.bergburg.bergburgdelivery.viewholder.ConversasViewHolder;
 import com.bergburg.bergburgdelivery.viewholder.ConversasViewHolder;
 
 import java.util.ArrayList;
@@ -23,11 +21,11 @@ public class ConversasAdapter extends RecyclerView.Adapter<ConversasViewHolder> 
     private Context context;
     private List<Conversas> conversas = new ArrayList<>();
     private OnListenerAcao<Conversas> onListenerAcao;
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
 
     public ConversasAdapter(Context context) {
         this.context = context;
-        preferences = new UsuarioPreferences(context);
+        preferences = new DadosPreferences(context);
     }
 
     @NonNull

@@ -177,6 +177,44 @@
         android:layout_height="wrap_content">
 
         <View
+            android:id="@+id/view2d"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/Gainsboro" />
+
+        <TextView
+            android:id="@+id/textViewPagamentoLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/forma_de_pagamento"
+            android:textColor="@color/grey11"
+            android:textSize="15sp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textViewFormaPagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:drawableLeft="@drawable/ic_baseline_fiber_manual_record_24"
+        android:drawablePadding="5dp"
+        android:text="Carregando..."
+        android:textColor="@color/grey11"
+        android:textSize="16sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
             android:id="@+id/view2"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
@@ -184,7 +222,7 @@
             android:background="@color/Gainsboro" />
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/textViewStatusLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"

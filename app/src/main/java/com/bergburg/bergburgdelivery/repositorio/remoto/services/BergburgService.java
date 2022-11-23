@@ -183,6 +183,7 @@ public interface BergburgService {
     @POST("criarPedido2.php/")
     @FormUrlEncoded
     Call<Dados> criarPedido(
+            @Field("formaDePagamento") String formaDePagamento,
             @Field("idUsuario") Long idUsuario,
             @Field("idSacola") Long idSacola,
             @Field("opcaoEntrega") String opcaoEntrega,
@@ -258,6 +259,33 @@ public interface BergburgService {
             @Field("idItem") Long idItem,
             @Field("quantidade") int quantidade
     );
+
+
+    @PUT("atualizarLoja.php/")
+    @FormUrlEncoded
+    Call<Dados> atualizarLoja(
+            @Field("id") Long id,
+            @Field("nome") String nome,
+            @Field("status") String status,
+            @Field("ramo") String ramo,
+            @Field("endereco") String endereco,
+            @Field("tempoEntrega") String tempoEntrega,
+            @Field("valorMinimo") String valorMinimo,
+            @Field("telefone") String telefone
+    );
+    @PUT("atualizarStatusLoja.php/")
+    @FormUrlEncoded
+    Call<Dados> atualizarStatusLoja(
+            @Field("id") Long id,
+            @Field("status") String status
+    );
+
+    @PUT("visualizarPedido.php/")
+    @FormUrlEncoded
+    Call<Dados> visualizarPedido(
+            @Field("idPedido") Long idPedido
+    );
+
 
     //ok
     @PUT("atualizarObservacaoItemSacola.php/")

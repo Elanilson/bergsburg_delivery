@@ -20,6 +20,7 @@ import com.bergburg.bergburgdelivery.databinding.ActivityGerencialProdutosBindin
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
 import com.bergburg.bergburgdelivery.model.Produto;
 import com.bergburg.bergburgdelivery.model.Resposta;
+import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClient;
 import com.bergburg.bergburgdelivery.viewmodel.GerencialProdutosViewModel;
 
 import java.util.List;
@@ -122,5 +123,11 @@ public class GerencialProdutosActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         viewModel.getProdutos();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        RetrofitClient.CancelarRequisicoes();
     }
 }

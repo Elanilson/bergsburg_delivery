@@ -13,8 +13,13 @@ public class Constantes {
     public static String ID_PEDIDO = "idPedido";
     public static String ID_USUARIO = "idUsuario";
     public static String ID_CONVERSA = "idConversa";
+    public static String ABERTA = "Aberto";
+    public static String FECHADO = "Fechado";
+    public static String LOJA_FECHADO = "Loja Fechada";
+    public static String LOJA_ABERTA = "Loja Aberta";
     public static String USUARIO_NAO_ENCONTRADO = "Usuario não entrado";
     public static String NOME = "nome";
+    public static String RETIRAR_N0_LOCAL = "Retirar no local";
     public static String SEM_INTERNET = "Sem internet";
     public static String INSTABILIDADE = "Instabilidade na conexão";
     public static String ALTERADO_SUCESSO = "Alterado com sucesso";
@@ -25,5 +30,11 @@ public class Constantes {
     public static Double LATITUDE_BERGS_BURG = -1.3767920885335923;
     public static Double LONGITUDE_BERGS_BURG = -48.436112643121895;
     public static Long ADMIN = 1L;
+
+
+    public static String DINHEIRO = "Dinheiro";
+    public static String PIX = "PIX";
+    public static String CARTAO_DE_CREDIDO = "Cartão de crédito";
+    public static String CARTAO_DE_DEBITO = "Cartão de débito";
 
 }

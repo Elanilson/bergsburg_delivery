@@ -30,8 +30,7 @@ public class ViewPedidorViewHolder extends RecyclerView.ViewHolder {
     private LinearLayout layoutTaxa;
     private ProgressBar progressBarUsuario, progressBarStatusPedido;
     private  LinearLayout layoutNome, layoutTelefone,layoutCep, layoutNCasa,layoutEndereco,layoutNPEdi,layout_st_total,layoutSub,layoutTotal;
-
-
+    private TextView textViewPagamaneto;
 
     private TextView textViewNome,textViewTelefone,textEndereco;
 
@@ -52,6 +51,7 @@ public class ViewPedidorViewHolder extends RecyclerView.ViewHolder {
         layoutTaxa = itemView.findViewById(R.id.layout_taxaEntrega);
         textViewTaxa_entrega = itemView.findViewById(R.id.textViewTaxa_entregaView);
         textViewSubTotal = itemView.findViewById(R.id.textViewSubTotalView);
+        textViewPagamaneto = itemView.findViewById(R.id.textViewFormaPagamento);
 
         progressBarUsuario = itemView.findViewById(R.id.progressBarDadosUsuario);
         progressBarStatusPedido = itemView.findViewById(R.id.progressBarSatusPedido);
@@ -89,6 +89,7 @@ public class ViewPedidorViewHolder extends RecyclerView.ViewHolder {
             progressBarStatusPedido.setVisibility(View.VISIBLE);
         }
 
+        textViewPagamaneto.setText(pedido.getFormaDePagamento());
         textViewDataPedido.setText(pedido.getData_pedido());
         textViewNumeroPedido.setText("Pedido n° "+pedido.getId());
         textViewTotal.setText("R$ "+String.format("%.2f",pedido.getTotal()));
@@ -126,7 +127,7 @@ public class ViewPedidorViewHolder extends RecyclerView.ViewHolder {
                     endereco.getRua()+","+
                     endereco.getNumeroCasa()+", "+
                     endereco.getBairro()+", "+
-                    endereco.getCidade()+", Complemento: "+
+                    endereco.getCidade()+" \n Complemento: "+
                     endereco.getComplemento()
             );
             textViewCep.setText(endereco.getCep());

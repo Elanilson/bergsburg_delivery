@@ -18,11 +18,11 @@ import android.widget.Toast;
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.databinding.ActivityPerfilBinding;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.model.Endereco;
-import com.bergburg.bergburgdelivery.model.ItensSacola;
 import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.model.Usuario;
+import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClient;
 import com.bergburg.bergburgdelivery.viewmodel.PerfilViewModel;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ import java.util.Locale;
 public class PerfilActivity extends AppCompatActivity {
     private ActivityPerfilBinding binding;
     private PerfilViewModel viewModel;
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
     private Long idUsuario;
     private Usuario usuarioAtual = new Usuario();
     private Endereco enderecoAtual = new Endereco();
@@ -60,7 +60,7 @@ public class PerfilActivity extends AppCompatActivity {
         });
 
         viewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
-        preferences = new UsuarioPreferences(this);
+        preferences = new DadosPreferences(this);
 
 
         binding.layoutAlterarDadosUsuario.setOnClickListener(new View.OnClickListener() {
@@ -388,6 +388,7 @@ public class PerfilActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         ticker = false;
+        RetrofitClient.CancelarRequisicoes();
     }
 
     @Override

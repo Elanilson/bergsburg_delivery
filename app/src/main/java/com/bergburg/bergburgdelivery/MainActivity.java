@@ -2,41 +2,30 @@ package com.bergburg.bergburgdelivery;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.AlarmManagerCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
-import android.app.AlarmManager;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.databinding.ActivityMainBinding;
 import com.bergburg.bergburgdelivery.helpers.Permissoes;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
-import com.bergburg.bergburgdelivery.helpers.notificacaoLocal.NotificationHelper;
-import com.bergburg.bergburgdelivery.model.Conversas;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.model.Mensagem;
 import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.model.Usuario;
-import com.bergburg.bergburgdelivery.view.activity.ChatActivity;
+import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClient;
 import com.bergburg.bergburgdelivery.view.activity.LoginActivity;
 import com.bergburg.bergburgdelivery.view.fragment.ContaFragment;
 import com.bergburg.bergburgdelivery.view.fragment.HomeFragment;
@@ -54,8 +43,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -63,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private ConversasViewModel conversasViewModel;
     private BottomNavigationView bottomNavigationView;
     private MainViewModel mainViewModel;
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
     private Boolean logado = false;
     private  Menu menu;
 
@@ -101,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        preferences = new UsuarioPreferences(MainActivity.this);
+        preferences = new DadosPreferences(MainActivity.this);
 
         String status = preferences.recuperarStatus();
         System.out.println("Status recuperado: "+status);
@@ -383,6 +370,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         ticker = false;
         statusActivity = false;
+        RetrofitClient.CancelarRequisicoes();
     }
 
     @Override

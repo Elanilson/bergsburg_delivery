@@ -15,6 +15,7 @@ import com.bergburg.bergburgdelivery.adapter.PedidoAdapter;
 import com.bergburg.bergburgdelivery.databinding.ActivityMeusPedidosBinding;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
 import com.bergburg.bergburgdelivery.model.Pedido;
+import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClient;
 import com.bergburg.bergburgdelivery.viewmodel.PedidosViewModel;
 
 import java.util.List;
@@ -97,5 +98,11 @@ public class MeusPedidosActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        RetrofitClient.CancelarRequisicoes();
     }
 }

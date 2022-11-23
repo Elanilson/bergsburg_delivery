@@ -9,6 +9,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,16 +19,21 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.BergBurgDelivery"
-        android:screenOrientation="portrait"
         tools:targetApi="31">
         <activity
-            android:name=".view.activity.MeusPedidosActivity"
+            android:name=".view.activity.LojaActivity"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar"
-            android:screenOrientation="portrait"
             android:exported="false" />
+        <activity
+            android:name=".view.activity.MeusPedidosActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.EditarProdutoActivity"
             android:exported="false"
@@ -66,14 +74,14 @@
         <activity
             android:name=".view.activity.CadastroActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
             android:parentActivityName=".view.activity.LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.LoginActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.ExibirProdutoActivity"
@@ -84,12 +92,12 @@
             android:name=".view.activity.ListarProdutosActivity"
             android:exported="false"
             android:label="Voltar"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

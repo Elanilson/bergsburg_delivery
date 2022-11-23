@@ -9,12 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bergburg.bergburgdelivery.R;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
-import com.bergburg.bergburgdelivery.model.ItensPedido;
 import com.bergburg.bergburgdelivery.model.Mensagem;
 import com.bergburg.bergburgdelivery.viewholder.MensagensViewHolder;
-import com.bergburg.bergburgdelivery.viewholder.ViewItemPedioViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +23,11 @@ public class MensagensAdapter extends RecyclerView.Adapter<MensagensViewHolder> 
     private OnListenerAcao<Mensagem> onListenerAcao;
     private static final int TIPO_REMETENTE = 0;
     private static final int TIPO_DESTINATARIO = 1;
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
 
     public MensagensAdapter(Context context) {
         this.context = context;
-        preferences = new UsuarioPreferences(context);
+        preferences = new DadosPreferences(context);
     }
 
     @NonNull

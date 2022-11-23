@@ -2,7 +2,6 @@ package com.bergburg.bergburgdelivery.view.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -35,8 +34,7 @@ import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.adapter.SacolaAdapter;
 import com.bergburg.bergburgdelivery.databinding.FragmentSacolaBinding;
 import com.bergburg.bergburgdelivery.helpers.Local;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
-import com.bergburg.bergburgdelivery.helpers.VerificadorDeConexao;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
 import com.bergburg.bergburgdelivery.model.Endereco;
 import com.bergburg.bergburgdelivery.model.Estabelicimento;
@@ -47,7 +45,6 @@ import com.bergburg.bergburgdelivery.viewmodel.ExibirPedidoViewModel;
 import com.bergburg.bergburgdelivery.viewmodel.SacolaViewModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -69,7 +66,7 @@ public class SacolaFragment extends Fragment {
     private Long idSacola;
     private Long idUsuario;
     String opcaoEntrega = "Retirar no local";
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
     private Usuario dadosUsuario = new Usuario();
     private  Boolean confirmarEntregaADomicilio = false;
     private  Boolean enderecoConfirmado = false;
@@ -83,11 +80,12 @@ public class SacolaFragment extends Fragment {
     private Handler handler = new Handler();
     private Boolean ticker = false;
     private  Dialog dialogInternet;
+    private String formarDePagamento = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferences = new UsuarioPreferences(getActivity());
+        preferences = new DadosPreferences(getActivity());
         formatCasaDecimal = new DecimalFormat("0.00");
 
 
@@ -276,6 +274,8 @@ public class SacolaFragment extends Fragment {
 
     private void alertaConfirmarEndereco(){
 
+
+
          dialog = new Dialog(getActivity(),android.R.style.Theme_Material_Light_Dialog_Presentation);
        // Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.layout_retirada_ou_entegra);
@@ -285,6 +285,7 @@ public class SacolaFragment extends Fragment {
         LinearLayout layoutFrete = dialog.findViewById(R.id.layout_frete);
 
         RadioGroup opcaoDeEntrega = dialog.findViewById(R.id.radioGroupOpcao);
+        RadioGroup opcaoDePagamento = dialog.findViewById(R.id.groupPagamento);
         Switch confirmarEndereco = dialog.findViewById(R.id.switchConfirmarEndereco);
         TextView nome = dialog.findViewById(R.id.textViewNomeView);
         TextView telefone = dialog.findViewById(R.id.textViewTelefoneView);
@@ -302,11 +303,34 @@ public class SacolaFragment extends Fragment {
                 enderecoUsuario.getRua()+","+
                         enderecoUsuario.getNumeroCasa()+", "+
                         enderecoUsuario.getBairro()+", "+
-                        enderecoUsuario.getCidade()+", Complemento: "+
+                        enderecoUsuario.getCidade()+",\n  Complemento: "+
                         enderecoUsuario.getComplemento()
         );
         frete_pedido.setText("R$ "+String.format("%.2f", taxa_de_entrega));
 
+        opcaoDePagamento.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                switch (opcaoDePagamento.getCheckedRadioButtonId()){
+
+                    case R.id.radioButtonDinheiro:
+                        formarDePagamento = Constantes.DINHEIRO;
+                        break;
+                    case R.id.radioButtonPix:
+                        formarDePagamento = Constantes.PIX;
+                        break;
+                    case R.id.radioButtonCartaoCredito:
+                        formarDePagamento = Constantes.CARTAO_DE_CREDIDO;
+                        break;
+                    case R.id.radioButtonDebito:
+                        formarDePagamento = Constantes.CARTAO_DE_DEBITO;
+                        break;
+
+                }
+
+            }
+        });
 
 
         opcaoDeEntrega.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -362,16 +386,22 @@ public class SacolaFragment extends Fragment {
             public void onClick(View v) {
                 //entrega a domiciilio e endereço confirmado ou
                 //retirada no local
-                if(opcaoEntrega.equalsIgnoreCase(getString(R.string.entrega_a_domicilio)) &&
-                        enderecoConfirmado  ||
-                        opcaoEntrega.equalsIgnoreCase(getString(R.string.retirar_no_local))) {
-                    total = Float.parseFloat(formatCasaDecimal.format(total).replace(",",".")); //formatando
-                    System.out.println("SubTotal: "+subTotal);
-                    viewModel.criarPedido(idUsuario, idSacola, opcaoEntrega,total,valor_do_frete,subTotal);
-                    progressBarEnvioPedido.setVisibility(View.VISIBLE);
-                }else{
-                    //snackbar(getString(R.string.confirme_endereco_de_entrega));
-                    Toast.makeText(binding.getRoot().getContext(), getString(R.string.confirme_endereco_de_entrega), Toast.LENGTH_SHORT).show();
+                if (!formarDePagamento.isEmpty()){
+                    if (opcaoEntrega.equalsIgnoreCase(getString(R.string.entrega_a_domicilio)) &&
+                            enderecoConfirmado ||
+                            opcaoEntrega.equalsIgnoreCase(getString(R.string.retirar_no_local))
+
+                    ) {
+                        total = Float.parseFloat(formatCasaDecimal.format(total).replace(",", ".")); //formatando
+                        System.out.println("SubTotal: " + subTotal);
+                        viewModel.criarPedido(formarDePagamento,idUsuario, idSacola, opcaoEntrega, total, valor_do_frete, subTotal);
+                        progressBarEnvioPedido.setVisibility(View.VISIBLE);
+                    } else {
+                        //snackbar(getString(R.string.confirme_endereco_de_entrega));
+                            Toast.makeText(binding.getRoot().getContext(), getString(R.string.confirme_endereco_de_entrega), Toast.LENGTH_SHORT).show();
+                    }
+              }else{
+                    Toast.makeText(binding.getRoot().getContext(), getString(R.string.confirme_forma_pagamento), Toast.LENGTH_SHORT).show();
                 }
             }
         });

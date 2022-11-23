@@ -27,6 +27,64 @@
 
         <FrameLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <View
+                android:id="@+id/viefssdw2fgf"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="@color/Gainsboro" />
+
+            <TextView
+                android:id="@+id/textViewsada32yg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal|left"
+                android:background="@color/white"
+                android:paddingRight="10dp"
+                android:text="@string/opcoes_pagamento"
+                android:textColor="@color/grey11"
+                android:textSize="15sp" />
+        </FrameLayout>
+
+        <RadioGroup
+            android:id="@+id/groupPagamento"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/radioButtonDinheiro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/grey21"
+                android:text="Dinheiro" />
+
+            <RadioButton
+                android:id="@+id/radioButtonPix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/grey21"
+                android:text="Pix" />
+
+            <RadioButton
+                android:id="@+id/radioButtonCartaoCredito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/grey21"
+                android:text="Cartão de credito" />
+
+            <RadioButton
+                android:id="@+id/radioButtonDebito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/grey21"
+                android:text="Cartão de debito" />
+        </RadioGroup>
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
 

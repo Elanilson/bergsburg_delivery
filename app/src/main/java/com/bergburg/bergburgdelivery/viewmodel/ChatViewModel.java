@@ -8,18 +8,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.listeners.APIListener;
 import com.bergburg.bergburgdelivery.model.Dados;
-import com.bergburg.bergburgdelivery.model.Endereco;
 import com.bergburg.bergburgdelivery.model.Mensagem;
-import com.bergburg.bergburgdelivery.model.NotificacaoDados;
 import com.bergburg.bergburgdelivery.model.Resposta;
-import com.bergburg.bergburgdelivery.model.Usuario;
-import com.bergburg.bergburgdelivery.repositorio.EnderecoRepositorio;
 import com.bergburg.bergburgdelivery.repositorio.MensagensRepositorio;
 import com.bergburg.bergburgdelivery.repositorio.NotificacaoRepositorio;
-import com.bergburg.bergburgdelivery.repositorio.UsuarioRepositorio;
 
 import java.util.List;
 
@@ -38,11 +33,11 @@ public class ChatViewModel extends AndroidViewModel {
     private MutableLiveData<Resposta> _Resposta = new MutableLiveData<>();
     public LiveData<Resposta> resposta = _Resposta;
 
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
 
     public ChatViewModel(@NonNull Application application) {
         super(application);
-        preferences = new UsuarioPreferences(application.getBaseContext());
+        preferences = new DadosPreferences(application.getBaseContext());
         repositorio = new MensagensRepositorio(application.getBaseContext());
         notificacaoRepositorio = new NotificacaoRepositorio(application.getBaseContext());
     }

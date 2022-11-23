@@ -16,6 +16,7 @@ import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.databinding.ActivityEditarProdutoBinding;
 import com.bergburg.bergburgdelivery.model.Produto;
 import com.bergburg.bergburgdelivery.model.Resposta;
+import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClient;
 import com.bergburg.bergburgdelivery.viewmodel.EditarProdutoViewModel;
 import com.bumptech.glide.Glide;
 
@@ -118,5 +119,11 @@ public class EditarProdutoActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        RetrofitClient.CancelarRequisicoes();
     }
 }

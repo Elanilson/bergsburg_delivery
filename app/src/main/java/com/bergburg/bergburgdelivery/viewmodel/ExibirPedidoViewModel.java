@@ -85,6 +85,24 @@ public class ExibirPedidoViewModel extends AndroidViewModel {
         repositorio.listarItensPedidos(listener,idPedido);
     }
 
+    public  void visualizarPedido(Long idPedido){
+        APIListener<Dados> listener = new APIListener<Dados>() {
+            @Override
+            public void onSuccess(Dados result) {
+               if(result.getStatus()){
+                   System.out.println("Pedido marcado como visulizado");
+               }else{
+                   System.out.println("Pedido não foi marcado como visualizado");
+               }
+            }
+            @Override
+            public void onFailures(String mensagem) {
+                _Resposta.setValue(new Resposta(mensagem));
+            }
+        };
+        repositorio.visualizarPedido(listener,idPedido);
+    }
+
     public  void getStatusPedido(Long idPedido){
         APIListener<Dados> listener = new APIListener<Dados>() {
             @Override

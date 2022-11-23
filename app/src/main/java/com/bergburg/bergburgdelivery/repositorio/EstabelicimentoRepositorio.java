@@ -49,4 +49,63 @@ public class EstabelicimentoRepositorio {
         }
 
     }
+
+
+    public void atualizarLoja(APIListener<Dados> listener, Long id, String nome,String status,String ramo,String endereco,String tempoEntrega,String valorMinimo, String telefone){
+        try{
+            if(VerificadorDeConexao.isConnectionAvailable(context)) {
+                Call<Dados> call = remoto.atualizarLoja(id,nome,status,ramo,endereco,tempoEntrega,valorMinimo,telefone);
+                call.enqueue(new Callback<Dados>() {
+                    @Override
+                    public void onResponse(Call<Dados> call, Response<Dados> response) {
+                        if (response.isSuccessful()) {
+                            listener.onSuccess(response.body());
+                        } else {
+                            listener.onFailures(Constantes.INSTABILIDADE);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Dados> call, Throwable t) {
+                        System.out.println("Error: "+t.getMessage());
+                        //  listener.onFailures(Constantes.INSTABILIDADE);
+                    }
+                });
+            }else{
+                //  listener.onFailures(Constantes.SEM_INTERNET);
+            }
+        }catch (Exception e){
+            System.out.println("Error: "+e.getMessage());
+        }
+
+    }
+
+    public void atualizarStatusLoja(APIListener<Dados> listener, Long id,String status){
+        try{
+            if(VerificadorDeConexao.isConnectionAvailable(context)) {
+                Call<Dados> call = remoto.atualizarStatusLoja(id,status);
+                call.enqueue(new Callback<Dados>() {
+                    @Override
+                    public void onResponse(Call<Dados> call, Response<Dados> response) {
+                        if (response.isSuccessful()) {
+                            listener.onSuccess(response.body());
+                        } else {
+                            listener.onFailures(Constantes.INSTABILIDADE);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Dados> call, Throwable t) {
+                        System.out.println("Error: "+t.getMessage());
+                        //  listener.onFailures(Constantes.INSTABILIDADE);
+                    }
+                });
+            }else{
+                //  listener.onFailures(Constantes.SEM_INTERNET);
+            }
+        }catch (Exception e){
+            System.out.println("Error: "+e.getMessage());
+        }
+
+    }
 }

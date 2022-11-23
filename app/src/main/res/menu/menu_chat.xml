@@ -2,6 +2,13 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <group android:id="@+id/groupAdmin" android:visible="false" >
+        <item
+            android:id="@+id/impremirPedido"
+            android:icon="@drawable/ic_baseline_print_24"
+            android:title="@string/impressora"
+            app:showAsAction="always" />
+    </group>
     <item
         android:id="@+id/chatAdmin"
         android:icon="@android:drawable/stat_notify_chat"

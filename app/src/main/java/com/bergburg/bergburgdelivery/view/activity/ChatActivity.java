@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,9 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
@@ -26,20 +23,17 @@ import com.bergburg.bergburgdelivery.MainActivity;
 import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.adapter.MensagensAdapter;
 import com.bergburg.bergburgdelivery.databinding.ActivityChatBinding;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
-import com.bergburg.bergburgdelivery.helpers.notificacaoLocal.NotificationHelper;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.model.Mensagem;
 import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.model.Token;
+import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClient;
 import com.bergburg.bergburgdelivery.viewmodel.ChatViewModel;
 import com.bergburg.bergburgdelivery.viewmodel.MainViewModel;
-import com.bergburg.bergburgdelivery.viewmodel.PedidosViewModel;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ChatActivity extends AppCompatActivity {
     private ActivityChatBinding binding;
@@ -51,7 +45,7 @@ public class ChatActivity extends AppCompatActivity {
     private Handler handler = new Handler();
     private Boolean ticker = false;
     private List<Mensagem> mensagensLocal = new ArrayList<>();
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
     private Long idUsuario,idConversa;
     private Token tokenAtual = new Token();
     private String mensagemEnviada = "";
@@ -68,7 +62,7 @@ public class ChatActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbarPersonalizada.toolbar);
         viewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        preferences = new UsuarioPreferences(ChatActivity.this);
+        preferences = new DadosPreferences(ChatActivity.this);
         editTextMensagem = binding.editTextMensagem;
         binding.toolbarPersonalizada.textViewTituloToolbar.setText("Chat");
         binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
@@ -321,6 +315,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         ticker = false;
+        RetrofitClient.CancelarRequisicoes();
 
        if(!verSacola){
          //  finish();

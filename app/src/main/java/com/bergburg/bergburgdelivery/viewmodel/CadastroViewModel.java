@@ -8,21 +8,24 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.listeners.APIListener;
-import com.bergburg.bergburgdelivery.model.Categoria;
 import com.bergburg.bergburgdelivery.model.Dados;
 import com.bergburg.bergburgdelivery.model.Endereco;
+import com.bergburg.bergburgdelivery.model.Estabelicimento;
 import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.model.Usuario;
 import com.bergburg.bergburgdelivery.repositorio.EnderecoRepositorio;
+import com.bergburg.bergburgdelivery.repositorio.EstabelicimentoRepositorio;
 import com.bergburg.bergburgdelivery.repositorio.UsuarioRepositorio;
-
-import java.util.List;
 
 public class CadastroViewModel extends AndroidViewModel {
     private EnderecoRepositorio enderecoRepositorio ;
     private UsuarioRepositorio usuarioRepositorio ;
+    private EstabelicimentoRepositorio estabelicimentoRepositorio;
+
+    private MutableLiveData<Estabelicimento> _Estabelicimento = new MutableLiveData<>();
+    public LiveData<Estabelicimento> estabelicimento = _Estabelicimento;
 
     private MutableLiveData<Endereco> _Endereco = new MutableLiveData<>();
     public LiveData<Endereco> endereco = _Endereco;
@@ -33,13 +36,14 @@ public class CadastroViewModel extends AndroidViewModel {
     private MutableLiveData<Resposta> _Resposta = new MutableLiveData<>();
     public LiveData<Resposta> resposta = _Resposta;
 
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
 
     public CadastroViewModel(@NonNull Application application) {
         super(application);
-        preferences = new UsuarioPreferences(application.getBaseContext());
+        preferences = new DadosPreferences(application.getBaseContext());
         usuarioRepositorio = new UsuarioRepositorio(application.getBaseContext());
         enderecoRepositorio = new EnderecoRepositorio(application.getBaseContext());
+        estabelicimentoRepositorio = new EstabelicimentoRepositorio(application.getBaseContext());
     }
 
     public void buscarEnderecoSalvo(Long idUsuario){
@@ -228,4 +232,55 @@ public class CadastroViewModel extends AndroidViewModel {
 
 
     }
+
+    public void getEstabelicimento(){
+        APIListener<Dados> listener = new APIListener<Dados>() {
+            @Override
+            public void onSuccess(Dados result) {
+                _Estabelicimento.setValue(result.getEstabelicimento());
+            }
+
+            @Override
+            public void onFailures(String mensagem) {
+                _Resposta.setValue(new Resposta(mensagem));
+
+            }
+        };
+        estabelicimentoRepositorio.getEstabelicimento(listener);
+    }
+
+    public void atualizarStatusLoja( Long id, String status){
+
+
+        if(id != null){
+            if(!status.isEmpty()){
+                APIListener<Dados> listener = new APIListener<Dados>() {
+                    @Override
+                    public void onSuccess(Dados result) {
+                        if(result.getStatus()){
+                            _Resposta.setValue(new Resposta(Constantes.ALTERADO_SUCESSO,true));
+                        }else{
+                            _Resposta.setValue(new Resposta("Não foi possível alterar, tente novamente"));
+                        }
+                    }
+
+                    @Override
+                    public void onFailures(String mensagem) {
+                        _Resposta.setValue(new Resposta(mensagem));
+
+                    }
+                };
+                estabelicimentoRepositorio.atualizarStatusLoja(listener,id,status);
+
+            }else{
+                _Resposta.setValue(new Resposta("A loja está aberta ou fechada ?"));
+            }
+        }else{
+            _Resposta.setValue(new Resposta("ID da loja não encontrado"));
+        }
+
+
+    }
+
+
 }

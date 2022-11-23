@@ -10,8 +10,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -26,15 +24,13 @@ import android.widget.Toast;
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.MainActivity;
 import com.bergburg.bergburgdelivery.R;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
-import com.bergburg.bergburgdelivery.helpers.VerificadorDeConexao;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.model.Usuario;
 import com.bergburg.bergburgdelivery.viewmodel.LoginViewModel;
 import com.bergburg.bergburgdelivery.databinding.ActivityLoginBinding;
 import com.bergburg.bergburgdelivery.model.Resposta;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.sql.SQLOutput;
 import java.util.Calendar;
 
 public class LoginActivity extends AppCompatActivity {
@@ -42,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoginViewModel viewModel;
     private String login = "";
     private String senha = "";
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
     private Dialog dialog;
     private Dialog dialogaTIVA_Conta;
     private Boolean btnLogin = false;
@@ -63,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         binding.buttonLogin.setTextColor(BLACK);
-        preferences = new UsuarioPreferences(LoginActivity.this);
+        preferences = new DadosPreferences(LoginActivity.this);
 
         String email = preferences.recuperarEmail();
         String senha = preferences.recuperarSenha();

@@ -53,7 +53,7 @@ public class SacolaViewModel extends AndroidViewModel {
         estabelicimentoRepositorio = new EstabelicimentoRepositorio(application.getBaseContext());
     }
 
-    public  void criarPedido(Long idUsuario,Long idSacola,String opcaoEntrega,Float total,Float taxa_entrega,Float subTotal){
+    public  void criarPedido(String formaDePagamento,Long idUsuario,Long idSacola,String opcaoEntrega,Float total,Float taxa_entrega,Float subTotal){
 
         APIListener<Dados> listener = new APIListener<Dados>() {
             @Override
@@ -69,7 +69,7 @@ public class SacolaViewModel extends AndroidViewModel {
             }
         };
 
-        pedidoRepositorio.criarPedido(listener,idUsuario,idSacola,opcaoEntrega,total,taxa_entrega, subTotal);
+        pedidoRepositorio.criarPedido(listener,formaDePagamento,idUsuario,idSacola,opcaoEntrega,total,taxa_entrega, subTotal);
 
     }
 
@@ -183,11 +183,9 @@ public class SacolaViewModel extends AndroidViewModel {
             public void onSuccess(Dados result) {
                 _Estabelicimento.setValue(result.getEstabelicimento());
             }
-
             @Override
             public void onFailures(String mensagem) {
                 _Resposta.setValue(new Resposta(mensagem));
-
             }
         };
         estabelicimentoRepositorio.getEstabelicimento(listener);

@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.R;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.listeners.APIListener;
 import com.bergburg.bergburgdelivery.model.Dados;
 import com.bergburg.bergburgdelivery.model.Resposta;
@@ -27,13 +27,13 @@ public class LoginViewModel extends AndroidViewModel {
     private MutableLiveData<Resposta> _Resposta = new MutableLiveData<>();
     public LiveData<Resposta> resposta = _Resposta;
 
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
     private Context context;
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
         repositorio = new UsuarioRepositorio(application.getBaseContext());
-        preferences = new UsuarioPreferences(application.getBaseContext());
+        preferences = new DadosPreferences(application.getBaseContext());
         context = application.getBaseContext();
     }
 

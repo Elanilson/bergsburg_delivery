@@ -8,6 +8,7 @@ public class Estabelicimento {
    private String tempoEntrega ;
    private Float valorMinimo ;
    private String status;
+   private String telefone;
 
     @Override
     public String toString() {
@@ -77,4 +78,14 @@ public class Estabelicimento {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 }
+
+

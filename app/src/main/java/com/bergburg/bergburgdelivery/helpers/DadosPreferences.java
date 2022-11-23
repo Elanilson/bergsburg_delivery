@@ -3,7 +3,7 @@ package com.bergburg.bergburgdelivery.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class UsuarioPreferences {
+public class DadosPreferences {
     private Context context;
     private SharedPreferences preferences;
     private SharedPreferences preferencesEmail_Senha ;
@@ -23,8 +23,11 @@ public class UsuarioPreferences {
     private final String CHAVE_EMAIL = "email";
     private final String CHAVE_SENHA = "senha";
     private final String CHAVE_ATIVADA = "ativada";
+    private final String CHAVE_ENDERECO_LOJA = "EN_LOJA";
+    private final String CHAVE_NOME_LOJA = "NOME_LOJA";
+    private final String CHAVE_TELEFONE_LOJA = "TELEFONE_LOJA";
 
-    public UsuarioPreferences(Context context) {
+    public DadosPreferences(Context context) {
         this.context = context;
 
         preferences = context.getSharedPreferences(NOME_ARQUIVO,0);
@@ -40,6 +43,14 @@ public class UsuarioPreferences {
         editor.putString(CHAVE_STATUS, status );
         editor.commit();
     }
+
+    public void salvarInfLoja(String nome,String endereco,String telefone){
+        editor.putString(CHAVE_NOME_LOJA, nome );
+        editor.putString(CHAVE_ENDERECO_LOJA, endereco );
+        editor.putString(CHAVE_TELEFONE_LOJA, telefone );
+        editor.commit();
+    }
+
 
     public void salvarIdUsuario(Long id){
         editor.putLong(CHAVE_ID, id );
@@ -78,6 +89,16 @@ public class UsuarioPreferences {
         editor.putString(CHAVE_LATITUDE, latitude );
         editor.putString(CHAVE_LONGITUDE, longitude );
         editor.commit();
+    }
+
+    public String recuperarNomeLoja(){
+        return preferences.getString(CHAVE_NOME_LOJA, "");
+    }
+    public String recuperarEnderecoLoja(){
+        return preferences.getString(CHAVE_ENDERECO_LOJA, "");
+    }
+    public String recuperarTelefone(){
+        return preferences.getString(CHAVE_TELEFONE_LOJA, "");
     }
 
     public String recuperarLatitude(){

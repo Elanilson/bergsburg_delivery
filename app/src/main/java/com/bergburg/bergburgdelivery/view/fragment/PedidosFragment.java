@@ -1,6 +1,5 @@
 package com.bergburg.bergburgdelivery.view.fragment;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,15 +13,14 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.adapter.PedidoAdapter;
 import com.bergburg.bergburgdelivery.databinding.FragmentPedidosBinding;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
-import com.bergburg.bergburgdelivery.helpers.VerificadorDeConexao;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
+import com.bergburg.bergburgdelivery.model.Estabelicimento;
 import com.bergburg.bergburgdelivery.model.Pedido;
 import com.bergburg.bergburgdelivery.view.activity.ExibirPedidoActivity;
 import com.bergburg.bergburgdelivery.viewmodel.PedidosViewModel;
@@ -30,15 +28,13 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class PedidosFragment extends Fragment {
     private FragmentPedidosBinding binding;
     private PedidoAdapter pedidoAdapter = new PedidoAdapter();
     private PedidosViewModel viewModel;
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
     private Runnable runnable;
     private Handler handler = new Handler();
     private Boolean ticker = false;
@@ -46,7 +42,7 @@ public class PedidosFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferences = new UsuarioPreferences(getActivity());
+        preferences = new DadosPreferences(getActivity());
     }
 
     @Override
@@ -155,6 +151,15 @@ public class PedidosFragment extends Fragment {
                 }
             }
         });
+
+        viewModel.estabelicimento.observe(getViewLifecycleOwner(), new Observer<Estabelicimento>() {
+            @Override
+            public void onChanged(Estabelicimento estabelicimento) {
+                if(estabelicimento != null){
+                    preferences.salvarInfLoja(estabelicimento.getNome(), estabelicimento.getEndereco(), estabelicimento.getTelefone());
+                }
+            }
+        });
     }
 
     @Override
@@ -162,6 +167,7 @@ public class PedidosFragment extends Fragment {
         super.onResume();
         ticker = true;
         startClock();
+        viewModel.getEstabelicimento();
 
 
         String status = preferences.recuperarStatus();

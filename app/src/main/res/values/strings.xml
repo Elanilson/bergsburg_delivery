@@ -45,6 +45,7 @@
     <string name="voltar">Voltar</string>
     <string name="finalizar_pedido">Finalizar pedido</string>
     <string name="confirme_endereco_de_entrega">Confirme o endereço de entrega!</string>
+    <string name="confirme_forma_pagamento">Confirme a forma de pagamento!</string>
     <string name="caixa">Caixa</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="continuar">Continuar</string>
@@ -101,6 +102,15 @@
     <string name="produto_desativado">Produto desativado</string>
 
     <string name="versaoApp">versão 1.0</string>
+    <string name="impressora">Impressora</string>
+    <string name="opcoes_pagamento">Opções de pagamento</string>
+    <string name="forma_de_pagamento">Forma de pagamento</string>
+    <string name="loja">Loja</string>
+    <string name="ramo">Ramo</string>
+    <string name="tempo_entrega">Tempo de entrega</string>
+    <string name="valor_minimo">Valor mínimo</string>
+    <string name="loja_fechada">Loja fechada</string>
+    <string name="salvar">Salvar</string>
 
 
 </resources>

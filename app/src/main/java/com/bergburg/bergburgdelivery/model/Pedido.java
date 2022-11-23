@@ -9,6 +9,9 @@ public class Pedido {
     private String status;
     private String data_status;
     private String data_pedido;
+    private String visualizado;
+    private String opcaoEntrega;
+    private String formaDePagamento;
 
     @Override
     public String toString() {
@@ -21,6 +24,7 @@ public class Pedido {
                 ", status='" + status + '\'' +
                 ", data_status='" + data_status + '\'' +
                 ", data_pedido='" + data_pedido + '\'' +
+                ", visualizado='" + visualizado + '\'' +
                 '}';
     }
 
@@ -89,5 +93,29 @@ public class Pedido {
 
     public void setSubtotal(Float subtotal) {
         this.subtotal = subtotal;
+    }
+
+    public String getVisualizado() {
+        return visualizado;
+    }
+
+    public void setVisualizado(String visualizado) {
+        this.visualizado = visualizado;
+    }
+
+    public String getFormaDePagamento() {
+        return formaDePagamento;
+    }
+
+    public void setFormaDePagamento(String formaDePagamento) {
+        this.formaDePagamento = formaDePagamento;
+    }
+
+    public String getOpcaoEntrega() {
+        return opcaoEntrega;
+    }
+
+    public void setOpcaoEntrega(String opcaoEntrega) {
+        this.opcaoEntrega = opcaoEntrega;
     }
 }

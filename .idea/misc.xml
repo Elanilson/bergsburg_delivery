@@ -27,7 +27,9 @@
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_message_15.xml" value="0.1485" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2105" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_phone_android_24.xml" value="0.2105" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_shopping_white_bag_24.xml" value="0.1655" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_view_compact_24.xml" value="0.1485" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_baseline_warning_24.xml" value="0.1655" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_bolinha_24.xml" value="0.1485" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_chat_24.xml" value="0.165" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/drawable/ic_faz_pedido.xml" value="0.1" />
@@ -53,6 +55,7 @@
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_listar_itens.xml" value="0.264" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_listar_produtos.xml" value="0.2" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_loja.xml" value="0.264" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_maps.xml" value="0.25" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_meus_pedidos.xml" value="0.16216216216216217" />
@@ -62,7 +65,7 @@
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/bootsheer_total_sacola.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/bottom_sheet_sacola.xml" value="0.4" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/content_scrolling.xml" value="0.2644110275689223" />
-        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_conta.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_conta.xml" value="0.2" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_maps.xml" value="0.25" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_pedidos.xml" value="0.176" />
@@ -80,14 +83,14 @@
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_dados_alterar_senha.xml" value="0.4" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_entradas.xml" value="0.4" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_enviar_email.xml" value="0.264" />
-        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_exibir_pedido.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_exibir_pedido.xml" value="0.176" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_hamburger.xml" value="0.4" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_item_sacola.xml" value="0.536" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_item_status.xml" value="0.536" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_observacao.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_pedido.xml" value="0.4" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_pizza.xml" value="0.4" />
-        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_retirada_ou_entegra.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_retirada_ou_entegra.xml" value="0.264" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_sem_conexao.xml" value="0.25" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_teste.xml" value="0.4" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout_view_dados_usuario.xml" value="0.4" />
@@ -96,6 +99,7 @@
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/toolbar.xml" value="0.536" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/toolbar_amarelo.xml" value="0.4" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/menu/menu_admin.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/menu/menu_chat.xml" value="0.16216216216216217" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/menu/menu_conversa.xml" value="0.16216216216216217" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/menu/menu_opcoes.xml" value="0.25" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/menu/menu_principal.xml" value="0.24895833333333334" />

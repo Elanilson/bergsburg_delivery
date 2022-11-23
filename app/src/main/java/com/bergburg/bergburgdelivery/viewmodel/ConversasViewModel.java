@@ -7,8 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.bergburg.bergburgdelivery.Constantes.Constantes;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.listeners.APIListener;
 import com.bergburg.bergburgdelivery.model.Conversas;
 import com.bergburg.bergburgdelivery.model.Dados;
@@ -34,11 +33,11 @@ public class ConversasViewModel extends AndroidViewModel {
     private MutableLiveData<Resposta> _Resposta = new MutableLiveData<>();
     public LiveData<Resposta> resposta = _Resposta;
 
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
 
     public ConversasViewModel(@NonNull Application application) {
         super(application);
-        preferences = new UsuarioPreferences(application.getBaseContext());
+        preferences = new DadosPreferences(application.getBaseContext());
         repositorio = new ConversasRepositorio(application.getBaseContext());
         mensagensRepositorio = new MensagensRepositorio(application.getBaseContext());
     }

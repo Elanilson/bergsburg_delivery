@@ -20,6 +20,7 @@ import com.bergburg.bergburgdelivery.databinding.ActivityListarProdutosBinding;
 import com.bergburg.bergburgdelivery.helpers.VerificadorDeConexao;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
 import com.bergburg.bergburgdelivery.model.Produto;
+import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClient;
 import com.bergburg.bergburgdelivery.viewmodel.ListarProdutosViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -127,6 +128,7 @@ public class ListarProdutosActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        RetrofitClient.CancelarRequisicoes();
 
 
     }

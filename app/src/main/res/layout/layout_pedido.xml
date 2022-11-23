@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardViewPedido"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,9 +10,9 @@
     app:cardCornerRadius="7dp">
 
     <LinearLayout
+        android:id="@+id/layoutPedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:gravity="center"
         android:padding="10dp">
 
@@ -70,14 +71,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
                     android:layout_gravity="center"
-                    android:background="@color/cinza" />
+                    android:background="@color/cinza"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
 
                 <TextView
-                    android:id="@+id/textView32"
+                    android:id="@+id/textViewStatusLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@color/white"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="Status do pedido"

@@ -8,19 +8,16 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.databinding.ActivityExibirProdutoBinding;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
-import com.bergburg.bergburgdelivery.helpers.VerificadorDeConexao;
-import com.bergburg.bergburgdelivery.model.ItensSacola;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.model.Produto;
 import com.bergburg.bergburgdelivery.model.Resposta;
+import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClient;
 import com.bergburg.bergburgdelivery.viewmodel.ExibirProdutoViewModel;
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
@@ -32,7 +29,7 @@ public class ExibirProdutoActivity extends AppCompatActivity {
     private Long idSacola;
     private int quantidade = 1;
     private String observacao = "";
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
     private ImageView imageViewProduto;
     private Produto produtoAtual = new Produto();
     private  Dialog dialogInternet;
@@ -42,7 +39,7 @@ public class ExibirProdutoActivity extends AppCompatActivity {
         binding = ActivityExibirProdutoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         viewModel = new ViewModelProvider(this).get(ExibirProdutoViewModel.class);
-        preferences = new UsuarioPreferences(getApplicationContext());
+        preferences = new DadosPreferences(getApplicationContext());
         binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,6 +172,7 @@ public class ExibirProdutoActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+        RetrofitClient.CancelarRequisicoes();
 
 
     }

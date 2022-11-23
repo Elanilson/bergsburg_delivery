@@ -1,7 +1,6 @@
 package com.bergburg.bergburgdelivery.view.fragment;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -19,7 +18,6 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +26,7 @@ import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.adapter.PopularesAdapter;
 import com.bergburg.bergburgdelivery.adapter.CategoriaAdapter;
 import com.bergburg.bergburgdelivery.databinding.FragmentHomeBinding;
-import com.bergburg.bergburgdelivery.helpers.UsuarioPreferences;
-import com.bergburg.bergburgdelivery.helpers.VerificadorDeConexao;
+import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
 import com.bergburg.bergburgdelivery.model.Categoria;
 import com.bergburg.bergburgdelivery.model.Estabelicimento;
@@ -44,7 +41,6 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.snackbar.Snackbar;
-import com.smarteist.autoimageslider.SliderView;
 
 import java.util.Calendar;
 import java.util.List;
@@ -58,7 +54,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private PopularesAdapter popularesAdapter = new PopularesAdapter();
     private MapView mapView;
     private GoogleMap mMap;
-    private UsuarioPreferences preferences;
+    private DadosPreferences preferences;
     private Double latitude = 0.0;
     private Double longitude = 0.0;
     private TextView nomeEstabelicimento,ramoEstabelicimento,enderecoEstabelicimento,tempodeEntregaEstabelicimento,valorMinimoEstabelicimento,statusEstabelicimento;
@@ -71,7 +67,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferences = new UsuarioPreferences(getActivity());
+        preferences = new DadosPreferences(getActivity());
         if(!preferences.recuperarLatitude().isEmpty()){
             latitude = Double.parseDouble(preferences.recuperarLatitude());
             longitude = Double.parseDouble(preferences.recuperarLogitude());
@@ -316,6 +312,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onChanged(Estabelicimento estabelicimento) {
                 if(estabelicimento != null){
+                    preferences.salvarInfLoja(estabelicimento.getNome(), estabelicimento.getEndereco(), estabelicimento.getTelefone());
                     System.out.println("Home - "+estabelicimento.toString());
                     nomeEstabelicimento.setText(estabelicimento.getNome());
                     ramoEstabelicimento.setText(estabelicimento.getRamo());
