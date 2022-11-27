@@ -370,12 +370,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         ticker = false;
         statusActivity = false;
-        RetrofitClient.CancelarRequisicoes();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        RetrofitClient.CancelarRequisicoes();
         ticker = false;
     }
 }

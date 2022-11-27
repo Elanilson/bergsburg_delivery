@@ -59,28 +59,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/grey21"
-                android:text="Dinheiro" />
+                android:text="@string/dinheiro" />
 
             <RadioButton
                 android:id="@+id/radioButtonPix"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/grey21"
-                android:text="Pix" />
+                android:text="@string/pix" />
 
             <RadioButton
                 android:id="@+id/radioButtonCartaoCredito"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/grey21"
-                android:text="Cartão de credito" />
+                android:text="@string/cartao_de_credito" />
 
             <RadioButton
                 android:id="@+id/radioButtonDebito"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/grey21"
-                android:text="Cartão de debito" />
+                android:text="@string/cartao_de_debito" />
         </RadioGroup>
 
         <FrameLayout

@@ -257,8 +257,10 @@ public class CadastroViewModel extends AndroidViewModel {
                 APIListener<Dados> listener = new APIListener<Dados>() {
                     @Override
                     public void onSuccess(Dados result) {
-                        if(result.getStatus()){
-                            _Resposta.setValue(new Resposta(Constantes.ALTERADO_SUCESSO,true));
+                        if(result.getStatus()) {
+                            _Resposta.setValue(new Resposta(Constantes.ALTERADO_SUCESSO, true));
+                        }else if(result.getEnviado()){
+
                         }else{
                             _Resposta.setValue(new Resposta("Não foi possível alterar, tente novamente"));
                         }

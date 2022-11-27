@@ -29,6 +29,8 @@ public class GerencialProdutosActivity extends AppCompatActivity {
     private ActivityGerencialProdutosBinding binding;
     private GerencialProdutosViewModel viewModel;
     private ProdutdoAdapter produtdoAdapter = new ProdutdoAdapter();
+    private int tentativa = 5;
+    private int contador_de_tentativa = 0;
 
 
     @Override
@@ -102,9 +104,17 @@ public class GerencialProdutosActivity extends AppCompatActivity {
             public void onChanged(List<Produto> produtos) {
               if(produtos != null){
                   if(produtos.size() > 0){
+                      binding.textViewSemprodutos.setVisibility(View.GONE);
                       produtdoAdapter.attackProdutos(produtos);
+                  }else{
+                      binding.textViewSemprodutos.setVisibility(View.VISIBLE);
+                      if(  contador_de_tentativa <= tentativa){
+                         viewModel.getProdutos();
+                          System.out.println("Tentativas de buscas: "+contador_de_tentativa);
+                      }
                   }
               }
+                contador_de_tentativa++;
             }
         });
 
@@ -128,6 +138,11 @@ public class GerencialProdutosActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         RetrofitClient.CancelarRequisicoes();
     }
 }

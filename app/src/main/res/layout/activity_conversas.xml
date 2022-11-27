@@ -23,4 +23,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizada" />
+
+    <TextView
+        android:id="@+id/textViewSemUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sem usuários"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewConversas"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerViewConversas"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewConversas"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizada" />
 </androidx.constraintlayout.widget.ConstraintLayout>

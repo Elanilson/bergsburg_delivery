@@ -4,8 +4,11 @@
     android:id="@+id/cardConversa"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="1dp"
-    app:cardCornerRadius="0dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="5dp"
+    app:cardCornerRadius="10dp"
     app:cardElevation="5dp">
 
     <LinearLayout
@@ -15,9 +18,18 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_imageContato"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/perfil_padr"
+            app:civ_border_color="@android:color/transparent"
+            app:civ_border_width="2dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -26,6 +38,7 @@
                 android:id="@+id/textViewNomeUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="@string/nome"
                 android:textColor="@color/grey11"
                 android:textSize="16sp"

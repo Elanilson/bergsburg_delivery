@@ -111,6 +111,10 @@
     <string name="valor_minimo">Valor mínimo</string>
     <string name="loja_fechada">Loja fechada</string>
     <string name="salvar">Salvar</string>
+    <string name="cartao_de_debito">Cartão de débito</string>
+    <string name="cartao_de_credito">Cartão de crédito</string>
+    <string name="pix">PIX</string>
+    <string name="dinheiro">Dinheiro</string>
 
 
 </resources>

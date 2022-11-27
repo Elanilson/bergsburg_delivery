@@ -194,6 +194,7 @@ public class ContaFragment extends Fragment {
                     aSwitchAbrir_FecharLoja.setText(Constantes.LOJA_FECHADO);
                     aSwitchAbrir_FecharLoja.setTextColor(getResources().getColor(R.color.vermelho));
                 }
+               // System.out.println("chamando xxxxxxxxxxxxxxx");
                 atualizar();
             }
         });
@@ -241,11 +242,11 @@ public class ContaFragment extends Fragment {
         binding.progressBarStatusLoja.setVisibility(View.VISIBLE);
        String status = binding.switchAbrirFecharLoja2.isChecked() == true ? "Aberto" : "Fechado";
 
-       if(!statusLojaWeb.equalsIgnoreCase(status)){
+      // if(!statusLojaWeb.equalsIgnoreCase(status)){
            viewModel.atualizarStatusLoja(idLoja,status);
-       }else{
+     //  }else{
            binding.progressBarStatusLoja.setVisibility(View.GONE);
-       }
+      // }
 
     }
 

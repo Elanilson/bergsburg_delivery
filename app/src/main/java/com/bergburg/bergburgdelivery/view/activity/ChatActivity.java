@@ -315,7 +315,6 @@ public class ChatActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         ticker = false;
-        RetrofitClient.CancelarRequisicoes();
 
        if(!verSacola){
          //  finish();
@@ -325,6 +324,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        RetrofitClient.CancelarRequisicoes();
         ticker = false;
     }
 

@@ -30,6 +30,8 @@ public class ConversasActivity extends AppCompatActivity {
     private ConversasViewModel viewModel;
     private ConversasAdapter adapter;
     public static Boolean statusActivity = false;
+    private int tentativa = 5;
+    private int contador_de_tentativa = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +89,21 @@ public class ConversasActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Conversas> conversas) {
                 if(conversas != null){
-                    adapter.attackConversas(conversas);
+                    if(conversas.size() > 0){
+                        binding.textViewSemUsuario.setVisibility(View.GONE);
+                        adapter.attackConversas(conversas);
+                    }else{
+                        binding.textViewSemUsuario.setVisibility(View.VISIBLE);
+                        if( contador_de_tentativa <= tentativa){
+                            viewModel.getConversas();
+                            System.out.println("Tentativas de buscas: "+contador_de_tentativa);
+                        }
+                    }
 
+                }else{
+                        binding.textViewSemUsuario.setVisibility(View.VISIBLE);
                 }
+                contador_de_tentativa++;
             }
         });
 

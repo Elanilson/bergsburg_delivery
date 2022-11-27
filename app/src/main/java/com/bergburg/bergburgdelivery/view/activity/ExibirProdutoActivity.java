@@ -172,9 +172,14 @@ public class ExibirProdutoActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         RetrofitClient.CancelarRequisicoes();
-
-
     }
 
     @Override
