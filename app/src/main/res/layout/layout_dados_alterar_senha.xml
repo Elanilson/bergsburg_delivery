@@ -45,6 +45,7 @@
             android:drawableLeft="@drawable/ic_lock_24"
             android:drawablePadding="10dp"
             android:ems="10"
+            android:hint="Nova senha"
             android:inputType="phone"
             android:padding="10dp"
             android:textSize="16sp" />
@@ -67,6 +68,7 @@
             android:drawableLeft="@drawable/ic_lock_24"
             android:drawablePadding="10dp"
             android:ems="10"
+            android:hint="Nova senha"
             android:inputType="phone"
             android:padding="10dp"
             android:textSize="16sp" />

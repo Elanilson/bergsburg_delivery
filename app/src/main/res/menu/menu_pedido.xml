@@ -4,13 +4,18 @@
 
     <group android:id="@+id/groupAdmin" android:visible="false" >
         <item
+            android:id="@+id/alterarStatus"
+            android:icon="@drawable/ic_baseline_note_alt_24"
+            android:title="Alterar status"
+            app:showAsAction="always" />
+        <item
             android:id="@+id/impremirPedido"
             android:icon="@drawable/ic_baseline_print_24"
             android:title="@string/impressora"
             app:showAsAction="always" />
     </group>
     <item
-        android:id="@+id/chatAdmin"
+        android:id="@+id/chatPedido"
         android:icon="@android:drawable/stat_notify_chat"
         android:title="@string/chat"
         app:showAsAction="always" />

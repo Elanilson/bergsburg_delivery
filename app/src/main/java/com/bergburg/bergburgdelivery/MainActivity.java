@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                     if(usuario.getStatus() != null){
                         if(usuario.getStatus().equalsIgnoreCase(Constantes.DESLOGADO)){
                             preferences.salvarContaAtivada("");
+                            preferences.limpar();
                             logado = false;
                         }else{
                             preferences.salvarIdConversa(usuario.getIdConversa());

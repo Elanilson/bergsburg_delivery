@@ -65,6 +65,12 @@ public interface BergburgService {
             @Field("texto") String texto,
             @Field("idConversa") Long idConversa);
 
+    @POST("salvarStatusPedido.php/")
+    @FormUrlEncoded
+    Call<Dados> salvarStatusPedido(
+            @Field("idPedido") Long idPedido,
+            @Field("status") String status);
+
     @POST("verificarUsuarioLogado.php/")
     @FormUrlEncoded
     Call<Dados> verificarUsuarioLogado(

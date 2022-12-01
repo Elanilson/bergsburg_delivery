@@ -263,6 +263,38 @@ public class PedidoRepositorio {
 
     }
 
+    public void salvarStatusPedido(APIListener<Dados> listener,Long idPedido,String status){
+        try{
+            if(VerificadorDeConexao.isConnectionAvailable(context)) {
+
+                        Call<Dados> call = remoto.salvarStatusPedido(idPedido,status);
+
+                        call.enqueue(new Callback<Dados>() {
+                            @Override
+                            public void onResponse(Call<Dados> call, Response<Dados> response) {
+                                if (response.isSuccessful()) {
+                                    listener.onSuccess(response.body());
+                                } else {
+                                    listener.onFailures(Constantes.INSTABILIDADE);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Dados> call, Throwable t) {
+                                System.out.println("Error: "+t.getMessage());
+                                //   listener.onFailures(Constantes.INSTABILIDADE);
+                            }
+                        });
+
+            }else{
+                // listener.onFailures(Constantes.SEM_INTERNET);
+            }
+        }catch (Exception e){
+            System.out.println("Error: "+e.getMessage());
+        }
+
+    }
+
     public void adicionarItemSacola(APIListener<Dados> listener,Long idSacola,Long idProduto,Float preco,int quantidade,String obsevacao){
         try{
             if(VerificadorDeConexao.isConnectionAvailable(context)) {

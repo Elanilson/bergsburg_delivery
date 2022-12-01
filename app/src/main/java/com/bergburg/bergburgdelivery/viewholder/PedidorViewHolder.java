@@ -46,11 +46,26 @@ public class PedidorViewHolder extends RecyclerView.ViewHolder {
         if(idUsuario != null){
             if(idUsuario == Constantes.ADMIN){
                 if(pedido.getVisualizado().equalsIgnoreCase(Constantes.SIM)){
-                    layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.amarelo_pedido_lido));
+                    if(pedido.getStatus().equalsIgnoreCase("Cancelado")){
+                        layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.cancelado));
+                    }else{
+                        layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.amarelo_pedido_lido));
+                    }
                     //  textViewlabelStatus.setBackgroundColor(itemView.getResources().getColor(R.color.amarelo_pedido_lido));
                 }else{
                     // textViewlabelStatus.setBackgroundColor(itemView.getResources().getColor(R.color.verde_Pedido_novo));
-                    layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.verde_Pedido_novo));
+                    if(pedido.getStatus().equalsIgnoreCase("Cancelado")){
+                        layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.cancelado));
+                    }else{
+                        layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.verde_Pedido_novo));
+                    }
+
+                }
+            }else{ // para os usuários
+                if(pedido.getStatus().equalsIgnoreCase("Cancelado")){
+                    layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.cancelado));
+                }else {
+                    layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.white));
                 }
             }
         }
@@ -63,6 +78,13 @@ public class PedidorViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 onListenerAcao.onClick(pedido);
+            }
+        });
+        cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                onListenerAcao.onLongClick(pedido);
+                return false;
             }
         });
 

@@ -21,4 +21,5 @@
     <color name="balaoRemetente">#dbf9c4</color>
     <color name="amarelo_pedido_lido">#99FFC70B</color>
     <color name="verde_Pedido_novo">#C900FF7F</color>
+    <color name="cancelado">#f59d92</color>
 </resources>

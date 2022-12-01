@@ -158,6 +158,7 @@
                     android:hint="Ex: Tirar a cebola, carne ao ponto etc."
                     android:inputType="textMultiLine"
                     android:lines="4"
+                    android:maxLength="224"
                     android:maxLines="5"
                     android:padding="10dp"
                     android:textSize="16sp" />

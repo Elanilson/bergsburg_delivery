@@ -71,4 +71,32 @@ public class PedidosViewModel extends AndroidViewModel {
         };
         estabelicimentoRepositorio.getEstabelicimento(listener);
     }
+
+    public  void salvarStatusPedido(Long idPedido,String status){
+        if(idPedido != null){
+            if(status != null){
+                APIListener<Dados> listener = new APIListener<Dados>() {
+                    @Override
+                    public void onSuccess(Dados result) {
+                        if(result.getStatus()){
+                            _Resposta.setValue(new Resposta("Atualizado",true));
+                        }else{
+                            _Resposta.setValue(new Resposta(result.getError()));
+                        }
+                    }
+
+                    @Override
+                    public void onFailures(String mensagem) {
+                        _Resposta.setValue(new Resposta(mensagem));
+                    }
+                };
+                repositorio.salvarStatusPedido(listener,idPedido,status);
+            }else {
+                _Resposta.setValue(new Resposta("Selecione um status"));
+            }
+        }else {
+            _Resposta.setValue(new Resposta("ID do pedido não encontrado"));
+        }
+
+    }
 }

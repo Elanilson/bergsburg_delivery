@@ -115,6 +115,17 @@
     <string name="cartao_de_credito">Cartão de crédito</string>
     <string name="pix">PIX</string>
     <string name="dinheiro">Dinheiro</string>
+    <string name="atualizando_status_pedido">Atualizando o Status do Pedido</string>
+    <string name="infoStatus">Mantenha os status do pedido atualizados isso vai permitir você otimizar o controle a gestão de seu negócio, além de melhorar a experiência do usuário que realiza pedidos pelo app.</string>
+
+
+    <string-array name="status">
+        <item>Aguardando confirmação</item>
+        <item>Confirmado</item>
+        <item>Preparando</item>
+        <item>Saiu para entrega</item>
+        <item>Cancelado</item>
+    </string-array>
 
 
 </resources>

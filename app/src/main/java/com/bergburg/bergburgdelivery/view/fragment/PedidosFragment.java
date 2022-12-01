@@ -1,6 +1,11 @@
 package com.bergburg.bergburgdelivery.view.fragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +18,11 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.R;
@@ -22,6 +32,7 @@ import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
 import com.bergburg.bergburgdelivery.model.Estabelicimento;
 import com.bergburg.bergburgdelivery.model.Pedido;
+import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.view.activity.ExibirPedidoActivity;
 import com.bergburg.bergburgdelivery.viewmodel.PedidosViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -38,11 +49,14 @@ public class PedidosFragment extends Fragment {
     private Runnable runnable;
     private Handler handler = new Handler();
     private Boolean ticker = false;
+    private Dialog dialog;
+    private ProgressBar progressBarStatus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferences = new DadosPreferences(getActivity());
+        dialog = new Dialog(getActivity());
     }
 
     @Override
@@ -67,6 +81,12 @@ public class PedidosFragment extends Fragment {
 
             @Override
             public void onLongClick(Pedido obj) {
+                Long idUSuario = preferences.recuperarID();
+                if(idUSuario != null){
+                    if(idUSuario.equals(Constantes.ADMIN)){
+                            opcaos_de_pedido(obj);
+                    }
+                }
 
             }
 
@@ -83,6 +103,46 @@ public class PedidosFragment extends Fragment {
         observe();
         return  binding.getRoot();
     }
+
+    private void opcaos_de_pedido(Pedido pedido){
+        dialog.setContentView(R.layout.layout_opcoes_pedido);
+
+        Spinner spinnerStatus = dialog.findViewById(R.id.spinnerStatus);
+        progressBarStatus = dialog.findViewById(R.id.progressBarStatus);
+        Button btnSalvar = dialog.findViewById(R.id.buttonSalvar);
+        String[] status = getResources().getStringArray(R.array.status);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,status);
+        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        spinnerStatus.setAdapter(adapter);
+
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBarStatus.setVisibility(View.VISIBLE);
+                new AlertDialog.Builder(getActivity())
+                        .setCancelable(false)
+                        .setTitle("Alteração")
+                        .setMessage("Alterar o status para ("+spinnerStatus.getSelectedItem().toString()+")" )
+                        .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                viewModel.salvarStatusPedido(pedido.getId(),spinnerStatus.getSelectedItem().toString());
+
+                            }
+                        })
+                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                progressBarStatus.setVisibility(View.GONE);
+                            }
+                        }).show();
+
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
 
     private void startClock(){
         final Calendar calendar = Calendar.getInstance();
@@ -158,6 +218,17 @@ public class PedidosFragment extends Fragment {
                 if(estabelicimento != null){
                     preferences.salvarInfLoja(estabelicimento.getNome(), estabelicimento.getEndereco(), estabelicimento.getTelefone());
                 }
+            }
+        });
+
+        viewModel.resposta.observe(getViewLifecycleOwner(), new Observer<Resposta>() {
+            @Override
+            public void onChanged(Resposta resposta) {
+                    if(resposta.getStatus()){
+                        dialog.dismiss();
+                    }
+                    progressBarStatus.setVisibility(View.GONE);
+                    Toast.makeText(getActivity(), resposta.getMensagem(), Toast.LENGTH_SHORT).show();
             }
         });
     }

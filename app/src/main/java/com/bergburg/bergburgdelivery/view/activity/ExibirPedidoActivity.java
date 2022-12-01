@@ -9,12 +9,16 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +33,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.R;
@@ -39,6 +48,7 @@ import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.model.Endereco;
 import com.bergburg.bergburgdelivery.model.ItensPedido;
 import com.bergburg.bergburgdelivery.model.Pedido;
+import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.model.Status_pedido;
 import com.bergburg.bergburgdelivery.model.Usuario;
 import com.bergburg.bergburgdelivery.viewmodel.ExibirPedidoViewModel;
@@ -63,6 +73,9 @@ public class ExibirPedidoActivity extends AppCompatActivity {
     private Boolean primeiroCarregamento = true;
     private  Menu menu;
 
+    private Dialog dialog;
+    private ProgressBar progressBarStatus;
+
     private Endereco enderecoLocal = new Endereco();
     private Pedido pedidoLocal = new Pedido();
     private List<ItensPedido> itensPedidosLocal = new ArrayList<>();
@@ -82,6 +95,8 @@ public class ExibirPedidoActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(ExibirPedidoViewModel.class);
 
         setSupportActionBar(binding.toolbarPersonalizada.toolbar);
+
+        dialog = new Dialog(this);
 
         //validar Permissao
         Permissoes.validarPermissoes(permissoes, this, 1);
@@ -188,6 +203,17 @@ public class ExibirPedidoActivity extends AppCompatActivity {
                    System.out.println("usuario id: "+usuario.toString());
                    adapter.attackUsuario(usuario);
                }
+            }
+        });
+
+        viewModel.resposta.observe(this, new Observer<Resposta>() {
+            @Override
+            public void onChanged(Resposta resposta) {
+                if(resposta.getStatus()){
+                    dialog.dismiss();
+                }
+                progressBarStatus.setVisibility(View.GONE);
+                Toast.makeText(ExibirPedidoActivity.this, resposta.getMensagem(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -940,7 +966,7 @@ public class ExibirPedidoActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_chat,menu);
+        inflater.inflate(R.menu.menu_pedido,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -962,7 +988,7 @@ public class ExibirPedidoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.chatAdmin:
+            case R.id.chatPedido:
                 String nome = "";
                 if(usuarioAtual != null){
                     if(usuarioAtual.getId() != null){
@@ -999,6 +1025,10 @@ public class ExibirPedidoActivity extends AppCompatActivity {
 
 
                 break;
+
+            case R.id.alterarStatus:
+                opcaos_de_pedido(pedidoLocal);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -1008,6 +1038,45 @@ public class ExibirPedidoActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
 
+    }
+
+    private void opcaos_de_pedido(Pedido pedido){
+        dialog.setContentView(R.layout.layout_opcoes_pedido);
+
+        Spinner spinnerStatus = dialog.findViewById(R.id.spinnerStatus);
+        progressBarStatus = dialog.findViewById(R.id.progressBarStatus);
+        Button btnSalvar = dialog.findViewById(R.id.buttonSalvar);
+        String[] status = getResources().getStringArray(R.array.status);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ExibirPedidoActivity.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,status);
+        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        spinnerStatus.setAdapter(adapter);
+
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBarStatus.setVisibility(View.VISIBLE);
+                new AlertDialog.Builder(ExibirPedidoActivity.this)
+                        .setCancelable(false)
+                        .setTitle("Alteração")
+                        .setMessage("Alterar o status para ("+spinnerStatus.getSelectedItem().toString()+")" )
+                        .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                viewModel.salvarStatusPedido(pedido.getId(),spinnerStatus.getSelectedItem().toString());
+
+                            }
+                        })
+                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                progressBarStatus.setVisibility(View.GONE);
+                            }
+                        }).show();
+
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 
     @Override
