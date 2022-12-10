@@ -60,6 +60,7 @@
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_maps.xml" value="0.25" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_meus_pedidos.xml" value="0.16216216216216217" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_perfil.xml" value="0.4" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/activity_teste_main.xml" value="0.16216216216216217" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/adapter_mensagem_destinatario.xml" value="0.25" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/adapter_mensagem_remetente.xml" value="0.4" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/bootsheer_total_sacola.xml" value="0.24635416666666668" />
@@ -69,7 +70,7 @@
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_maps.xml" value="0.25" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_pedidos.xml" value="0.176" />
-        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_sacola.xml" value="0.264" />
+        <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_sacola.xml" value="0.1" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/fragment_sacola2.xml" value="0.25" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/image_slider_layout_item.xml" value="0.25" />
         <entry key="..\:/Users/elani/AndroidStudioProjects/bergburgdelivery/app/src/main/res/layout/layout__pedido_enviado_com_sucesso.xml" value="0.25" />

@@ -21,6 +21,7 @@ public class RetrofitClient {
         return INSTACE;
     }
     public static void CancelarRequisicoes(){
+        System.out.println("Cancelar todas as requisições");
        // System.out.println("Cancelando todas as requisicoes 1-total: "+ client.dispatcher().getMaxRequestsPerHost());
         client.dispatcher().cancelAll();
        // client.dispatcher().getMaxRequests();

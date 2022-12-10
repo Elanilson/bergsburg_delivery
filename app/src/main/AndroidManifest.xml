@@ -26,9 +26,12 @@
         android:theme="@style/Theme.BergBurgDelivery"
         tools:targetApi="31">
         <activity
-            android:name=".view.activity.LojaActivity"
-            android:theme="@style/Theme.BergBurgDelivery_NoActionBar"
+            android:name=".MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".view.activity.LojaActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BergBurgDelivery_NoActionBar" />
         <activity
             android:name=".view.activity.MeusPedidosActivity"
             android:exported="false"
@@ -95,7 +98,7 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activity.TesteMainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

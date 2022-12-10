@@ -61,7 +61,7 @@ public class CadastroActivity extends AppCompatActivity  {
         });
        
 
-        binding.editCampoEMailCadastro.setText("elanilsonpp@hotmail.com");
+       /* binding.editCampoEMailCadastro.setText("elanilsonpp@hotmail.com");
         binding.editCampoLoginCadastro.setText("xxt");
         binding.editCampoSenha1Cadastro.setText("123");
         binding.editCampoSenha2Cadastro.setText("123");
@@ -73,7 +73,7 @@ public class CadastroActivity extends AppCompatActivity  {
         binding.editTextTextNumeroCasaCadastro.setText("526");
         binding.editTextTextCadatroDDDCadastro.setText("91");
         binding.editTextTextNumeroTelefoneCadastro.setText("555");
-        binding.editTextTextComplementoCadastro.setText("555");
+        binding.editTextTextComplementoCadastro.setText("555");*/
 
         viewModel = new ViewModelProvider(this).get(CadastroViewModel.class);
         binding.layoutCadastrar.setOnClickListener(new View.OnClickListener() {

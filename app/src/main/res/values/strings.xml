@@ -119,11 +119,20 @@
     <string name="infoStatus">Mantenha os status do pedido atualizados isso vai permitir você otimizar o controle a gestão de seu negócio, além de melhorar a experiência do usuário que realiza pedidos pelo app.</string>
 
 
+
+    <string name="grantType">client_credentials</string>
+    <string name="clientId">58bf6f8c-6be1-4b56-b51b-736235308c99</string>
+    <string name="clientSecret">oxt2ni0ruf9heucl963slcsan2n0l97s155wq675n82iwcem1g31x53nvpxy30aaooe933kjefefrwcqmatubr7o5cynygwgk5r</string>
+
+
+
+
     <string-array name="status">
         <item>Aguardando confirmação</item>
         <item>Confirmado</item>
         <item>Preparando</item>
         <item>Saiu para entrega</item>
+        <item>Entregue</item>
         <item>Cancelado</item>
     </string-array>
 
