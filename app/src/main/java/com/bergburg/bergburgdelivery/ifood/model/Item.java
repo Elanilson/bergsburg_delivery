@@ -10,17 +10,31 @@ public class Item {
     @SerializedName("name")
     private String nome; // 50 caracteres
     @SerializedName("externalCode")
-    private Long idItemExtreno; // id do item
+    private Long idPedidoApp; // id do item
     @SerializedName("quantity")
     private int quantidade;
     @SerializedName("unitPrice")
     private float precoUnitario;
     @SerializedName("price")
-    private float preco = (quantidade * precoUnitario);
-    @SerializedName("price")
-    private float precoTotal = preco;
+    private float precoTotal = (quantidade * precoUnitario);
     @SerializedName("totalPrice")
     private float precoTotalDasOpcoes = 0f;
+
+
+    public Item(String id, String nome, Long idPedidoApp, int quantidade, float precoUnitario, float precoTotal, float precoTotalDasOpcoes) {
+        this.id = id;
+        this.nome = nome;
+        this.idPedidoApp = idPedidoApp;
+        this.quantidade = quantidade;
+        this.precoUnitario = precoUnitario;
+        this.precoTotal = precoTotal;
+        this.precoTotalDasOpcoes = precoTotalDasOpcoes;
+    }
+
+    public Item() {
+    }
+
+
 
     public String getId() {
         return id;
@@ -38,12 +52,12 @@ public class Item {
         this.nome = nome;
     }
 
-    public Long getIdItemExtreno() {
-        return idItemExtreno;
+    public Long getIdPedidoApp() {
+        return idPedidoApp;
     }
 
-    public void setIdItemExtreno(Long idItemExtreno) {
-        this.idItemExtreno = idItemExtreno;
+    public void setIdPedidoApp(Long idPedidoApp) {
+        this.idPedidoApp = idPedidoApp;
     }
 
     public int getQuantidade() {
@@ -60,14 +74,6 @@ public class Item {
 
     public void setPrecoUnitario(float precoUnitario) {
         this.precoUnitario = precoUnitario;
-    }
-
-    public float getPreco() {
-        return preco;
-    }
-
-    public void setPreco(float preco) {
-        this.preco = preco;
     }
 
     public float getPrecoTotal() {

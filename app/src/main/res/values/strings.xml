@@ -120,6 +120,7 @@
 
 
 
+    <string name="idLoja">df6b048d-3570-4287-928a-946c5d0d2742</string>
     <string name="grantType">client_credentials</string>
     <string name="clientId">58bf6f8c-6be1-4b56-b51b-736235308c99</string>
     <string name="clientSecret">oxt2ni0ruf9heucl963slcsan2n0l97s155wq675n82iwcem1g31x53nvpxy30aaooe933kjefefrwcqmatubr7o5cynygwgk5r</string>

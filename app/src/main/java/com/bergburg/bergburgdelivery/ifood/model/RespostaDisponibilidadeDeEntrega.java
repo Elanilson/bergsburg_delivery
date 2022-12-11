@@ -10,6 +10,15 @@ public class RespostaDisponibilidadeDeEntrega {
     @SerializedName("distance")
     private int distancia;
 
+    @Override
+    public String toString() {
+        return "RespostaDisponibilidadeDeEntrega{" +
+                "citar=" + citar +
+                ", tempoDeEntrega=" + tempoDeEntrega +
+                ", distancia=" + distancia +
+                '}';
+    }
+
     public Citar getCitar() {
         return citar;
     }

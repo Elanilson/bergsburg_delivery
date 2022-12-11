@@ -2,7 +2,7 @@ package com.bergburg.bergburgdelivery.ifood.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PedidoResposta {
+public class EventoPedido {
     private String id;
     @SerializedName("code")
     private String codigo;
@@ -16,11 +16,13 @@ public class PedidoResposta {
     private String dataDeCriacao;
     @SerializedName("metadata")
     private Metadata metadata;
+    @SerializedName("error")
+    private Error error;
 
 
     @Override
     public String toString() {
-        return "PedidoResposta{" +
+        return "EventoPedido{" +
                 "id='" + id + '\'' +
                 ", codigo='" + codigo + '\'' +
                 ", codigoCompleto='" + codigoCompleto + '\'' +
@@ -28,7 +30,16 @@ public class PedidoResposta {
                 ", idDaLoja='" + idDaLoja + '\'' +
                 ", dataDeCriacao='" + dataDeCriacao + '\'' +
                 ", metadata=" + metadata +
+                ", error=" + error +
                 '}';
+    }
+
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
     }
 
     public String getId() {

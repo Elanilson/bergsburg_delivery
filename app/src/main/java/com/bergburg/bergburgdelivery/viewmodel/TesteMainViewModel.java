@@ -8,12 +8,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.bergburg.bergburgdelivery.ifood.model.Autenticacao;
-import com.bergburg.bergburgdelivery.ifood.model.PedidoResposta;
+import com.bergburg.bergburgdelivery.ifood.model.EventoPedido;
+import com.bergburg.bergburgdelivery.ifood.model.RespostaDisponibilidadeDeEntrega;
+import com.bergburg.bergburgdelivery.ifood.model.RespostaPedido;
 import com.bergburg.bergburgdelivery.listeners.APIListener;
-import com.bergburg.bergburgdelivery.model.Estabelicimento;
 import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.repositorio.IfoodRepositorio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TesteMainViewModel extends AndroidViewModel {
@@ -21,12 +23,21 @@ public class TesteMainViewModel extends AndroidViewModel {
 
     private MutableLiveData<Autenticacao> _Autenticacao = new MutableLiveData<>();
     public LiveData<Autenticacao> autenticacao = _Autenticacao;
+    private MutableLiveData<RespostaDisponibilidadeDeEntrega> _FreteIfood = new MutableLiveData<>();
+    public LiveData<RespostaDisponibilidadeDeEntrega> freteIfood = _FreteIfood;
 
-    private MutableLiveData<List<PedidoResposta>> _PedidoResposta = new MutableLiveData<>();
-    public LiveData<List<PedidoResposta>> pedidoResposta = _PedidoResposta;
+    private MutableLiveData<List<EventoPedido>> _EventosPedido = new MutableLiveData<>();
+    public LiveData<List<EventoPedido>> eventoPedido = _EventosPedido;
+
+
 
     private MutableLiveData<Resposta> _Resposta = new MutableLiveData<>();
     public LiveData<Resposta> resposta = _Resposta;
+
+    private MutableLiveData<RespostaPedido> _RespostaPedido = new MutableLiveData<>();
+    public LiveData<RespostaPedido> respostaPedido = _RespostaPedido;
+
+    private List<EventoPedido> listaTemporaria = new ArrayList<>();
 
     public TesteMainViewModel(@NonNull Application application) {
         super(application);
@@ -51,10 +62,17 @@ public class TesteMainViewModel extends AndroidViewModel {
     }
 
     public void verificarEvento(){
-        APIListener<List<PedidoResposta>> listener = new APIListener<List<PedidoResposta>>() {
+        APIListener<List<EventoPedido>> listener = new APIListener<List<EventoPedido>>() {
             @Override
-            public void onSuccess(List<PedidoResposta> result) {
-                _PedidoResposta.setValue(result);
+            public void onSuccess(List<EventoPedido> result) {
+
+                    if(result != null){
+                        listaTemporaria.addAll(result);
+                    }else{
+                        System.out.println("Sem eventos");
+                    }
+
+                _EventosPedido.setValue(result);
             }
 
             @Override
@@ -64,6 +82,62 @@ public class TesteMainViewModel extends AndroidViewModel {
             }
         };
         repositorio.verificarEventos(listener);
-
     }
+
+    public void reconhecerLimparEnventos(){
+        APIListener<Boolean> listener = new APIListener<Boolean>() {
+            @Override
+            public void onSuccess(Boolean result) {
+
+                _Resposta.setValue(new Resposta("Sucesso ao limpar eventos",true));
+            }
+
+            @Override
+            public void onFailures(String mensagem) {
+                _Resposta.setValue(new Resposta(mensagem));
+
+            }
+        };
+
+        repositorio.reconhecerLimparEnventos(listener,listaTemporaria);
+    }
+
+    public void criarPedidoIfood(){
+        APIListener<RespostaPedido> listener = new APIListener<RespostaPedido>() {
+            @Override
+            public void onSuccess(RespostaPedido result) {
+
+                _RespostaPedido.setValue(result);
+
+               // _Resposta.setValue(new Resposta("Sucesso ao limpar eventos",true));
+            }
+
+            @Override
+            public void onFailures(String mensagem) {
+                _Resposta.setValue(new Resposta(mensagem));
+
+            }
+        };
+
+        repositorio.criarPedidoIfood(listener);
+    }
+
+    public void verificarFreteIfood(){
+        APIListener<RespostaDisponibilidadeDeEntrega> listener = new APIListener<RespostaDisponibilidadeDeEntrega>() {
+            @Override
+            public void onSuccess(RespostaDisponibilidadeDeEntrega result) {
+
+                _FreteIfood.setValue(result);
+            }
+
+            @Override
+            public void onFailures(String mensagem) {
+                _Resposta.setValue(new Resposta(mensagem));
+
+            }
+        };
+
+        repositorio.verificarFreteIfood(listener);
+    }
+
 }

@@ -8,6 +8,14 @@ public class RespostaPedido {
     @SerializedName("trackingUrl")
     private String link;
 
+    @Override
+    public String toString() {
+        return "RespostaPedido{" +
+                "id='" + id + '\'' +
+                ", link='" + link + '\'' +
+                '}';
+    }
+
     public String getId() {
         return id;
     }

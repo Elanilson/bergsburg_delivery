@@ -10,6 +10,15 @@ public class Citar {
     @SerializedName("netValue")
     private float valorLiquido;
 
+    @Override
+    public String toString() {
+        return "Citar{" +
+                "valorBruto=" + valorBruto +
+                ", desconto=" + desconto +
+                ", valorLiquido=" + valorLiquido +
+                '}';
+    }
+
     public float getValorBruto() {
         return valorBruto;
     }

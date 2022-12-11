@@ -4,6 +4,15 @@ public class TempoDeEntrega {
     private int minimo;
     private int maximo;
 
+
+    @Override
+    public String toString() {
+        return "TempoDeEntrega{" +
+                "minimo=" + minimo +
+                ", maximo=" + maximo +
+                '}';
+    }
+
     public int getMinimo() {
         return minimo;
     }
