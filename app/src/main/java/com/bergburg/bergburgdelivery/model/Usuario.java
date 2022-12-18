@@ -2,10 +2,12 @@ package com.bergburg.bergburgdelivery.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 import retrofit2.http.Field;
 
 
-public class Usuario {
+public class Usuario implements Serializable {
     private Long id;
     private Long idSacola;
     private Long idConversa;

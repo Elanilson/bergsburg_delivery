@@ -7,7 +7,7 @@
     tools:context=".view.activity.GerencialProdutosActivity">
 
     <include
-        android:id="@+id/toolbarPersonalizada"
+        android:id="@+id/toolbarPersonalizadaGerecial"
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizada">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaLogin">
 
         <EditText
             android:id="@+id/editTextPesquisaProdutos"

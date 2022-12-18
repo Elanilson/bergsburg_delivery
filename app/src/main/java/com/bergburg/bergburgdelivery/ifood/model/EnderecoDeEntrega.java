@@ -25,6 +25,22 @@ public class EnderecoDeEntrega {
     private Coordenadas coordenadas;
 
 
+    @Override
+    public String toString() {
+        return "EnderecoDeEntrega{" +
+                "codigo_postal='" + codigo_postal + '\'' +
+                ", numero_da_casa='" + numero_da_casa + '\'' +
+                ", nome_da_rua='" + nome_da_rua + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", referencia='" + referencia + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", estado='" + estado + '\'' +
+                ", pais='" + pais + '\'' +
+                ", coordenadas=" + coordenadas +
+                '}';
+    }
+
     public String getCodigo_postal() {
         return codigo_postal;
     }

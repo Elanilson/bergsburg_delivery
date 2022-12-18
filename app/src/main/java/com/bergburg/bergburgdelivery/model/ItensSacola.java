@@ -1,6 +1,8 @@
 package com.bergburg.bergburgdelivery.model;
 
-public class ItensSacola {
+import java.io.Serializable;
+
+public class ItensSacola  implements Serializable {
     private Long id;
     private String titulo;
     private String urlImagem;

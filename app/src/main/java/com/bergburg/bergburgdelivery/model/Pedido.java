@@ -1,6 +1,8 @@
 package com.bergburg.bergburgdelivery.model;
 
-public class Pedido {
+import java.io.Serializable;
+
+public class Pedido  implements Serializable {
     private Long id;
     private Long idUsuario;
     private Float total;

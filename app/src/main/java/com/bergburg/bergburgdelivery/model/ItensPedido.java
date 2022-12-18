@@ -1,4 +1,6 @@
 package com.bergburg.bergburgdelivery.model;
 
-public class ItensPedido extends ItensSacola{
+import java.io.Serializable;
+
+public class ItensPedido extends ItensSacola implements Serializable {
 }

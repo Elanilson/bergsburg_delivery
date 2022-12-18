@@ -1,5 +1,6 @@
 package com.bergburg.bergburgdelivery.model;
 
+import com.bergburg.bergburgdelivery.ifood.model.EventoPedido;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.List;
 public class Dados {
     @SerializedName("error")
     private String error = "";
+    @SerializedName("idEvento")
+    private String idEvento = "";
     @SerializedName("status")
     private Boolean status = false;
     @SerializedName("enviado")
@@ -43,7 +46,17 @@ public class Dados {
     private List<Mensagem> Mensagens;
     @SerializedName("conversas")
     private List<Conversas> conversas;
+    @SerializedName("eventos")
+    private List<EventoPedido> eventos;
 
+
+    public String getIdEvento() {
+        return idEvento;
+    }
+
+    public void setIdEvento(String idEvento) {
+        this.idEvento = idEvento;
+    }
 
     public String getError() {
         return error;
@@ -197,5 +210,13 @@ public class Dados {
 
     public void setMensagem(Mensagem mensagem) {
         this.mensagem = mensagem;
+    }
+
+    public List<EventoPedido> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<EventoPedido> eventos) {
+        this.eventos = eventos;
     }
 }

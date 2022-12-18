@@ -45,6 +45,8 @@ import com.bergburg.bergburgdelivery.adapter.ViewPedidoAdapter;
 import com.bergburg.bergburgdelivery.databinding.ActivityExibirPedidoBinding;
 import com.bergburg.bergburgdelivery.helpers.Permissoes;
 import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
+import com.bergburg.bergburgdelivery.ifood.model.LayoutPedidoIfood;
+import com.bergburg.bergburgdelivery.listeners.OnListenerIfood;
 import com.bergburg.bergburgdelivery.model.Endereco;
 import com.bergburg.bergburgdelivery.model.ItensPedido;
 import com.bergburg.bergburgdelivery.model.Pedido;
@@ -60,7 +62,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class ExibirPedidoActivity extends AppCompatActivity {
+public class ExibirPedidoActivity extends AppCompatActivity  {
     private ActivityExibirPedidoBinding binding;
     private ExibirPedidoViewModel viewModel;
     private ViewPedidoAdapter adapter ;
@@ -79,12 +81,15 @@ public class ExibirPedidoActivity extends AppCompatActivity {
     private Endereco enderecoLocal = new Endereco();
     private Pedido pedidoLocal = new Pedido();
     private List<ItensPedido> itensPedidosLocal = new ArrayList<>();
+    private LayoutPedidoIfood layoutPedidoIfood = new LayoutPedidoIfood();
 
     private String[] permissoes = new String[]{
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.MANAGE_EXTERNAL_STORAGE
     };
+
+    private  Long idUsuario = 0L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,14 +99,14 @@ public class ExibirPedidoActivity extends AppCompatActivity {
         preferences = new DadosPreferences(this);
         viewModel = new ViewModelProvider(this).get(ExibirPedidoViewModel.class);
 
-        setSupportActionBar(binding.toolbarPersonalizada.toolbar);
+        setSupportActionBar(binding.toolbarPersonalizadaExibirP.toolbar);
 
         dialog = new Dialog(this);
 
         //validar Permissao
         Permissoes.validarPermissoes(permissoes, this, 1);
 
-        binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
+        binding.toolbarPersonalizadaExibirP.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -110,10 +115,27 @@ public class ExibirPedidoActivity extends AppCompatActivity {
 
         adapter = new ViewPedidoAdapter(ExibirPedidoActivity.this);
 
+        binding.buttonAcessarPAinel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+              /*  Bundle bundle = new Bundle();
+                bundle.putSerializable("layoutIfood",layoutPedidoIfood);*/
+                Intent intent =  new Intent(ExibirPedidoActivity.this,PaineliFoodActivity.class);
+                intent.putExtra("layoutIfood",layoutPedidoIfood);
+                intent.putExtra("idPedido",pedidoLocal.getId());
+                startActivity(intent);
+            }
+        });
+
 
 
         binding.recyclerviewViewDelhatesPedido.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         binding.recyclerviewViewDelhatesPedido.setAdapter(adapter);
+
+
+         idUsuario = preferences.recuperarID();
+
 
 
         observe();
@@ -160,20 +182,36 @@ public class ExibirPedidoActivity extends AppCompatActivity {
             @Override
             public void onChanged(Endereco endereco) {
                 enderecoLocal = endereco;
-
                 adapter.attackEnderede(endereco);
+                layoutPedidoIfood.setEndereco(endereco);
             }
         });
         viewModel.pedido.observe(this, new Observer<Pedido>() {
             @Override
             public void onChanged(Pedido pedido) {
-                pedidoLocal = pedido;
-                System.out.println("listarPedido: "+pedido.toString());
-                viewModel.getStatusPedido(pedido.getId());
-                viewModel.getItensPedido(pedido.getId());
-                viewModel.getUsuario(pedido.getIdUsuario());
-                viewModel.buscarEnderecoSalvo(pedido.getIdUsuario());
-                adapter.attackPedido(pedido);
+                if(pedido != null){
+                    if(pedido.getOpcaoEntrega().equalsIgnoreCase(getString(R.string.entregador_Parceiro_do_ifood))){
+                        if(idUsuario != null){
+                            if(idUsuario == Constantes.ADMIN){
+                                binding.linearLayoutPainelliFood.setVisibility(View.VISIBLE);
+                            }else{
+                                binding.linearLayoutPainelliFood.setVisibility(View.GONE);
+
+                            }
+                        }
+                      //  binding.linearLayoutPainelliFood.setVisibility(View.VISIBLE);
+                    }else{
+                        binding.linearLayoutPainelliFood.setVisibility(View.GONE);
+                    }
+                    pedidoLocal = pedido;
+                    System.out.println("listarPedido: "+pedido.toString());
+                    viewModel.getStatusPedido(pedido.getId());
+                    viewModel.getItensPedido(pedido.getId());
+                    viewModel.getUsuario(pedido.getIdUsuario());
+                    viewModel.buscarEnderecoSalvo(pedido.getIdUsuario());
+                    layoutPedidoIfood.setPedido(pedido);
+                    adapter.attackPedido(pedido);
+                }
             }
         });
         viewModel.itensPedido.observe(this, new Observer<List<ItensPedido>>() {
@@ -184,6 +222,7 @@ public class ExibirPedidoActivity extends AppCompatActivity {
                 }
                      itensPedidosLocal = itensPedidos;
 
+                layoutPedidoIfood.setItensPedidos(itensPedidos); // se deixar no final ele nao pega os itens disk
                 System.out.println("itensPedidos: "+itensPedidos.size());
                 adapter.attackItensPedidos(itensPedidos);
             }
@@ -202,6 +241,7 @@ public class ExibirPedidoActivity extends AppCompatActivity {
                    usuarioAtual = usuario;
                    System.out.println("usuario id: "+usuario.toString());
                    adapter.attackUsuario(usuario);
+                   layoutPedidoIfood.setUsuario(usuario);
                }
             }
         });
@@ -1135,4 +1175,6 @@ public class ExibirPedidoActivity extends AppCompatActivity {
 
 
     }
+
+
 }

@@ -44,4 +44,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Verificar frete" />
+
+    <Button
+        android:id="@+id/buttonConfirmarPedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirmar pedido" />
+
+    <Button
+        android:id="@+id/buttonCAncelarPedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancelar Pedido" />
+
+    <Button
+        android:id="@+id/buttonAceitarSolicitacaoDeCancelamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="aceita cancelamento" />
+
+    <Button
+        android:id="@+id/buttonNegarSolicitacaoCancelamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="nega cancelamento" />
+
+    <Button
+        android:id="@+id/buttonBuscarDetalhesDoPedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buscar detalhes do pedido" />
+
+    <Button
+        android:id="@+id/buttonHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Home" />
 </LinearLayout>

@@ -38,8 +38,8 @@ public class GerencialProdutosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityGerencialProdutosBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.toolbarPersonalizada.textViewTituloToolbar.setText(getString(R.string.gerencial_produtos));
-        binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
+        binding.toolbarPersonalizadaGerecial.textViewTituloToolbar.setText(getString(R.string.gerencial_produtos));
+        binding.toolbarPersonalizadaGerecial.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

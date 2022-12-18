@@ -20,6 +20,20 @@ public class EventoPedido {
     private Error error;
 
 
+    public EventoPedido() {
+    }
+
+    public EventoPedido(String id) {
+        this.id = id;
+    }
+
+    public EventoPedido(String id, String dataDeCriacao) {
+        this.id = id;
+        this.idDoPedido = id;
+        this.codigoCompleto = "Acompanha pedido";
+        this.dataDeCriacao = dataDeCriacao;
+    }
+
     @Override
     public String toString() {
         return "EventoPedido{" +

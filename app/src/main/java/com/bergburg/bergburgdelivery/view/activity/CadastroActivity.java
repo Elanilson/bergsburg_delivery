@@ -53,7 +53,7 @@ public class CadastroActivity extends AppCompatActivity  {
         preferences = new DadosPreferences(this);
         setContentView(binding.getRoot());
 
-        binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
+        binding.toolbarPersonalizadaCadastro.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

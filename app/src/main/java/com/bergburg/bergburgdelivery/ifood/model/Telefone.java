@@ -10,6 +10,15 @@ public class Telefone {
     @SerializedName("number")
     private String numero;
 
+    @Override
+    public String toString() {
+        return "Telefone{" +
+                "codigoDoPais='" + codigoDoPais + '\'' +
+                ", codigoDeArea='" + codigoDeArea + '\'' +
+                ", numero='" + numero + '\'' +
+                '}';
+    }
+
     public String getCodigoDoPais() {
         return codigoDoPais;
     }

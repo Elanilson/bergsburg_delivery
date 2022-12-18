@@ -153,9 +153,10 @@ public class CadastroViewModel extends AndroidViewModel {
         System.out.println("endereco: "+endereco.toString());
 
         if(nome != null && !nome.isEmpty()){
-            if(senha1 != null && !senha1.isEmpty() && senha2 != null && !senha2.isEmpty()){
+            if(senha1 != null && !senha1.isEmpty() && senha2 != null && !senha2.isEmpty() && senha1.length() > 4){
                 if(senha1.equalsIgnoreCase(senha2)){
                     if(telefone != null && !telefone.isEmpty()){
+                    if(telefone.length() == 12){
                         if(endereco.getRua() != null && !endereco.getRua().isEmpty()){
                             if(!endereco.getBairro().isEmpty()){
                                 if (!endereco.getCidade().isEmpty()){
@@ -215,6 +216,9 @@ public class CadastroViewModel extends AndroidViewModel {
                             _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
                         }
 
+                    }else{
+                        _Resposta.setValue(new Resposta("Informe um número valido!"));
+                    }
                     }else{
                         _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
                     }

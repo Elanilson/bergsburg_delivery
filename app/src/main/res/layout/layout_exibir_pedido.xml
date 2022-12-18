@@ -26,7 +26,7 @@
             android:background="@color/white"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="@string/dados_usuario"
+            android:text="@string/dados_do_cliente"
             android:textColor="@color/grey11"
             android:textSize="15sp" />
     </FrameLayout>
@@ -200,6 +200,44 @@
     <TextView
         android:id="@+id/textViewFormaPagamento"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:drawableLeft="@drawable/ic_baseline_fiber_manual_record_24"
+        android:drawablePadding="5dp"
+        android:text="Carregando..."
+        android:textColor="@color/grey11"
+        android:textSize="16sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view2d3d"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/Gainsboro" />
+
+        <TextView
+            android:id="@+id/textViewOpcaoDeEntregaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/opcoes_de_entrega"
+            android:textColor="@color/grey11"
+            android:textSize="15sp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textViewOpcaoDeEntrega"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"

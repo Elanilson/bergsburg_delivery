@@ -31,7 +31,7 @@ public class MeusPedidosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMeusPedidosBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
+        binding.toolbarPersonalizadaMeus.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

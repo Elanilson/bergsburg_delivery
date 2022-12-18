@@ -5,6 +5,14 @@ import com.google.gson.annotations.SerializedName;
 public class Metadata {
     @SerializedName("CANCEL_STAGE")
     private String cancelarEstagio;
+    @SerializedName("workerPhone")
+    private String telefoneEntregador;
+    @SerializedName("workerVehicleType")
+    private String veiiculoEntregador;
+    @SerializedName("workerName")
+    private String nomeEntregador;
+    @SerializedName("workerExternalUuid")
+    private String idEntregador;
     @SerializedName("ORIGIN")
     private String origem;
     @SerializedName("CANCEL_CODE")
@@ -25,6 +33,10 @@ public class Metadata {
     public String toString() {
         return "Metadata{" +
                 "cancelarEstagio='" + cancelarEstagio + '\'' +
+                ", telefoneEntregador='" + telefoneEntregador + '\'' +
+                ", veiiculoEntregador='" + veiiculoEntregador + '\'' +
+                ", nomeEntregador='" + nomeEntregador + '\'' +
+                ", idEntregador='" + idEntregador + '\'' +
                 ", origem='" + origem + '\'' +
                 ", codigoDeCancelamento='" + codigoDeCancelamento + '\'' +
                 ", tempoEsgotadoDoEvento='" + tempoEsgotadoDoEvento + '\'' +
@@ -33,6 +45,38 @@ public class Metadata {
                 ", motivoDoCancelamento='" + motivoDoCancelamento + '\'' +
                 ", idDoEnventoSolicitadoDeCancelamento='" + idDoEnventoSolicitadoDeCancelamento + '\'' +
                 '}';
+    }
+
+    public String getTelefoneEntregador() {
+        return telefoneEntregador;
+    }
+
+    public void setTelefoneEntregador(String telefoneEntregador) {
+        this.telefoneEntregador = telefoneEntregador;
+    }
+
+    public String getVeiiculoEntregador() {
+        return veiiculoEntregador;
+    }
+
+    public void setVeiiculoEntregador(String veiiculoEntregador) {
+        this.veiiculoEntregador = veiiculoEntregador;
+    }
+
+    public String getNomeEntregador() {
+        return nomeEntregador;
+    }
+
+    public void setNomeEntregador(String nomeEntregador) {
+        this.nomeEntregador = nomeEntregador;
+    }
+
+    public String getIdEntregador() {
+        return idEntregador;
+    }
+
+    public void setIdEntregador(String idEntregador) {
+        this.idEntregador = idEntregador;
     }
 
     public String getCancelarEstagio() {

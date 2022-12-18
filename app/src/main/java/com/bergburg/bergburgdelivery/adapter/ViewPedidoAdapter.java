@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bergburg.bergburgdelivery.R;
+import com.bergburg.bergburgdelivery.ifood.model.LayoutPedidoIfood;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
+import com.bergburg.bergburgdelivery.listeners.OnListenerIfood;
 import com.bergburg.bergburgdelivery.model.Endereco;
 import com.bergburg.bergburgdelivery.model.ItensPedido;
 import com.bergburg.bergburgdelivery.model.Pedido;
@@ -32,6 +34,8 @@ public class ViewPedidoAdapter extends RecyclerView.Adapter<ViewPedidorViewHolde
     private ItemPedidoViewAdapter itemPedidoViewAdapter = new ItemPedidoViewAdapter();
     private Context context;
 
+    private OnListenerIfood<LayoutPedidoIfood> onListenerIfood ;
+
 
     public ViewPedidoAdapter(Context context) {
         this.context = context;
@@ -46,7 +50,7 @@ public class ViewPedidoAdapter extends RecyclerView.Adapter<ViewPedidorViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull ViewPedidorViewHolder holder, int position) {
-        holder.bind(pedido,  pedidoStatusAdapter, itemPedidoViewAdapter,onListenerAcao,context,usuario,endereco );
+        holder.bind(pedido,  pedidoStatusAdapter, itemPedidoViewAdapter,onListenerAcao,context,usuario,endereco ,onListenerIfood,itensPedido);
 
     }
 
@@ -81,6 +85,8 @@ public class ViewPedidoAdapter extends RecyclerView.Adapter<ViewPedidorViewHolde
     public  void attackListener(OnListenerAcao<Pedido> onListenerAcao){
         this.onListenerAcao = onListenerAcao;
     }
+
+
 
 
 }

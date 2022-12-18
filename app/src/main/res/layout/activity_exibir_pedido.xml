@@ -9,14 +9,60 @@
     android:orientation="vertical"
     tools:context=".view.activity.ExibirPedidoActivity">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <include
-            android:id="@+id/toolbarPersonalizada"
+            android:id="@+id/toolbarPersonalizadaExibirP"
             layout="@layout/toolbar" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutPainelliFood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <View
+                    android:id="@+id/viefswfs2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="@color/Gainsboro" />
+
+                <TextView
+                    android:id="@+id/textViewsaasd32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal|left"
+                    android:background="@color/white"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/painel_do_ifood"
+                    android:textColor="@color/grey11"
+                    android:textSize="15sp" />
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/buttonAcessarPAinel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:backgroundTint="@color/vermelho"
+                android:text="@string/acessar_Painel_ifood" />
+
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

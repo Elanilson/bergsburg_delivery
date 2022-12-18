@@ -272,10 +272,11 @@ public class PedidoRepositorio {
                         call.enqueue(new Callback<Dados>() {
                             @Override
                             public void onResponse(Call<Dados> call, Response<Dados> response) {
+
                                 if (response.isSuccessful()) {
                                     listener.onSuccess(response.body());
                                 } else {
-                                    listener.onFailures(Constantes.INSTABILIDADE);
+                                    listener.onFailures("code: "+response.code()+" "+Constantes.INSTABILIDADE);
                                 }
                             }
 

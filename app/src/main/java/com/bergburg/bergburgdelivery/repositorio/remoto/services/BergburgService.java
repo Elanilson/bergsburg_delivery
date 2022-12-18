@@ -38,6 +38,27 @@ public interface BergburgService {
             @Field("login") String login,
             @Field("senha") String senha);
 
+    @POST("salvarEventosIfood.php/")
+    @FormUrlEncoded
+    Call<Dados> salvarEventosIfood(
+            @Field("idEvento") String idEvento,
+            @Field("idPedidoIfood") String idPedidoIfood,
+            @Field("idPedidoApp") Long idPedidoApp,
+            @Field("idEntregador") String idEntregador,
+            @Field("status") String status,
+            @Field("data_create") String data_create,
+            @Field("nomeEntregador") String nomeEntregador,
+            @Field("telefoneEntregador") String telefoneEntregador,
+            @Field("veiculoEntregador") String veiculoEntregador,
+            @Field("linkAcompanhamento") String linkAcompanhamento
+    );
+
+    @POST("getEventos.php/")
+    @FormUrlEncoded
+    Call<Dados> getEventosIfood(
+            @Field("id")Long idPedido);
+
+
     @POST("salvarToken.php/")
     @FormUrlEncoded
     Call<Dados> salvarToken(

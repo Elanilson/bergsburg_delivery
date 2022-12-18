@@ -20,8 +20,10 @@ import android.widget.Toast;
 
 import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.databinding.ActivityMainBinding;
+import com.bergburg.bergburgdelivery.helpers.DadosIFoodPreferences;
 import com.bergburg.bergburgdelivery.helpers.Permissoes;
 import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
+import com.bergburg.bergburgdelivery.ifood.model.Autenticacao;
 import com.bergburg.bergburgdelivery.model.Mensagem;
 import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.model.Usuario;
@@ -35,6 +37,7 @@ import com.bergburg.bergburgdelivery.viewmodel.ChatViewModel;
 import com.bergburg.bergburgdelivery.viewmodel.ConversasViewModel;
 import com.bergburg.bergburgdelivery.viewmodel.LoginViewModel;
 import com.bergburg.bergburgdelivery.viewmodel.MainViewModel;
+import com.bergburg.bergburgdelivery.viewmodel.IFoodMainViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -46,6 +49,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    private IFoodMainViewModel viewModelIFood;
     private LoginViewModel loginViewModel;
     private ConversasViewModel conversasViewModel;
     private BottomNavigationView bottomNavigationView;
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private String tokenUsuario = "";
     private Boolean  btnDeslogado = false;
     public static Boolean statusActivity = false;
-
+    private DadosIFoodPreferences preferencesIFood ;
 
     private String[] permissoes = new String[]{
             Manifest.permission.ACCESS_FINE_LOCATION
@@ -77,11 +81,11 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Home");
-
+        preferencesIFood = new DadosIFoodPreferences(binding.getRoot().getContext(),0L);
         //validar Permissao
         Permissoes.validarPermissoes(permissoes, MainActivity.this, 1);
 
-
+        viewModelIFood = new ViewModelProvider(this).get(IFoodMainViewModel.class);
         conversasViewModel = new ViewModelProvider(this).get(ConversasViewModel.class);
         chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
@@ -89,6 +93,10 @@ public class MainActivity extends AppCompatActivity {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         preferences = new DadosPreferences(MainActivity.this);
+
+        viewModelIFood.verificarEvento();
+
+
 
         String status = preferences.recuperarStatus();
         System.out.println("Status recuperado: "+status);
@@ -172,6 +180,27 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void observe() {
+        viewModelIFood.autenticacao.observe(this, new Observer<Autenticacao>() {
+            @Override
+            public void onChanged(Autenticacao autenticacao) {
+                if(autenticacao.getTokenDeAcesso() != null && !autenticacao.getTokenDeAcesso().isEmpty()){
+                    preferencesIFood.salvarTokenIFood(autenticacao.getTokenDeAcesso());
+                    viewModelIFood.verificarEvento();
+                }
+            }
+        });
+
+        viewModelIFood.resposta.observe(this, new Observer<Resposta>() {
+            @Override
+            public void onChanged(Resposta resposta) {
+                if(!resposta.getStatus()){
+                    if(resposta.getMensagem().equalsIgnoreCase("token expired Tente novamente") || resposta.getMensagem().equalsIgnoreCase("no jwt token Tente novamente")){
+                        viewModelIFood.autenticar();
+                    }
+                    // Toast.makeText(getActivity(), resposta.getMensagem(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         mainViewModel.resposta.observe(this, new Observer<Resposta>() {
             @Override
             public void onChanged(Resposta resposta) {
@@ -371,6 +400,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         ticker = false;
         statusActivity = false;
+        RetrofitClient.CancelarRequisicoes();
+
     }
 
     @Override

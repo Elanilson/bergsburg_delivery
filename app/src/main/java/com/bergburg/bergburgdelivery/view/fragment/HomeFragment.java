@@ -208,15 +208,17 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
                             public void run() {
                                 try {
+                                    if(ticker){
                                     calendar.setTimeInMillis(System.currentTimeMillis());
                                     System.out.println("Home -Milisegundos: "+System.currentTimeMillis());
 
                                     //ficar observando se tem alguma alteração de status do estabelicimento
-                                    viewModel.getEstabelicimento();
+                                      viewModel.getEstabelicimento();
 
                                     Long now = SystemClock.uptimeMillis();
                                     Long next = now + (1000 - (now % 1000));
                                     handler.postAtTime(runnable,next);
+                                    }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }

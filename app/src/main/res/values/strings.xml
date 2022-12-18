@@ -38,7 +38,7 @@
     <string name="data">Data</string>
     <string name="total">Total</string>
     <string name="retirar_no_local">Retirar no local</string>
-    <string name="entrega_a_domicilio">Entrega a domicílio</string>
+    <string name="entrega_a_domicilio">Entrega pelo restaurante</string>
     <string name="opcoes_de_entrega">"Opções de entrega "</string>
     <string name="confirmar_endereco">Confirmar endereço</string>
     <string name="resumo_pedido">Resumo pedido</string>
@@ -119,13 +119,41 @@
     <string name="infoStatus">Mantenha os status do pedido atualizados isso vai permitir você otimizar o controle a gestão de seu negócio, além de melhorar a experiência do usuário que realiza pedidos pelo app.</string>
 
 
+    <string name="entregador_Parceiro_do_ifood">Entrega parceiro do Ifood</string>
+    <string name="verificarDisponibilidade">Verificar  disponibilidade</string>
+    <string name="atencao">Atenção:</string>
+
+
+
 
     <string name="idLoja">df6b048d-3570-4287-928a-946c5d0d2742</string>
     <string name="grantType">client_credentials</string>
     <string name="clientId">58bf6f8c-6be1-4b56-b51b-736235308c99</string>
     <string name="clientSecret">oxt2ni0ruf9heucl963slcsan2n0l97s155wq675n82iwcem1g31x53nvpxy30aaooe933kjefefrwcqmatubr7o5cynygwgk5r</string>
+    <string name="dados_do_cliente">Dados do cliente</string>
+    <string name="painel_do_ifood">Painel do iFood</string>
+    <string name="criar_pedido_ifood">Criar pedido</string>
+    <string name="confirmar_Pedido_ifood">Confirmar pepdido</string>
+    <string name="cancelar_pedido_ifood">Cancelar pedido</string>
+    <string name="verificar_frete_ifood">Verificar frete</string>
+    <string name="aceitar_cancelamento">Aceitar cancel..</string>
+    <string name="nega_cancelamento">Nega cancel..</string>
+    <string name="status_ifood">Status iFood</string>
+    <string name="acessar_Painel_ifood">Acessar painel iFood</string>
+    <string name="info_entregador">Informações do entregador</string>
+    <string name="info_pedido_ifood">Informações do pedido</string>
+    <string name="acompanharPedido">Acompanhar pedido</string>
 
+    <string name="infoCancelamento">Como resultado dessa solicitação, você poderá receber  um dos seguintes status: - CANCELADO \n  -FALHA NO PEDIDO DE CANCELAMENTO</string>
 
+    <string name="validacaoCAncelamento">A solicitação de cancelamento não garante que o pedido está cancelado. \n Como resultado dessa solicitação, você poderá receber  um dos seguintes status: \n\n - Cancelado \n  - Falha no pedido de cancelamento</string>
+
+    <string name="penalidadeCancelmaneto">Evite cancelar pedidos! O excesso de cancelamentos pode resultar em algumas penalidades como por exemplo ter a loja fechada temporariamente na plataforma.</string>
+    <string name="recarregar">Recarregar eventos</string>
+    <string name="acompanhar">Acompanhar</string>
+    <string name="copiarLink">Copiar link</string>
+    <string name="opcao_entrega">Opção de entrega</string>
+    <string name="receberar_email">Você receberar o E-mail e alguns minutos.</string>
 
 
     <string-array name="status">
@@ -137,5 +165,17 @@
         <item>Cancelado</item>
     </string-array>
 
-
+    <string-array name="motivo_de_cancelamentos">
+        <item>PROBLEMAS DE SISTEMA</item>
+        <item>PEDIDO EM DUPLICIDADE</item>
+        <item>ITEM INDISPONÍVEL</item>
+        <item>RESTAURANTE SEM MOTOBOY</item>
+        <item>CARDÁPIO DESATUALIZADO</item>
+        <item>PEDIDO FORA DA ÁREA DE ENTREGA</item>
+        <item>CLIENTE GOLPISTA / TROTE</item>
+        <item>FORA DO HORÁRIO DO DELIVERY</item>
+        <item>DIFICULDADES INTERNAS DO RESTAURANTE</item>
+        <item>ÁREA DE RISCO</item>
+        <item>RESTAURANTE ABRIRÁ MAIS TARDE</item>
+    </string-array>
 </resources>

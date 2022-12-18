@@ -17,7 +17,7 @@
         android:orientation="vertical"
         tools:context=".view.activity.LoginActivity">
         <include
-            android:id="@+id/toolbarPersonalizada"
+            android:id="@+id/toolbarPersonalizadaLogin"
             layout="@layout/toolbar_amarelo"/>
 
         <LinearLayout
@@ -27,7 +27,7 @@
             android:gravity="center|right">
 
             <TextView
-                android:id="@+id/textView52"
+                android:id="@+id/textView52df"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -47,7 +47,7 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/view5"
+            android:id="@+id/viewvb5"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/wave" />
@@ -70,7 +70,7 @@
                 android:textSize="48sp" />
 
             <EditText
-                android:id="@+id/editCampoLogin"
+                android:id="@+id/editCampoEmailLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -84,7 +84,7 @@
                 android:textColor="@color/grey31" />
 
             <EditText
-                android:id="@+id/editCampoSenha"
+                android:id="@+id/editCampoSenhaLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_campo"

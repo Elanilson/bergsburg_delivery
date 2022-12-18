@@ -127,6 +127,13 @@
                 android:buttonTint="@color/grey21"
                 android:text="@string/entrega_a_domicilio" />
 
+            <RadioButton
+                android:id="@+id/radioButtonEntregaPeloIfood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/grey11"
+                android:text="@string/entregador_Parceiro_do_ifood" />
+
 
         </RadioGroup>
 
@@ -138,6 +145,58 @@
             android:orientation="vertical"
             android:visibility="gone"
             tools:visibility="visible">
+
+            <Button
+                android:id="@+id/buttonVerificarDisponibilidadeEntregaIfood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/vermelho"
+                android:text="@string/verificarDisponibilidade"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/layoutInfoIfood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/Gainsboro"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView44"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/atencao"
+                        android:textColor="@color/grey11"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="iFood"
+                        android:textColor="@color/vermelho"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewInfoDoFrenteIfood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="há entregadores disponíveis e qual será o valor de frete."
+                    android:textColor="@color/vermelho" />
+            </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.adapter.ItemPedidoViewAdapter;
 import com.bergburg.bergburgdelivery.adapter.PedidoStatusAdapter;
+import com.bergburg.bergburgdelivery.ifood.model.LayoutPedidoIfood;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
+import com.bergburg.bergburgdelivery.listeners.OnListenerIfood;
 import com.bergburg.bergburgdelivery.model.Endereco;
 import com.bergburg.bergburgdelivery.model.ItensPedido;
 import com.bergburg.bergburgdelivery.model.Pedido;
@@ -24,13 +27,16 @@ import com.bergburg.bergburgdelivery.model.Usuario;
 import java.util.List;
 
 public class ViewPedidorViewHolder extends RecyclerView.ViewHolder {
-    private TextView textViewNumeroPedido,textViewDataPedido,textViewCep,textViewNumeroCasa,textViewTotal,textViewTaxa_entrega,textViewSubTotal;
+    private TextView textViewNumeroPedido,textViewDataPedido,textViewCep,textViewNumeroCasa,textViewTotal,textViewTaxa_entrega,textViewSubTotal,opcaoDeEntrega;
     private RecyclerView recyclerViewStatusPedido, recyclerViewItensPedido;
     private Button buttonFechar;
     private LinearLayout layoutTaxa;
     private ProgressBar progressBarUsuario, progressBarStatusPedido;
     private  LinearLayout layoutNome, layoutTelefone,layoutCep, layoutNCasa,layoutEndereco,layoutNPEdi,layout_st_total,layoutSub,layoutTotal;
     private TextView textViewPagamaneto;
+
+
+    private LayoutPedidoIfood layoutPedidoIfood = new LayoutPedidoIfood();
 
     private TextView textViewNome,textViewTelefone,textEndereco;
 
@@ -42,6 +48,7 @@ public class ViewPedidorViewHolder extends RecyclerView.ViewHolder {
         textEndereco = itemView.findViewById(R.id.textViewEnderecoView);
         textViewCep = itemView.findViewById(R.id.textViewCepView);
         textViewNumeroCasa = itemView.findViewById(R.id.textViewNumeroCasaView);
+        opcaoDeEntrega = itemView.findViewById(R.id.textViewOpcaoDeEntrega);
 
         textViewDataPedido = itemView.findViewById(R.id.textViewPedidoDataPedido);
         textViewNumeroPedido = itemView.findViewById(R.id.textViewPedidoNumeroPedido);
@@ -52,6 +59,9 @@ public class ViewPedidorViewHolder extends RecyclerView.ViewHolder {
         textViewTaxa_entrega = itemView.findViewById(R.id.textViewTaxa_entregaView);
         textViewSubTotal = itemView.findViewById(R.id.textViewSubTotalView);
         textViewPagamaneto = itemView.findViewById(R.id.textViewFormaPagamento);
+
+
+
 
         progressBarUsuario = itemView.findViewById(R.id.progressBarDadosUsuario);
         progressBarStatusPedido = itemView.findViewById(R.id.progressBarSatusPedido);
@@ -69,7 +79,7 @@ public class ViewPedidorViewHolder extends RecyclerView.ViewHolder {
         //buttonFechar = itemView.findViewById(R.id.buttonViewPedidoFechar);
     }
 
-    public void bind(Pedido pedido, PedidoStatusAdapter pedidoStatusAdapter, ItemPedidoViewAdapter itemPedidoViewAdapter, OnListenerAcao<Pedido> onListenerAcao, Context context, Usuario usuario, Endereco endereco){
+    public void bind(Pedido pedido, PedidoStatusAdapter pedidoStatusAdapter, ItemPedidoViewAdapter itemPedidoViewAdapter, OnListenerAcao<Pedido> onListenerAcao, Context context, Usuario usuario, Endereco endereco, OnListenerIfood<LayoutPedidoIfood> onListenerIfood,List<ItensPedido> itensPedido){
 
         if(pedido != null){
             layoutNome.setVisibility(View.VISIBLE);
@@ -89,6 +99,7 @@ public class ViewPedidorViewHolder extends RecyclerView.ViewHolder {
             progressBarStatusPedido.setVisibility(View.VISIBLE);
         }
 
+        opcaoDeEntrega.setText(pedido.getOpcaoEntrega());
         textViewPagamaneto.setText(pedido.getFormaDePagamento());
         textViewDataPedido.setText(pedido.getData_pedido());
         textViewNumeroPedido.setText("Pedido n° "+pedido.getId());
@@ -140,6 +151,11 @@ public class ViewPedidorViewHolder extends RecyclerView.ViewHolder {
             recyclerViewStatusPedido.setVisibility(View.GONE);
             progressBarUsuario.setVisibility(View.VISIBLE);
         }
+
+        layoutPedidoIfood.setUsuario(usuario);
+        layoutPedidoIfood.setEndereco(endereco);
+        layoutPedidoIfood.setItensPedidos(itensPedido);
+
 
 
 

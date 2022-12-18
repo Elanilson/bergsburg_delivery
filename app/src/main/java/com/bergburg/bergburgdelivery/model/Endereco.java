@@ -2,7 +2,9 @@ package com.bergburg.bergburgdelivery.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Endereco {
+import java.io.Serializable;
+
+public class Endereco implements Serializable {
     @SerializedName("idUsuario")
     private Long idUsuario;
     @SerializedName("id")

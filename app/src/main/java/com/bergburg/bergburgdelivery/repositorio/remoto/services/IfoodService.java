@@ -1,10 +1,12 @@
 package com.bergburg.bergburgdelivery.repositorio.remoto.services;
 
 import com.bergburg.bergburgdelivery.ifood.model.Autenticacao;
+import com.bergburg.bergburgdelivery.ifood.model.DetalhesPedido;
 import com.bergburg.bergburgdelivery.ifood.model.EventoPedido;
 import com.bergburg.bergburgdelivery.ifood.model.LayoutEnvioPedido;
 import com.bergburg.bergburgdelivery.ifood.model.RespostaDisponibilidadeDeEntrega;
 import com.bergburg.bergburgdelivery.ifood.model.RespostaPedido;
+import com.bergburg.bergburgdelivery.viewmodel.CancelamentoDePedido;
 
 import java.util.List;
 
@@ -31,12 +33,39 @@ public interface IfoodService {
             @Body List<EventoPedido> eventoPedidos
     );
 
+    @POST("order/v1.0/orders/{idPedido}/confirm")
+    Call<Void> confirmarPedido(
+            @Path(value = "idPedido" , encoded = true) String idPedido
+    );
+
+    @POST("order/v1.0/orders/{idPedido}/requestCancellation")
+    Call<Void> cancelarPepdido(
+            @Path(value = "idPedido" , encoded = true) String idPedido,
+            @Body CancelamentoDePedido cancelamentoDePedido
+    );
+
+    @POST("order/v1.0/orders/{idPedido}/acceptCancellation")
+    Call<Void> aceitarPedidoDeCanelamento(
+            @Path(value = "idPedido" , encoded = true) String idPedido
+    );
+
+    @POST("order/v1.0/orders/{idPedido}/denyCancellation")
+    Call<Void> negarPedidoDeCanelamento(
+            @Path(value = "idPedido" , encoded = true) String idPedido
+    );
+
     @GET("shipping/v1.0/merchants/{idLoja}/deliveryAvailabilities")
     Call<RespostaDisponibilidadeDeEntrega> verificarFreteIfood(
             @Path(value = "idLoja" , encoded = true) String idLoja,
-            @Query(value = "latitude", encoded = true) float latitude,
-            @Query(value ="longitude", encoded = true) float longitude
+            @Query(value = "latitude", encoded = true) Double latitude,
+            @Query(value ="longitude", encoded = true) Double longitude
     );
+
+    @GET("order/v1.0/orders/{idPedido}")
+    Call<DetalhesPedido> buscarDetalhesDoPedido(
+            @Path(value = "idPedido" , encoded = true) String idPedido
+    );
+
 
     @POST("shipping/v1.0/merchants/{idLoja}/orders")
     Call<RespostaPedido> criarPedidoIfood(

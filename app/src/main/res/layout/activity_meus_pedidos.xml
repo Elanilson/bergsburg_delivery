@@ -7,7 +7,7 @@
     tools:context=".view.activity.MeusPedidosActivity">
 
     <include
-        android:id="@+id/toolbarPersonalizada"
+        android:id="@+id/toolbarPersonalizadaMeus"
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizada" >
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaLogin" >
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -36,5 +36,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/recyclerViewMeusPedidos"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewMeusPedidos"
         app:layout_constraintStart_toStartOf="@+id/recyclerViewMeusPedidos"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizada" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

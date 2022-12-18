@@ -61,13 +61,22 @@ android:padding="10dp">
     android:textColor="@color/GhostWhite"
     android:theme="@style/button_custom_black" />
 
-<TextView
-    android:id="@+id/textView6"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="30dp"
-    android:gravity="center"
-    android:text="@string/nao_encontrou" />
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="@string/receberar_email"
+        android:textColor="@color/vermelho" />
+
+    <TextView
+        android:id="@+id/textView69"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="@string/nao_encontrou" />
 
 </LinearLayout>
 

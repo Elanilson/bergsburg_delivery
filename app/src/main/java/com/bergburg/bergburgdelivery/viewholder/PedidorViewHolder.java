@@ -1,6 +1,7 @@
 package com.bergburg.bergburgdelivery.viewholder;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,10 +16,12 @@ import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
 import com.bergburg.bergburgdelivery.model.Pedido;
 
 public class PedidorViewHolder extends RecyclerView.ViewHolder {
-    private TextView textViewIdPedido,textViewDataPedido,textViewStatus,textViewHorarioStatus,textViewTotal,textViewlabelStatus;
+    private TextView textViewIdPedido,textViewDataPedido,textViewStatus,textViewHorarioStatus,textViewTotal,textViewlabelStatus,opcaoDeEntrega;
     private CardView cardView;
     private LinearLayout layoutPedido;
     private DadosPreferences preferences;
+    private TextView textViewOpcapDeEntrega;
+
 
 
     public PedidorViewHolder(@NonNull View itemView) {
@@ -31,6 +34,9 @@ public class PedidorViewHolder extends RecyclerView.ViewHolder {
         cardView = itemView.findViewById(R.id.cardViewPedido);
         layoutPedido = itemView.findViewById(R.id.layoutPedido);
         textViewlabelStatus = itemView.findViewById(R.id.textViewStatusLabel);
+        opcaoDeEntrega = itemView.findViewById(R.id.textViewOpcaoDeEntrega);
+        textViewOpcapDeEntrega = itemView.findViewById(R.id.textViewOpcaoDeEntregaLabel);
+
         preferences = new DadosPreferences(itemView.getContext());
     }
 
@@ -40,6 +46,14 @@ public class PedidorViewHolder extends RecyclerView.ViewHolder {
         textViewStatus.setText(pedido.getStatus());
         textViewHorarioStatus.setText(pedido.getData_status());
         textViewTotal.setText("R$ "+String.format("%.2f",pedido.getTotal()));
+        opcaoDeEntrega.setText(pedido.getOpcaoEntrega());
+
+        if(pedido.getOpcaoEntrega().equalsIgnoreCase(itemView.getContext().getString(R.string.entregador_Parceiro_do_ifood))){
+         //   opcaoDeEntrega.setTextColor(itemView.getResources().getColor(R.color.vermelho));
+        }else{
+         //   opcaoDeEntrega.setTextColor(itemView.getResources().getColor(R.color.grey21));
+
+        }
 
 
         Long idUsuario = preferences.recuperarID();
@@ -48,24 +62,30 @@ public class PedidorViewHolder extends RecyclerView.ViewHolder {
                 if(pedido.getVisualizado().equalsIgnoreCase(Constantes.SIM)){
                     if(pedido.getStatus().equalsIgnoreCase("Cancelado")){
                         layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.cancelado));
+                      //  textViewOpcapDeEntrega.setBackgroundColor(itemView.getResources().getColor(R.color.cancelado));
                     }else{
                         layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.amarelo_pedido_lido));
+                    //    textViewOpcapDeEntrega.setBackgroundColor(itemView.getResources().getColor(R.color.amarelo_pedido_lido));
                     }
                     //  textViewlabelStatus.setBackgroundColor(itemView.getResources().getColor(R.color.amarelo_pedido_lido));
                 }else{
                     // textViewlabelStatus.setBackgroundColor(itemView.getResources().getColor(R.color.verde_Pedido_novo));
                     if(pedido.getStatus().equalsIgnoreCase("Cancelado")){
                         layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.cancelado));
+                      //  textViewOpcapDeEntrega.setBackgroundColor(itemView.getResources().getColor(R.color.cancelado));
                     }else{
                         layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.verde_Pedido_novo));
+                       // textViewOpcapDeEntrega.setBackgroundColor(itemView.getResources().getColor(R.color.verde_Pedido_novo));
                     }
 
                 }
             }else{ // para os usuários
                 if(pedido.getStatus().equalsIgnoreCase("Cancelado")){
                     layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.cancelado));
+                  //  textViewOpcapDeEntrega.setBackgroundColor(itemView.getResources().getColor(R.color.cancelado));
                 }else {
                     layoutPedido.setBackgroundColor(itemView.getResources().getColor(R.color.white));
+                   // textViewOpcapDeEntrega.setBackgroundColor(itemView.getResources().getColor(R.color.white));
                 }
             }
         }
@@ -73,6 +93,8 @@ public class PedidorViewHolder extends RecyclerView.ViewHolder {
 
 
         System.out.println("Holder "+pedido.toString());
+
+
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

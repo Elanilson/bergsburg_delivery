@@ -15,7 +15,7 @@
         tools:context=".view.activity.EditarProdutoActivity">
 
         <include
-            android:id="@+id/toolbarPersonalizada"
+            android:id="@+id/toolbarPersonalizadaEditar"
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

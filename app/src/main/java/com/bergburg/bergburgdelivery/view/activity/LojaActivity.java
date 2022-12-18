@@ -31,8 +31,8 @@ public class LojaActivity extends AppCompatActivity {
         binding = ActivityLojaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.toolbarPersonalizada.textViewTituloToolbar.setText(getString(R.string.gerencial_produtos));
-        binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
+        binding.toolbarPersonalizadaLoja.textViewTituloToolbar.setText(getString(R.string.gerencial_produtos));
+        binding.toolbarPersonalizadaLoja.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

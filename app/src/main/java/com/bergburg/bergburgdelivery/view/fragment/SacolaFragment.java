@@ -33,8 +33,11 @@ import com.bergburg.bergburgdelivery.Constantes.Constantes;
 import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.adapter.SacolaAdapter;
 import com.bergburg.bergburgdelivery.databinding.FragmentSacolaBinding;
+import com.bergburg.bergburgdelivery.helpers.DadosIFoodPreferences;
 import com.bergburg.bergburgdelivery.helpers.Local;
 import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
+import com.bergburg.bergburgdelivery.ifood.model.Autenticacao;
+import com.bergburg.bergburgdelivery.ifood.model.RespostaDisponibilidadeDeEntrega;
 import com.bergburg.bergburgdelivery.listeners.OnListenerAcao;
 import com.bergburg.bergburgdelivery.model.Endereco;
 import com.bergburg.bergburgdelivery.model.Estabelicimento;
@@ -43,6 +46,7 @@ import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.model.Usuario;
 import com.bergburg.bergburgdelivery.viewmodel.ExibirPedidoViewModel;
 import com.bergburg.bergburgdelivery.viewmodel.SacolaViewModel;
+import com.bergburg.bergburgdelivery.viewmodel.IFoodMainViewModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -54,6 +58,7 @@ public class SacolaFragment extends Fragment {
     private FragmentSacolaBinding    binding;
     private SacolaViewModel viewModel;
     private ExibirPedidoViewModel exibirPedidoViewModel;
+    private IFoodMainViewModel viewModelIFood;
     private SacolaAdapter sacolaAdapter;
     private BottomSheetBehavior bottomSheetBehavior;
     private FrameLayout frameLayoutSheetTotal;
@@ -61,7 +66,8 @@ public class SacolaFragment extends Fragment {
     private CardView cardViewTotal;
     private Float total = 0f;
     private Float subTotal =0f;
-    private Float taxa_de_entrega = 0f; // ele já fica com o valor da entrega disponivel
+    private Float taxa_de_entrega_IFOOD = 0f;
+   // private Float taxa_de_entrega = 0f; // ele já fica com o valor da entrega disponivel
     private Float valor_do_frete = 0f; // ele recebe o valor da entrega ser fo aptante
     private Long idSacola;
     private Long idUsuario;
@@ -81,6 +87,13 @@ public class SacolaFragment extends Fragment {
     private Boolean ticker = false;
     private  Dialog dialogInternet;
     private String formarDePagamento = "";
+    private LinearLayout linearLayoutInfoIfood;
+    private TextView textViewInfoFreteIfood;
+    private Switch confirmarEndereco;
+    private TextView frete_pedido,total_pedido;
+    private Float taxa_de_entregaTemporariaDoRestaurante = 0f;
+    private DadosIFoodPreferences preferencesIFood ;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,6 +110,9 @@ public class SacolaFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(SacolaViewModel.class);
         exibirPedidoViewModel = new ViewModelProvider(this).get(ExibirPedidoViewModel.class);
+        viewModelIFood = new ViewModelProvider(this).get(IFoodMainViewModel.class);
+
+        preferencesIFood = new DadosIFoodPreferences(binding.getRoot().getContext(),0L);
 
         sacolaAdapter = new SacolaAdapter(getActivity());
         binding.recyclerviewSacola.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
@@ -280,22 +296,25 @@ public class SacolaFragment extends Fragment {
        // Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.layout_retirada_ou_entegra);
         Button btnVoltar = dialog.findViewById(R.id.buttonVoltar);
+        Button buttonVerificarDisponibilidadeEntregaIfood = dialog.findViewById(R.id.buttonVerificarDisponibilidadeEntregaIfood);
         FrameLayout framFinalizar = dialog.findViewById(R.id.layoutFinalizarPedido);
         LinearLayout layoutEndereco = dialog.findViewById(R.id.layoutEndereco);
         LinearLayout layoutFrete = dialog.findViewById(R.id.layout_frete);
 
         RadioGroup opcaoDeEntrega = dialog.findViewById(R.id.radioGroupOpcao);
         RadioGroup opcaoDePagamento = dialog.findViewById(R.id.groupPagamento);
-        Switch confirmarEndereco = dialog.findViewById(R.id.switchConfirmarEndereco);
+        confirmarEndereco = dialog.findViewById(R.id.switchConfirmarEndereco);
         TextView nome = dialog.findViewById(R.id.textViewNomeView);
         TextView telefone = dialog.findViewById(R.id.textViewTelefoneView);
         TextView cep = dialog.findViewById(R.id.textViewCepView);
         TextView numeroCasa = dialog.findViewById(R.id.textViewNumeroCasaView);
         TextView endereco = dialog.findViewById(R.id.textViewEnderecoView);
         TextView subTotal_pedido = dialog.findViewById(R.id.textViexSubTotal);
-        TextView frete_pedido = dialog.findViewById(R.id.textViecxwTaxaEntrega);
-        TextView total_pedido = dialog.findViewById(R.id.textViewSheetTotal);
+         frete_pedido = dialog.findViewById(R.id.textViecxwTaxaEntrega);
+         total_pedido = dialog.findViewById(R.id.textViewSheetTotal);
         progressBarEnvioPedido = dialog.findViewById(R.id.progressBarPedidoEnviado);
+         textViewInfoFreteIfood = dialog.findViewById(R.id.textViewInfoDoFrenteIfood);
+         linearLayoutInfoIfood = dialog.findViewById(R.id.layoutInfoIfood);
 
         cep.setText(enderecoUsuario.getCep());
         numeroCasa.setText(enderecoUsuario.getNumeroCasa());
@@ -306,7 +325,7 @@ public class SacolaFragment extends Fragment {
                         enderecoUsuario.getCidade()+",\n  Complemento: "+
                         enderecoUsuario.getComplemento()
         );
-        frete_pedido.setText("R$ "+String.format("%.2f", taxa_de_entrega));
+        frete_pedido.setText("R$ "+String.format("%.2f", taxa_de_entregaTemporariaDoRestaurante));
 
         opcaoDePagamento.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -332,12 +351,22 @@ public class SacolaFragment extends Fragment {
             }
         });
 
+        buttonVerificarDisponibilidadeEntregaIfood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModelIFood.verificarFreteIfood(enderecoUsuario);
+
+            }
+        });
+
 
         opcaoDeEntrega.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (opcaoDeEntrega.getCheckedRadioButtonId()){
                     case R.id.radioButtonRetiraNoLocal:
+                        buttonVerificarDisponibilidadeEntregaIfood.setVisibility(View.GONE);
+                        linearLayoutInfoIfood.setVisibility(View.GONE);
                         valor_do_frete = 0f;
                         layoutEndereco.setVisibility(View.GONE);
                         layoutFrete.setVisibility(View.GONE);
@@ -348,11 +377,31 @@ public class SacolaFragment extends Fragment {
                         System.out.println("Total: "+total);
                         break;
                     case R.id.radioButtonEntregaEmCasa:
-                        valor_do_frete = Float.parseFloat(formatCasaDecimal.format(taxa_de_entrega).replace(",",".")); //formatando
+                        valor_do_frete = 0f;
+                        enderecoConfirmado = false;
+                        confirmarEndereco.setChecked(false);
+                        viewModel.buscarEnderecoSalvo(idUsuario);
+                        buttonVerificarDisponibilidadeEntregaIfood.setVisibility(View.GONE);
+                        linearLayoutInfoIfood.setVisibility(View.GONE);
+                        confirmarEndereco.setVisibility(View.VISIBLE);
+                        valor_do_frete = Float.parseFloat(formatCasaDecimal.format(taxa_de_entregaTemporariaDoRestaurante).replace(",",".")); //formatando
                         opcaoEntrega = getString(R.string.entrega_a_domicilio);
                         confirmarEntregaADomicilio = true;
-                        total = calcularTotal(taxa_de_entrega); // com taxa de entrega
+                        total = calcularTotal(taxa_de_entregaTemporariaDoRestaurante); // com taxa de entrega
                         total_pedido.setText("R$ "+String.format("%.2f",total));
+                        layoutEndereco.setVisibility(View.VISIBLE);
+                        layoutFrete.setVisibility(View.VISIBLE);
+                        break;
+                    case R.id.radioButtonEntregaPeloIfood:
+                        enderecoConfirmado = false;
+                        confirmarEndereco.setChecked(false);
+                        total_pedido.setText("Carregando");
+                        frete_pedido.setText("Carregando");
+                        viewModelIFood.verificarFreteIfood(enderecoUsuario);
+                        buttonVerificarDisponibilidadeEntregaIfood.setVisibility(View.VISIBLE);
+                        linearLayoutInfoIfood.setVisibility(View.GONE);
+                        opcaoEntrega = getString(R.string.entregador_Parceiro_do_ifood);
+                        confirmarEntregaADomicilio = true;
                         layoutEndereco.setVisibility(View.VISIBLE);
                         layoutFrete.setVisibility(View.VISIBLE);
                         break;
@@ -365,6 +414,7 @@ public class SacolaFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 enderecoConfirmado = isChecked;
+                System.out.println("Endereco de entrega confirmado: "+enderecoConfirmado);
             }
         });
 
@@ -387,8 +437,10 @@ public class SacolaFragment extends Fragment {
                 //entrega a domiciilio e endereço confirmado ou
                 //retirada no local
                 if (!formarDePagamento.isEmpty()){
-                    if (opcaoEntrega.equalsIgnoreCase(getString(R.string.entrega_a_domicilio)) &&
-                            enderecoConfirmado ||
+                    if (
+                            opcaoEntrega.equalsIgnoreCase(getString(R.string.entrega_a_domicilio)) &&
+                            enderecoConfirmado && valor_do_frete != 0f || opcaoEntrega.equalsIgnoreCase(getString(R.string.entregador_Parceiro_do_ifood)) &&
+                            enderecoConfirmado && valor_do_frete != 0f ||
                             opcaoEntrega.equalsIgnoreCase(getString(R.string.retirar_no_local))
 
                     ) {
@@ -434,6 +486,54 @@ public class SacolaFragment extends Fragment {
     }
 
     private void observer() {
+        viewModelIFood.autenticacao.observe(getViewLifecycleOwner(), new Observer<Autenticacao>() {
+            @Override
+            public void onChanged(Autenticacao autenticacao) {
+                if(autenticacao.getTokenDeAcesso() != null && !autenticacao.getTokenDeAcesso().isEmpty()){
+                    preferencesIFood.salvarTokenIFood(autenticacao.getTokenDeAcesso());
+                    //viewModelIFood.verificarEvento();
+                   // preferencesIFood.salvarTokenIFood("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI1OGJmNmY4Yy02YmUxLTRiNTYtYjUxYi03MzYyMzUzMDhjOTkiLCJhdWQiOlsic2hpcHBpbmciLCJjYXRhbG9nIiwicmV2aWV3IiwiZmluYW5jaWFsIiwibWVyY2hhbnQiLCJvcmRlciIsIm9hdXRoLXNlcnZlciJdLCJhcHBfbmFtZSI6IjU4YmY2ZjhjLTZiZTEtNGI1Ni1iNTFiLTczNjIzNTMwOGM5OSIsIm93bmVyX25hbWUiOiIiLCJzY29wZSI6WyJzaGlwcGluZyIsImNhdGFsb2ciLCJyZXZpZXciLCJtZXJjaGFudCIsIm9yZGVyIiwiY29uY2lsaWF0b3IiXSwiaXNzIjoiaUZvb2QiLCJtZXJjaGFudF9zY29wZSI6WyJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6bWVyY2hhbnQiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6Y2F0YWxvZyIsImRmNmIwNDhkLTM1NzAtNDI4Ny05MjhhLTk0NmM1ZDBkMjc0MjpyZXZpZXciLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6b3JkZXIiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6Y29uY2lsaWF0b3IiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6c2hpcHBpbmciXSwiZXhwIjoxNjcxMTQ4Mjk1LCJpYXQiOjE2NzExMjY2OTUsImp0aSI6IjU4YmY2ZjhjLTZiZTEtNGI1Ni1iNTFiLTczNjIzNTMwOGM5OSIsIm1lcmNoYW50X3Njb3BlZCI6dHJ1ZSwiY2xpZW50X2lkIjoiNThiZjZmOGMtNmJlMS00YjU2LWI1MWItNzM2MjM1MzA4Yzk5In0.UKAgTCoeGc5RavqnQJ314dheP-2rE0EPs8e77_cw2hGUS2mqqS4kf5B3k3vrHDVdnJXF4rAKkZ0UoT32K4aYKWSy_YZ2C5DDEICKZZMIrwURfXWpAB6jsNNcFj48lY9lwW8rjPBl7j4ZOJTjFaYdheSsLXM3PWKtEAoPJogHVjQ");
+                    viewModelIFood.verificarFreteIfood(enderecoUsuario);
+                    Toast.makeText(getActivity(), "Autenticado!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        viewModelIFood.freteIfood.observe(getViewLifecycleOwner(), new Observer<RespostaDisponibilidadeDeEntrega>() {
+            @Override
+            public void onChanged(RespostaDisponibilidadeDeEntrega respostaDisponibilidadeDeEntrega) {
+               if(respostaDisponibilidadeDeEntrega != null){
+                   Float valorDoFrete = respostaDisponibilidadeDeEntrega.getCitar().getValorLiquido();
+                   taxa_de_entrega_IFOOD = valorDoFrete;
+                   frete_pedido.setText("R$ "+String.format("%.2f", taxa_de_entrega_IFOOD));
+                   total = calcularTotal(taxa_de_entrega_IFOOD); // com taxa de entrega
+                   total_pedido.setText("R$ "+String.format("%.2f",total));
+                   valor_do_frete = Float.parseFloat(formatCasaDecimal.format(taxa_de_entrega_IFOOD).replace(",",".")); //formatando
+                   System.out.println("frete "+respostaDisponibilidadeDeEntrega.toString());
+                   textViewInfoFreteIfood.setText("Há entregadores disponíveis  para sua localidade, o valor de frete será R$ "+valorDoFrete);
+                  // System.out.println("apkdoandroid: "+respostaDisponibilidadeDeEntrega.toString());
+                   linearLayoutInfoIfood.setVisibility(View.VISIBLE);
+
+               }
+            }
+        });
+        viewModelIFood.resposta.observe(getViewLifecycleOwner(), new Observer<Resposta>() {
+            @Override
+            public void onChanged(Resposta resposta) {
+                if(!resposta.getStatus()){
+                    linearLayoutInfoIfood.setVisibility(View.VISIBLE);
+                    confirmarEndereco.setVisibility(View.GONE);
+                    enderecoConfirmado = false;
+                    textViewInfoFreteIfood.setText(resposta.getMensagem());
+                    if(resposta.getMensagem().equalsIgnoreCase("token expired Tente novamente") || resposta.getMensagem().equalsIgnoreCase("no jwt token Tente novamente")){
+                        viewModelIFood.autenticar();
+                    }
+                   // Toast.makeText(getActivity(), resposta.getMensagem(), Toast.LENGTH_SHORT).show();
+                }else{
+                    confirmarEndereco.setVisibility(View.VISIBLE);
+                    enderecoConfirmado = true;
+                }
+            }
+        });
         viewModel.estabelicimento.observe(getViewLifecycleOwner(), new Observer<Estabelicimento>() {
             @Override
             public void onChanged(Estabelicimento estabelicimento) {
@@ -460,7 +560,10 @@ public class SacolaFragment extends Fragment {
         viewModel.endereco.observe(getViewLifecycleOwner(), new Observer<Endereco>() {
             @Override
             public void onChanged(Endereco endereco) {
-                taxa_de_entrega =  0f;
+                if(linearLayoutInfoIfood != null ){
+                    linearLayoutInfoIfood.setVisibility(View.GONE);
+                }
+                taxa_de_entregaTemporariaDoRestaurante =  0f;
                 if(endereco != null){
                     enderecoUsuario.setRua(endereco.getRua());
                     enderecoUsuario.setBairro(endereco.getBairro());
@@ -472,7 +575,12 @@ public class SacolaFragment extends Fragment {
                     enderecoUsuario.setLatitude(endereco.getLatitude());
                     enderecoUsuario.setLongitude(endereco.getLongitude());
                     //recebe as cordenadas do endereço para gerar o valor da taxa de entrega
-                    taxa_de_entrega = calcularTaxaDeEntrega();
+                    taxa_de_entregaTemporariaDoRestaurante = calcularTaxaDeEntrega();
+                    if(frete_pedido != null){
+                        frete_pedido.setText("R$ "+String.format("%.2f", taxa_de_entregaTemporariaDoRestaurante));
+                        total = calcularTotal(taxa_de_entregaTemporariaDoRestaurante); // com taxa de entrega
+                        total_pedido.setText("R$ "+String.format("%.2f",total));
+                    }
                 }
             }
         });
@@ -570,9 +678,9 @@ public class SacolaFragment extends Fragment {
 
     }
 
-    private Float calcularTotal(Float taxa_de_entrega){
-        if(taxa_de_entrega != null && taxa_de_entrega != 0.0){
-          return subTotal + taxa_de_entrega;
+    private Float calcularTotal(Float taxa){
+        if(taxa != null && taxa != 0.0){
+          return subTotal + taxa;
         }
         return  subTotal;
     }

@@ -9,6 +9,14 @@ public class Cliente {
     @SerializedName("phone")
     private Telefone telefone;
 
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome='" + nome + '\'' +
+                ", telefone=" + telefone +
+                '}';
+    }
+
     public String getNome() {
         return nome;
     }

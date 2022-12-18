@@ -1,5 +1,9 @@
 package com.bergburg.bergburgdelivery.repositorio.remoto;
 
+import android.content.Context;
+
+import com.bergburg.bergburgdelivery.helpers.DadosIFoodPreferences;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -11,18 +15,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClientIFood {
     private RetrofitClientIFood(){}
+    private static String token = "";
+
+
 
     private static Retrofit INSTACE;
-    private static Retrofit getINSTACE(){
+    private static Retrofit getINSTACE(  ){
+        System.out.println("Token x recebido "+token);
 
-     String tokenAcesse = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI1OGJmNmY4Yy02YmUxLTRiNTYtYjUxYi03MzYyMzUzMDhjOTkiLCJhdWQiOlsic2hpcHBpbmciLCJjYXRhbG9nIiwicmV2aWV3IiwiZmluYW5jaWFsIiwibWVyY2hhbnQiLCJvcmRlciIsIm9hdXRoLXNlcnZlciJdLCJhcHBfbmFtZSI6IjU4YmY2ZjhjLTZiZTEtNGI1Ni1iNTFiLTczNjIzNTMwOGM5OSIsIm93bmVyX25hbWUiOiIiLCJzY29wZSI6WyJzaGlwcGluZyIsImNhdGFsb2ciLCJyZXZpZXciLCJtZXJjaGFudCIsIm9yZGVyIiwiY29uY2lsaWF0b3IiXSwiaXNzIjoiaUZvb2QiLCJtZXJjaGFudF9zY29wZSI6WyJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6bWVyY2hhbnQiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6Y2F0YWxvZyIsImRmNmIwNDhkLTM1NzAtNDI4Ny05MjhhLTk0NmM1ZDBkMjc0MjpyZXZpZXciLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6b3JkZXIiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6Y29uY2lsaWF0b3IiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6c2hpcHBpbmciXSwiZXhwIjoxNjcwODA0NTc5LCJpYXQiOjE2NzA3ODI5NzksImp0aSI6IjU4YmY2ZjhjLTZiZTEtNGI1Ni1iNTFiLTczNjIzNTMwOGM5OSIsIm1lcmNoYW50X3Njb3BlZCI6dHJ1ZSwiY2xpZW50X2lkIjoiNThiZjZmOGMtNmJlMS00YjU2LWI1MWItNzM2MjM1MzA4Yzk5In0.CO-hPEcTqII3F1_Xy7i8cGcIdYIuTEDDaGK68Xva_3FfBMUxLlTGgQTOebMFSa8UjnwiCzCyu4r3B8u4NCPem1SeahCZtuofA5nVIhsDC8fawkF6a27tCD-CO24DZwdpxEGZZ3i8-a1q6NmUfuJ-Bslyq81OcB970FLw6AFVAXA";
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         client.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request()
                         .newBuilder()
-                        .addHeader("Authorization","Bearer "+tokenAcesse)
+                        .addHeader("Authorization","Bearer "+token)
                         .build();
                 return chain.proceed(request);
             }
@@ -40,8 +47,10 @@ public class RetrofitClientIFood {
     }
 
 
-
-    public static  <T> T classService(Class<T> classService){
+    public static  <T> T classService(Class<T> classService ){
         return getINSTACE().create(classService);
+    }
+    public static void novoToken(String novoToken){
+        token = novoToken;
     }
 }

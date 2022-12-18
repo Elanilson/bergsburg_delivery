@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
+        binding.toolbarPersonalizadaLogin.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -67,8 +67,8 @@ public class LoginActivity extends AppCompatActivity {
             if(!email.trim().isEmpty() && !senha.trim().isEmpty()){
                 binding.checkBoxLembrarDeMin.setChecked(true);
             }
-            binding.editCampoLogin.setText(email);
-            binding.editCampoSenha.setText(senha);
+            binding.editCampoEmailLogin.setText(email);
+            binding.editCampoSenhaLogin.setText(senha);
         }
 
 
@@ -83,8 +83,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(binding.checkBoxLembrarDeMin.isChecked()){
-                   String email = binding.editCampoLogin.getText().toString();
-                   String senha = binding.editCampoSenha.getText().toString();
+                   String email = binding.editCampoEmailLogin.getText().toString();
+                   String senha = binding.editCampoSenhaLogin.getText().toString();
                    if(email != null && senha != null){
                        if(!email.trim().isEmpty() && !senha.trim().isEmpty()){
                            preferences.salvarEmailSenha(email,senha);
@@ -287,8 +287,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     private void login(){
-        login = binding.editCampoLogin.getText().toString();
-        senha = binding.editCampoSenha.getText().toString();
+        login = binding.editCampoEmailLogin.getText().toString();
+        senha = binding.editCampoSenhaLogin.getText().toString();
         viewModel.login(login,senha);
     }
     private  void snackbar(String mensagem){

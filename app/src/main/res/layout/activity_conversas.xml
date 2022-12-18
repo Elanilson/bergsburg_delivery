@@ -7,7 +7,7 @@
     tools:context=".view.activity.ConversasActivity">
 
     <include
-        android:id="@+id/toolbarPersonalizada"
+        android:id="@+id/toolbarPersonalizadaConversa"
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizada" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaLogin" />
 
     <TextView
         android:id="@+id/textViewSemUsuario"
@@ -33,5 +33,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/recyclerViewConversas"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewConversas"
         app:layout_constraintStart_toStartOf="@+id/recyclerViewConversas"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizada" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -59,13 +59,13 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbarPersonalizada.toolbar);
+        setSupportActionBar(binding.toolbarPersonalizadaChat.toolbar);
         viewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         preferences = new DadosPreferences(ChatActivity.this);
         editTextMensagem = binding.editTextMensagem;
-        binding.toolbarPersonalizada.textViewTituloToolbar.setText("Chat");
-        binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
+        binding.toolbarPersonalizadaChat.textViewTituloToolbar.setText("Chat");
+        binding.toolbarPersonalizadaChat.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                if(ConversasActivity.statusActivity){
@@ -157,7 +157,7 @@ public class ChatActivity extends AppCompatActivity {
                         titulo = bundle.getString(Constantes.NOME);
                         String nomeUsuario = preferences.recuperarNome();
                         if(titulo != null && nomeUsuario != null && !titulo.equalsIgnoreCase(nomeUsuario)){
-                            binding.toolbarPersonalizada.textViewTituloToolbar.setText(titulo);
+                            binding.toolbarPersonalizadaChat.textViewTituloToolbar.setText(titulo);
                         }
                     }else{ // quando o cliente envia mensagem para o admin
                       /*  Handler handler = new Handler();

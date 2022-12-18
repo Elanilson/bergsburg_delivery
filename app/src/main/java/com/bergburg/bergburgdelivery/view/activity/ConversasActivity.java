@@ -39,8 +39,8 @@ public class ConversasActivity extends AppCompatActivity {
         binding = ActivityConversasBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.toolbarPersonalizada.textViewTituloToolbar.setText("Chat");
-        binding.toolbarPersonalizada.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
+        binding.toolbarPersonalizadaConversa.textViewTituloToolbar.setText("Chat");
+        binding.toolbarPersonalizadaConversa.imageViewButtonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

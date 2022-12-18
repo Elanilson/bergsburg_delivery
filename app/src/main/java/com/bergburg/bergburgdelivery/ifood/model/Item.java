@@ -20,6 +20,18 @@ public class Item {
     @SerializedName("totalPrice")
     private float precoTotalDasOpcoes = 0f;
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id='" + id + '\'' +
+                ", nome='" + nome + '\'' +
+                ", idPedidoApp=" + idPedidoApp +
+                ", quantidade=" + quantidade +
+                ", precoUnitario=" + precoUnitario +
+                ", precoTotal=" + precoTotal +
+                ", precoTotalDasOpcoes=" + precoTotalDasOpcoes +
+                '}';
+    }
 
     public Item(String id, String nome, Long idPedidoApp, int quantidade, float precoUnitario, float precoTotal, float precoTotalDasOpcoes) {
         this.id = id;

@@ -26,7 +26,12 @@
         android:theme="@style/Theme.BergBurgDelivery"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activity.PaineliFoodActivity"
+            android:label="Painel do iFood"
+            android:theme="@style/Theme.BergBurgDelivery_NoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.TesteMainActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.LojaActivity"
@@ -98,7 +103,7 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.activity.TesteMainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

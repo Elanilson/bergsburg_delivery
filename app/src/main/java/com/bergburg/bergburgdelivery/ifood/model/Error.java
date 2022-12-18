@@ -2,6 +2,8 @@ package com.bergburg.bergburgdelivery.ifood.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Error {
     @SerializedName("code")
     private String codigo;
@@ -9,6 +11,8 @@ public class Error {
     private String campo;
     @SerializedName("message")
     private String mensagem;
+    @SerializedName("details")
+    private List<String> details;
 
 
     @Override
@@ -18,6 +22,14 @@ public class Error {
                 ", campo='" + campo + '\'' +
                 ", mensagem='" + mensagem + '\'' +
                 '}';
+    }
+
+    public List<String> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<String> details) {
+        this.details = details;
     }
 
     public String getCodigo() {
