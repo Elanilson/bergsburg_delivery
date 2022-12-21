@@ -20,11 +20,13 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.bergburg.bergburgdelivery.MainActivity;
 import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.adapter.IFoodAdapter;
 import com.bergburg.bergburgdelivery.databinding.ActivityPaineliFoodBinding;
@@ -71,7 +73,7 @@ public class PaineliFoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPaineliFoodBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        dialog = new Dialog(this);
+        dialog = new Dialog(this,android.R.style.Theme_Material_Light_Dialog_Presentation);
         viewModel = new ViewModelProvider(this).get(IFoodMainViewModel.class);
         pedidosViewModel = new ViewModelProvider(this).get(PedidosViewModel.class);
 
@@ -164,6 +166,27 @@ public class PaineliFoodActivity extends AppCompatActivity {
 
             }
         });
+
+        binding.buttonDespachar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new AlertDialog.Builder(binding.getRoot().getContext())
+                        .setTitle("Atenção!")
+                        .setMessage("Você está preste a despachar o pedido.")
+
+                        .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                viewModel.despachar(idPedidoIfood);
+                            }
+                        })
+
+                        .setNegativeButton("Fechar", null)
+                        .setIcon(R.drawable.ic_baseline_warning_24)
+                        .show();
+
+            }
+        });
         binding.buttonCancelarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -245,12 +268,21 @@ public class PaineliFoodActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.layout_cancelar_pedido_ifood);
 
         Spinner spinnerStatus = dialog.findViewById(R.id.spinnerStatus);
+        Button btnFechar = dialog.findViewById(R.id.buttonFecharDialog);
         ProgressBar progressBarStatus = dialog.findViewById(R.id.progressBarStatus);
         Button btnSalvar = dialog.findViewById(R.id.buttonSalvar);
+        EditText comenatarioCancelamento = dialog.findViewById(R.id.editTextComentario);
         String[] status = getResources().getStringArray(R.array.motivo_de_cancelamentos);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,status);
         adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         spinnerStatus.setAdapter(adapter);
+
+        btnFechar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,9 +295,11 @@ public class PaineliFoodActivity extends AppCompatActivity {
                         .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dlog, int which) {
+                                String comentario = "";
+                                comentario = comenatarioCancelamento.getText().toString();
                                // viewModel.salvarStatusPedido(pedido.getId(),spinnerStatus.getSelectedItem().toString());
                                 if(idPedidoIfood != null && !idPedidoIfood.isEmpty()){
-                                    viewModel.cancelarPepdido(spinnerStatus.getSelectedItem().toString(),idPedidoIfood);
+                                    viewModel.cancelarPepdido(spinnerStatus.getSelectedItem().toString(),idPedidoIfood,comentario);
                                     progressBarStatus.setVisibility(View.GONE);
                                     dialog.dismiss();
                                     dlog.dismiss();
@@ -347,7 +381,7 @@ public class PaineliFoodActivity extends AppCompatActivity {
                   String dataFormatada = formataData.format(data);
                   linkAcompanhamentoPedido = respostaPedido.getLink();
                   idPedidoIfood = respostaPedido.getId();
-                  adapter.limparDado();
+                //  adapter.limparDado();
                   viewModel.verificarEvento();
                   layoutAcompanhamento.setVisibility(View.VISIBLE);
                   viewModel.salvarEventos(idPedido,respostaPedido.getLink(),new EventoPedido(respostaPedido.getId(),dataFormatada));
@@ -360,10 +394,11 @@ public class PaineliFoodActivity extends AppCompatActivity {
             @Override
             public void onChanged(Autenticacao autenticacao) {
                 if(autenticacao.getTokenDeAcesso() != null && !autenticacao.getTokenDeAcesso().isEmpty()){
-                    preferencesiFood.salvarTokenIFood(autenticacao.getTokenDeAcesso());
+                    preferencesiFood.salvarTokenIFood(autenticacao.getTokenDeAcesso(),autenticacao.getRefreshToken());
                      RetrofitClientIFood.novoToken(autenticacao.getTokenDeAcesso());
                     Toast.makeText(PaineliFoodActivity.this, "Autenticado!", Toast.LENGTH_SHORT).show();
                 }
+                    alertToken = null;
                 System.out.println("apkdoandroid: "+autenticacao.toString());
             }
         });
@@ -371,11 +406,13 @@ public class PaineliFoodActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<EventoPedido> eventoPedido) {
                 if(eventoPedido != null){
-                    adapter.limparDado();
+                   adapter.limparDado();
 
                     analisarEventosE_Separando(eventoPedido);
                     analisarEventos(listaTemporariaDeEventos);
+
                     adapter.attackEventos(listaTemporariaDeEventos);
+                    //System.out.println("xxxxxxxxxxxxxxxxxxxxxx total "+listaTemporariaDeEventos.size());
                    // listaTemporariaDeEventos.clear();
                     System.out.println("apkdoandroid: "+ eventoPedido.toString());
                 }
@@ -393,15 +430,20 @@ public class PaineliFoodActivity extends AppCompatActivity {
                                 .setNegativeButton("Fechar", null)
                                 .setIcon(R.drawable.ic_baseline_warning_24)
                                 .show();
-                    }else if(resposta.getMensagem().equalsIgnoreCase("token expired Tente novamente") || resposta.getMensagem().equalsIgnoreCase("no jwt token Tente novamente")){
+                    }else if(
+                            resposta.getMensagem().equalsIgnoreCase("token expired Tente novamente") ||
+                                    resposta.getMensagem().equalsIgnoreCase("no jwt token Tente novamente") ||
+                                    resposta.getMensagem().equalsIgnoreCase("null Tente novamente")
+                    ){
+                      //  Toast.makeText(PaineliFoodActivity.this, resposta.getMensagem(), Toast.LENGTH_SHORT).show();
                         if(alertToken == null){
                             alertToken =  new AlertDialog.Builder(binding.getRoot().getContext())
                                     .setTitle("Token expirado!")
                                     .setMessage("Por favor, é nescessário a renovação do token. Após renovação tente novamente!")
                                     .setPositiveButton("Renovar", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            viewModel.autenticar();
-                                            viewModel.verificarEvento();
+                                            viewModel.renovarToken(preferencesiFood.recuperarTokenRefresh(), PaineliFoodActivity.this);
+                                            //viewModel.verificarEvento();
                                             alertToken = null;
                                         }
                                     })
@@ -409,6 +451,7 @@ public class PaineliFoodActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             alertToken = null;
+                                            viewModel.verificarEvento();
                                         }
                                     })
                                     .setIcon(R.drawable.ic_baseline_warning_24)
@@ -417,7 +460,7 @@ public class PaineliFoodActivity extends AppCompatActivity {
                         }
 
                     }else{
-                        Toast.makeText(PaineliFoodActivity.this, resposta.getMensagem(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(PaineliFoodActivity.this, resposta.getMensagem(), Toast.LENGTH_SHORT).show();
                     }
 
                 }else{
@@ -434,8 +477,10 @@ public class PaineliFoodActivity extends AppCompatActivity {
 
                     }else if(resposta.getMensagem().equalsIgnoreCase("Pedido confirmado com sucesso")){
                         Toast.makeText(PaineliFoodActivity.this, resposta.getMensagem(), Toast.LENGTH_SHORT).show();
+                    }else if(resposta.getMensagem().equalsIgnoreCase("Pedido despachado com sucesso")){
+                        Toast.makeText(PaineliFoodActivity.this, resposta.getMensagem(), Toast.LENGTH_SHORT).show();
                     }
-                    viewModel.verificarEvento();
+                  //  viewModel.verificarEvento();
                 }
                 System.out.println("apkdoandroid: status "+resposta.getStatus());
                 System.out.println("apkdoandroid: "+resposta.getMensagem());
@@ -455,6 +500,12 @@ public class PaineliFoodActivity extends AppCompatActivity {
                     listaTemporariaDeEventos.add(evento);
                 }
             }
+
+        }
+
+        if(listaTemporariaDeEventos.size() > 0){
+        //- Enviar /acknowledgment para todos os eventos recebidos imediatamente após a request de polling;
+      //  viewModel.reconhecerLimparEnventos(listaTemporariaDeEventos);
 
         }
 
@@ -511,8 +562,7 @@ public class PaineliFoodActivity extends AppCompatActivity {
 
                 try{
 
-
-
+                    //- Fazer requests no endpoint de /polling regularmente a cada 30 segundos;
 
                     long TEMPO = (1000 * 30); // chama o método a cada 30 segundos
 

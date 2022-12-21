@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaConversa" />
 
     <TextView
         android:id="@+id/textViewSemUsuario"
@@ -33,5 +33,17 @@
         app:layout_constraintBottom_toBottomOf="@+id/recyclerViewConversas"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewConversas"
         app:layout_constraintStart_toStartOf="@+id/recyclerViewConversas"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaConversa" />
+
+    <ProgressBar
+        android:id="@+id/progressBarConversas"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/grey11"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaConversa"
+        app:layout_constraintVertical_bias="0.32999998" />
 </androidx.constraintlayout.widget.ConstraintLayout>

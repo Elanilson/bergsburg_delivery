@@ -1,12 +1,14 @@
 package com.bergburg.bergburgdelivery.viewmodel;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.bergburg.bergburgdelivery.R;
 import com.bergburg.bergburgdelivery.helpers.DadosIFoodPreferences;
 import com.bergburg.bergburgdelivery.ifood.Cliente;
 import com.bergburg.bergburgdelivery.ifood.model.Autenticacao;
@@ -60,6 +62,8 @@ public class IFoodMainViewModel extends AndroidViewModel {
 
     private LayoutEnvioPedido  layoutEnvioPedidoiFood = new LayoutEnvioPedido();
 
+    private String refresh_token;
+
     public IFoodMainViewModel(@NonNull Application application) {
         super(application);
         repositorio = new IfoodRepositorio(application);
@@ -82,13 +86,47 @@ public class IFoodMainViewModel extends AndroidViewModel {
 
     }
 
+    public void renovarToken(String refresh_token, Context context){
+        if(refresh_token != null){
+            if(!refresh_token.isEmpty()){
+                this.refresh_token = refresh_token;
+            }else{
+                refresh_token = context.getString(R.string.refresh_token);
+            }
+        }else{
+            refresh_token = context.getString(R.string.refresh_token);
+        }
+
+
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxx recebi "+refresh_token);
+
+        APIListener<Autenticacao> listener = new APIListener<Autenticacao>() {
+            @Override
+            public void onSuccess(Autenticacao result) {
+                _Autenticacao.setValue(result);
+            }
+
+            @Override
+            public void onFailures(String mensagem) {
+                _Resposta.setValue(new Resposta(mensagem));
+
+            }
+        };
+        repositorio.renovarToken(listener,refresh_token);
+
+    }
+    // Receber pedido
     public void verificarEvento(){
+        System.out.println("Procurando eventos");
         APIListener<List<EventoPedido>> listener = new APIListener<List<EventoPedido>>() {
             @Override
             public void onSuccess(List<EventoPedido> result) {
 
                     if(result != null){
+
                         listaTemporaria.addAll(result);
+                        //- Enviar /acknowledgment para todos os eventos recebidos imediatamente após a request de polling;
+                     //   reconhecerLimparEnventos(result); // acknowledgment
                     }else{
                         System.out.println("Sem eventos");
                     }
@@ -99,7 +137,6 @@ public class IFoodMainViewModel extends AndroidViewModel {
             @Override
             public void onFailures(String mensagem) {
                 _Resposta.setValue(new Resposta(mensagem));
-
             }
         };
         repositorio.verificarEventos(listener);
@@ -124,13 +161,13 @@ public class IFoodMainViewModel extends AndroidViewModel {
             }
         };
 
-        if(eventos.size() > 0){
             repositorio.reconhecerLimparEnventos(listener,eventos);
+       /* if(eventos.size() > 0){
         }else{
             repositorio.reconhecerLimparEnventos(listener,listaTemporaria);
-        }
+        }*/
     }
-
+    //confirmar pedido
     public void confirmarPedido(String idPedido){
        // String idPedido = "a0af51da-72ff-44dc-9950-a09912d00f12";
         APIListener<Boolean> listener = new APIListener<Boolean>() {
@@ -149,32 +186,57 @@ public class IFoodMainViewModel extends AndroidViewModel {
 
         repositorio.confirmarPedido(listener,idPedido);
     }
-    public void cancelarPepdido(String motivo,String idPedidoIfood){
+    //despachar pedido
+    public void despachar(String idPedido){
+        // String idPedido = "a0af51da-72ff-44dc-9950-a09912d00f12";
+        APIListener<Boolean> listener = new APIListener<Boolean>() {
+            @Override
+            public void onSuccess(Boolean result) {
+
+                _Resposta.setValue(new Resposta("Pedido despachado com sucesso",true));
+            }
+
+            @Override
+            public void onFailures(String mensagem) {
+                _Resposta.setValue(new Resposta(mensagem));
+
+            }
+        };
+
+        repositorio.despachar(listener,idPedido);
+    }
+
+    //cancelar um pedido delivery
+    public void cancelarPepdido(String motivo,String idPedidoIfood,String comentario){
 
         CancelamentoDePedido cancelamentoDePedido = new CancelamentoDePedido();
-        cancelamentoDePedido.setMotivo(motivo);
+        if(comentario != null && !comentario.isEmpty()){
+            cancelamentoDePedido.setMotivo(comentario);
+        }else{
+            cancelamentoDePedido.setMotivo(motivo);
+        }
 
-        if(motivo.equalsIgnoreCase("PROBLEMAS DE SISTEMA")){
+        if(motivo.equalsIgnoreCase("501-PROBLEMAS DE SISTEMA")){
             cancelamentoDePedido.setCodigoDeCancelamento(501);
-        }else if(motivo.equalsIgnoreCase("PEDIDO EM DUPLICIDADE")){
+        }else if(motivo.equalsIgnoreCase("502-PEDIDO EM DUPLICIDADE")){
             cancelamentoDePedido.setCodigoDeCancelamento(502);
-        }else if(motivo.equalsIgnoreCase("ITEM INDISPONÍVEL")){
+        }else if(motivo.equalsIgnoreCase("503-ITEM INDISPONÍVEL")){
             cancelamentoDePedido.setCodigoDeCancelamento(503);
-        }else if(motivo.equalsIgnoreCase("RESTAURANTE SEM MOTOBOY")){
+        }else if(motivo.equalsIgnoreCase("504-RESTAURANTE SEM MOTOBOY")){
             cancelamentoDePedido.setCodigoDeCancelamento(504);
-        }else if(motivo.equalsIgnoreCase("CARDÁPIO DESATUALIZADO")){
+        }else if(motivo.equalsIgnoreCase("505-CARDÁPIO DESATUALIZADO")){
             cancelamentoDePedido.setCodigoDeCancelamento(505);
-        }else if(motivo.equalsIgnoreCase("PEDIDO FORA DA ÁREA DE ENTREGA")){
+        }else if(motivo.equalsIgnoreCase("506-PEDIDO FORA DA ÁREA DE ENTREGA")){
             cancelamentoDePedido.setCodigoDeCancelamento(506);
-        }else if(motivo.equalsIgnoreCase("CLIENTE GOLPISTA / TROTE")){
+        }else if(motivo.equalsIgnoreCase("507-CLIENTE GOLPISTA / TROTE")){
             cancelamentoDePedido.setCodigoDeCancelamento(507);
-        }else if(motivo.equalsIgnoreCase("FORA DO HORÁRIO DO DELIVERY")){
+        }else if(motivo.equalsIgnoreCase("508-FORA DO HORÁRIO DO DELIVERY")){
             cancelamentoDePedido.setCodigoDeCancelamento(508);
-        }else if(motivo.equalsIgnoreCase("DIFICULDADES INTERNAS DO RESTAURANTE")){
+        }else if(motivo.equalsIgnoreCase("509-DIFICULDADES INTERNAS DO RESTAURANTE")){
             cancelamentoDePedido.setCodigoDeCancelamento(509);
-        }else if(motivo.equalsIgnoreCase("ÁREA DE RISCO")){
+        }else if(motivo.equalsIgnoreCase("5011-ÁREA DE RISCO")){
             cancelamentoDePedido.setCodigoDeCancelamento(5011);
-        }else if(motivo.equalsIgnoreCase("RESTAURANTE ABRIRÁ MAIS TARD")){
+        }else if(motivo.equalsIgnoreCase("5012-RESTAURANTE ABRIRÁ MAIS TARD")){
             cancelamentoDePedido.setCodigoDeCancelamento(5012);
         }
 
@@ -194,6 +256,7 @@ public class IFoodMainViewModel extends AndroidViewModel {
 
         repositorio.cancelarPepdido(listener,cancelamentoDePedido,idPedidoIfood);
     }
+
     public void aceitarPedidoDeCanelamento(){
         APIListener<Boolean> listener = new APIListener<Boolean>() {
             @Override

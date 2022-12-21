@@ -44,7 +44,7 @@ public class TesteMainActivity extends AppCompatActivity {
 
         binding.buttonAutenticar.setOnClickListener(v -> {
             binding.progressBar.setVisibility(View.VISIBLE);
-            viewModel.autenticar();
+            viewModel.renovarToken(preferences.recuperarTokenRefresh(), TesteMainActivity.this);
         });
 
         binding.buttonBuscarEventos.setOnClickListener(v -> {
@@ -73,7 +73,7 @@ public class TesteMainActivity extends AppCompatActivity {
         });
         binding.buttonCAncelarPedido.setOnClickListener(v -> {
             binding.progressBar.setVisibility(View.VISIBLE);
-            viewModel.cancelarPepdido("","");
+            viewModel.cancelarPepdido("","","");
         });
         binding.buttonAceitarSolicitacaoDeCancelamento.setOnClickListener(v -> {
             binding.progressBar.setVisibility(View.VISIBLE);

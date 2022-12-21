@@ -17,16 +17,18 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="333dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="50dp"
         app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbarPersonalizadaGerecial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaLogin">
+        app:layout_constraintTop_toTopOf="@+id/toolbarPersonalizadaGerecial">
 
         <EditText
             android:id="@+id/editTextPesquisaProdutos"
@@ -38,7 +40,8 @@
             android:ems="10"
             android:hint="Pesquisar"
             android:inputType="textPersonName"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:textSize="15sp" />
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -49,7 +52,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" >
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPersonalizadaGerecial">
 
     </androidx.recyclerview.widget.RecyclerView>
 

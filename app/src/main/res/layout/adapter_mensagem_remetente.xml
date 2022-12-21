@@ -27,7 +27,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:autoLink="web"
+            android:inputType="textUri|textWebEditText|textMultiLine"
             android:text="Olá tudo bem?"
+            android:textColorLink="@color/grey11"
             android:textSize="18sp" />
 
         <TextView

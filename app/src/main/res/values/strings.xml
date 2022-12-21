@@ -126,10 +126,17 @@
 
 
 
-    <string name="idLoja">df6b048d-3570-4287-928a-946c5d0d2742</string>
-    <string name="grantType">client_credentials</string>
-    <string name="clientId">58bf6f8c-6be1-4b56-b51b-736235308c99</string>
-    <string name="clientSecret">oxt2ni0ruf9heucl963slcsan2n0l97s155wq675n82iwcem1g31x53nvpxy30aaooe933kjefefrwcqmatubr7o5cynygwgk5r</string>
+    <string name="idLoja">5987b560-2dc3-44cc-9fe2-d59caafa947e</string>
+    <string name="grantType">refresh_token</string>
+    <string name="authorizationCode">ZSJC-SFRV</string>
+    <string name="authorizationCodeVerifier">dwah0d8s5ekcd8vdbcm21y99r69ul74lkcn8ex09qpzhr4dtp32swp4vkbgyib2sbz7yxscbm3dyf7qpi7hhxzsngykhiqmmt4w</string>
+    <string name="clientId">b537125e-37fc-46e0-8b68-e32346d12c9a</string>
+    <string name="clientSecret">v2rsjf4ashfrjdqe4w5qjb2bbbn5s2j293lr3vs366i7mnkrulf1vseoq0vbjfral0t1lbvlfxjyg18hmpxrdr6rs9j2xlgdraq</string>
+
+    <string name="tokenAcess">eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJzdWIiOiJlZDk5Mzk1Ni1mYzM0LTQyNzAtYWRlZS0xYWI4YjVjMzQ4ZjAiLCJhcHBfbmFtZSI6ImFwa2RvYW5kcm9pZC10ZXN0ZS1kIiwiYXVkIjpbInNoaXBwaW5nIiwicmV2aWV3IiwiY2F0YWxvZyIsImZpbmFuY2lhbCIsIm1lcmNoYW50Iiwib3JkZXIiLCJvYXV0aC1zZXJ2ZXIiXSwib3duZXJfbmFtZSI6ImFwa2RvYW5kcm9pZCIsInNjb3BlIjpbIm1lcmNoYW50Iiwic2hpcHBpbmciLCJyZXZpZXciLCJjYXRhbG9nIiwiY29uY2lsaWF0b3IiLCJvcmRlciJdLCJpc3MiOiJpRm9vZCIsIm1lcmNoYW50X3Njb3BlIjpbIjU5ODdiNTYwLTJkYzMtNDRjYy05ZmUyLWQ1OWNhYWZhOTQ3ZTptZXJjaGFudCIsIjU5ODdiNTYwLTJkYzMtNDRjYy05ZmUyLWQ1OWNhYWZhOTQ3ZTpvcmRlciIsIjU5ODdiNTYwLTJkYzMtNDRjYy05ZmUyLWQ1OWNhYWZhOTQ3ZTpjYXRhbG9nIiwiNTk4N2I1NjAtMmRjMy00NGNjLTlmZTItZDU5Y2FhZmE5NDdlOmNvbmNpbGlhdG9yIiwiNTk4N2I1NjAtMmRjMy00NGNjLTlmZTItZDU5Y2FhZmE5NDdlOnJldmlldyIsIjU5ODdiNTYwLTJkYzMtNDRjYy05ZmUyLWQ1OWNhYWZhOTQ3ZTpzaGlwcGluZyJdLCJleHAiOjE2NzE1NzQ3NjAsImlhdCI6MTY3MTU1MzE2MCwianRpIjoiZWQ5OTM5NTYtZmMzNC00MjcwLWFkZWUtMWFiOGI1YzM0OGYwOmI1MzcxMjVlLTM3ZmMtNDZlMC04YjY4LWUzMjM0NmQxMmM5YSIsIm1lcmNoYW50X3Njb3BlZCI6dHJ1ZSwiY2xpZW50X2lkIjoiYjUzNzEyNWUtMzdmYy00NmUwLThiNjgtZTMyMzQ2ZDEyYzlhIn0.FCxcDw1tDUUqQbSr52YEVwXaPEOYIhgLnjOfbcSA6NdQwXPlEftOaRFB93s4D6mrBx-IZDrvKKQmgV68jLa7qa9jgUB3tMJp4z-frUSqY0r8dUmlo10HQPMJJwWueS3uZ8cRcGToSRNlSgvyY4_h1zKldxvlSajtuV7ZkYnYNlI</string>
+
+    <string name="refresh_token">eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJzdWIiOiJlZDk5Mzk1Ni1mYzM0LTQyNzAtYWRlZS0xYWI4YjVjMzQ4ZjAiLCJpc3MiOiJpRm9vZCIsImV4cCI6MTY3MjE1Nzk2MCwiaWF0IjoxNjcxNTUzMTYwLCJjbGllbnRfaWQiOiJiNTM3MTI1ZS0zN2ZjLTQ2ZTAtOGI2OC1lMzIzNDZkMTJjOWEifQ.DlMJ-PLW0OQMomroUWzO1yOMsLnPa4UP7Lc_wgxBrNu2qx-TC8uujD7IjcRA1IsPyYKBXcxacHOTuj2LrOyNr_9frV2JSqSnA_KrRvaaUg17rENHFj25R1Lbp_i3E4hHPaz1X27wynbB55mueMP34O7CNhJfurQzVrH9yyNjP9g</string>
+
     <string name="dados_do_cliente">Dados do cliente</string>
     <string name="painel_do_ifood">Painel do iFood</string>
     <string name="criar_pedido_ifood">Criar pedido</string>
@@ -154,6 +161,9 @@
     <string name="copiarLink">Copiar link</string>
     <string name="opcao_entrega">Opção de entrega</string>
     <string name="receberar_email">Você receberar o E-mail e alguns minutos.</string>
+    <string name="despachar">Despachar</string>
+    <string name="despachar_pedido">Despachar pedido</string>
+    <string name="comentario">Comentário</string>
 
 
     <string-array name="status">
@@ -166,16 +176,16 @@
     </string-array>
 
     <string-array name="motivo_de_cancelamentos">
-        <item>PROBLEMAS DE SISTEMA</item>
-        <item>PEDIDO EM DUPLICIDADE</item>
-        <item>ITEM INDISPONÍVEL</item>
-        <item>RESTAURANTE SEM MOTOBOY</item>
-        <item>CARDÁPIO DESATUALIZADO</item>
-        <item>PEDIDO FORA DA ÁREA DE ENTREGA</item>
-        <item>CLIENTE GOLPISTA / TROTE</item>
-        <item>FORA DO HORÁRIO DO DELIVERY</item>
-        <item>DIFICULDADES INTERNAS DO RESTAURANTE</item>
-        <item>ÁREA DE RISCO</item>
-        <item>RESTAURANTE ABRIRÁ MAIS TARDE</item>
+        <item>501-PROBLEMAS DE SISTEMA</item>
+        <item>502-PEDIDO EM DUPLICIDADE</item>
+        <item>503-ITEM INDISPONÍVEL</item>
+        <item>504-RESTAURANTE SEM MOTOBOY</item>
+        <item>505-CARDÁPIO DESATUALIZADO</item>
+        <item>506-PEDIDO FORA DA ÁREA DE ENTREGA</item>
+        <item>507-CLIENTE GOLPISTA / TROTE</item>
+        <item>508-FORA DO HORÁRIO DO DELIVERY</item>
+        <item>509-DIFICULDADES INTERNAS DO RESTAURANTE</item>
+        <item>511-ÁREA DE RISCO</item>
+        <item>512-RESTAURANTE ABRIRÁ MAIS TARDE</item>
     </string-array>
 </resources>

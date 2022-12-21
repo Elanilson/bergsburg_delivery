@@ -9,8 +9,10 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.NetworkOnMainThreadException;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
@@ -61,7 +63,7 @@ public class CadastroActivity extends AppCompatActivity  {
         });
        
 
-       /* binding.editCampoEMailCadastro.setText("elanilsonpp@hotmail.com");
+        binding.editCampoEMailCadastro.setText("conta123apk@gmail.com");
         binding.editCampoLoginCadastro.setText("xxt");
         binding.editCampoSenha1Cadastro.setText("123");
         binding.editCampoSenha2Cadastro.setText("123");
@@ -73,7 +75,7 @@ public class CadastroActivity extends AppCompatActivity  {
         binding.editTextTextNumeroCasaCadastro.setText("526");
         binding.editTextTextCadatroDDDCadastro.setText("91");
         binding.editTextTextNumeroTelefoneCadastro.setText("555");
-        binding.editTextTextComplementoCadastro.setText("555");*/
+        binding.editTextTextComplementoCadastro.setText("555");
 
         viewModel = new ViewModelProvider(this).get(CadastroViewModel.class);
         binding.layoutCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -93,28 +95,57 @@ public class CadastroActivity extends AppCompatActivity  {
                 String numeroCasa = binding.editTextTextNumeroCasaCadastro.getText().toString();
                 String telefone = binding.editTextTextCadatroDDDCadastro.getText().toString()+"-"+binding.editTextTextNumeroTelefoneCadastro.getText().toString();
 
-                 //buscar cordenadas apartir do endereço
-                // cordernadas encontradas com sucesso, liberação de salvamento do usuario
-               if( buscarLozalização(numeroCasa+"-"+rua+"-"+bairro+"-"+cidade+"-"+estado+"-"+cep) && numeroCasa != null && !numeroCasa.isEmpty() && numeroCasa != " "){
-                   enderecoUsuario.setRua(rua);
-                   enderecoUsuario.setBairro(bairro);
-                   enderecoUsuario.setCidade(cidade);
-                   enderecoUsuario.setEstado(estado);
-                   enderecoUsuario.setCep(cep);
-                   enderecoUsuario.setNumeroCasa(numeroCasa);
-                   enderecoUsuario.setComplemento(complemento);
-                   enderecoUsuario.setLatitude(latitude);
-                   enderecoUsuario.setLongitude(longitude);
-                   System.out.println("Latitude:xxxx "+latitude+" - "+longitude);
-                   //salvando cordendas localmente também
-                   preferences.salvarCordenadas(String.valueOf(latitude),String.valueOf(longitude));
-                   viewModel.salvarUsuario(nome,email,senha1,senha2,telefone,enderecoUsuario);
 
-               }else{
-                 //  snackbar("Preencha os campos corretamente");
-                   Toast.makeText(CadastroActivity.this, "Preencha os campos corretamente", Toast.LENGTH_SHORT).show();
-                   binding.progressBarEnvioProduto.setVisibility(View.GONE);
-               }
+                if(numeroCasa != null &&  !numeroCasa.isEmpty()){
+                    if(rua != null &&  !rua.isEmpty()){
+                        if(bairro != null &&  !bairro.isEmpty()){
+                            if(estado != null &&  !estado.isEmpty()){
+                                if(cep != null &&  !cep.isEmpty()){
+
+                                    //buscar cordenadas apartir do endereço
+                                    // cordernadas encontradas com sucesso, liberação de salvamento do usuario
+                                    if( buscarLozalização(rua+", "+numeroCasa+", "+bairro+", "+cidade+", "+estado+", cep: "+cep)){
+                                        enderecoUsuario.setRua(rua);
+                                        enderecoUsuario.setBairro(bairro);
+                                        enderecoUsuario.setCidade(cidade);
+                                        enderecoUsuario.setEstado(estado);
+                                        enderecoUsuario.setCep(cep);
+                                        enderecoUsuario.setNumeroCasa(numeroCasa);
+                                        enderecoUsuario.setComplemento(complemento);
+                                        enderecoUsuario.setLatitude(latitude);
+                                        enderecoUsuario.setLongitude(longitude);
+                                        System.out.println("Latitude:xxxx "+latitude+" - "+longitude);
+                                        //salvando cordendas localmente também
+                                        preferences.salvarCordenadas(String.valueOf(latitude),String.valueOf(longitude));
+                                        viewModel.salvarUsuario(nome,email,senha1,senha2,telefone,enderecoUsuario);
+
+                                    }else{
+                                        //  snackbar("Preencha os campos corretamente");
+                                        Toast.makeText(CadastroActivity.this, "Informar  um endereço valido.", Toast.LENGTH_SHORT).show();
+                                        binding.progressBarEnvioProduto.setVisibility(View.GONE);
+                                    }
+
+                                }else{
+                                   Toast.makeText(CadastroActivity.this, "Informar  o CEP.", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }else{
+                                  Toast.makeText(CadastroActivity.this, "Informar  o nome do estado.", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }else{
+                              Toast.makeText(CadastroActivity.this, "Informar  o nome do bairro.", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }else{
+                         Toast.makeText(CadastroActivity.this, "Informar  o nome da rua", Toast.LENGTH_SHORT).show();
+
+                    }
+                }else{
+                    Toast.makeText(CadastroActivity.this, "Informar  o número da casa", Toast.LENGTH_SHORT).show();
+                }
+
+
 
             }
         });
@@ -246,6 +277,7 @@ public class CadastroActivity extends AppCompatActivity  {
 
     }
     public Boolean buscarLozalização(String stringEndereco){
+        System.out.println("Endereço recebido: "+stringEndereco);
         // busca o a localização pelo endereco
         Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
         try {
@@ -266,7 +298,12 @@ public class CadastroActivity extends AppCompatActivity  {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("error "+e.getMessage());
+        }catch (NetworkOnMainThreadException j){
+            j.printStackTrace();
+            System.out.println("error "+j.getMessage());
         }
+
+
         return false;
     }
 

@@ -1,130 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_height="match_parent"
     android:background="@drawable/btn_bg"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:scaleType="centerCrop"
-        android:tint="@color/grey11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/wave" />
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Cancelar pedido"
-        android:textColor="@color/grey11"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView14" />
-
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="32dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView32">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:tint="@color/grey11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/wave" />
 
         <TextView
-            android:id="@+id/textView51"
+            android:id="@+id/textView32"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Penalidades"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Cancelar pedido"
             android:textColor="@color/grey11"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textView42"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/penalidadeCancelmaneto"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textView57"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Validação do cancelamento"
-            android:textColor="@color/grey11"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textView49"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/validacaoCAncelamento"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textView62"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Problemas no pedido ? Contatar o suporte do iFood."
-            android:textColor="@color/grey11"
-            android:textSize="16sp" />
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView14" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/background_campo_text"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:layout_margin="10dp"
+            android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/spinnerStatus"
+            <TextView
+                android:id="@+id/textView51"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:spinnerMode="dropdown" />
+                android:text="Penalidades"
+                android:textColor="@color/grey11"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/penalidadeCancelmaneto"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView57"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Validação do cancelamento"
+                android:textColor="@color/grey11"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/validacaoCAncelamento"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView62"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Problemas no pedido ? Contatar o suporte do iFood."
+                android:textColor="@color/grey11"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/background_campo_text"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <Spinner
+                    android:id="@+id/spinnerStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressBarStatus"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:indeterminateTint="@color/grey11"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView71"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/comentario"
+                android:textColor="@color/grey11"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextComentario"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/background_campo_text"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/buttonSalvar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/salvar"
+                android:textColor="@color/grey11"
+                android:theme="@style/button_custom" />
+
+            <Button
+                android:id="@+id/buttonFecharDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fechar" />
         </LinearLayout>
 
-        <ProgressBar
-            android:id="@+id/progressBarStatus"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:indeterminateTint="@color/grey11"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-        <Button
-            android:id="@+id/buttonSalvar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/salvar"
-            android:textColor="@color/grey11"
-            android:theme="@style/button_custom" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/view26"
-        android:layout_width="411dp"
-        android:layout_height="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -61,7 +61,31 @@
                 android:padding="10dp"
                 android:text="@string/criar_pedido_ifood"
                 android:textAllCaps="false"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/buttonConfirmarPedidoIfood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/vermelho"
+                android:padding="10dp"
+                android:text="@string/confirmar_Pedido_ifood"
+                android:textAllCaps="false"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            tools:visibility="visible">
 
             <Button
                 android:id="@+id/buttonVerificarFrete"
@@ -73,39 +97,7 @@
                 android:padding="10dp"
                 android:text="@string/verificar_frete_ifood"
                 android:textAllCaps="false"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            tools:visibility="visible">
-
-            <Button
-                android:id="@+id/buttonConfirmarPedidoIfood"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/vermelho"
-                android:text="@string/confirmar_Pedido_ifood"
-                android:textAllCaps="false"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            tools:visibility="visible">
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/buttonCancelarPedido"
@@ -114,8 +106,34 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/vermelho"
+                android:padding="10dp"
                 android:text="@string/cancelar_pedido_ifood"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            tools:visibility="visible">
+
+            <Button
+                android:id="@+id/buttonDespachar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/grey11"
+                android:padding="10dp"
+                android:text="@string/despachar_pedido"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
         </LinearLayout>
 
         <LinearLayout
@@ -134,9 +152,10 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/vermelho"
+                android:padding="10dp"
                 android:text="@string/aceitar_cancelamento"
                 android:textAllCaps="false"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/buttonNegaCAncelamento"
@@ -145,9 +164,10 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/vermelho"
+                android:padding="10dp"
                 android:text="@string/nega_cancelamento"
                 android:textAllCaps="false"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -162,7 +182,9 @@
             android:padding="10dp"
             android:text="@string/recarregar"
             android:textAllCaps="false"
-            android:textSize="16sp" />
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <ProgressBar
             android:id="@+id/progressBarIfood"
@@ -226,7 +248,7 @@
                     android:padding="10dp"
                     android:text="@string/acompanhar"
                     android:textAllCaps="false"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/buttonCopiarLinkPedido"
@@ -239,7 +261,7 @@
                     android:padding="10dp"
                     android:text="@string/copiarLink"
                     android:textAllCaps="false"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>

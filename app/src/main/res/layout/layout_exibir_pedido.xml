@@ -52,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="Nome:"
-                android:textColor="@color/grey11" />
+                android:textColor="@color/grey11"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewNomeView"
@@ -77,7 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="Telefone:"
-                android:textColor="@color/grey11" />
+                android:textColor="@color/grey11"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewTelefoneView"
@@ -101,14 +103,14 @@
                 android:layout_marginRight="5dp"
                 android:text="@string/cep"
                 android:textColor="@color/grey11"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewCepView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,14 +128,14 @@
                 android:layout_marginRight="5dp"
                 android:text="@string/n_casa"
                 android:textColor="@color/grey11"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewNumeroCasaView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -150,7 +152,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="Endereço:"
-                android:textColor="@color/grey11" />
+                android:textColor="@color/grey11"
+                android:textSize="16sp" />
 
 
         </LinearLayout>
@@ -193,7 +196,7 @@
             android:paddingRight="10dp"
             android:text="@string/forma_de_pagamento"
             android:textColor="@color/grey11"
-            android:textSize="15sp" />
+            android:textSize="16sp" />
 
     </FrameLayout>
 
@@ -231,7 +234,7 @@
             android:paddingRight="10dp"
             android:text="@string/opcoes_de_entrega"
             android:textColor="@color/grey11"
-            android:textSize="15sp" />
+            android:textSize="16sp" />
 
     </FrameLayout>
 
@@ -269,7 +272,7 @@
             android:paddingRight="10dp"
             android:text="Status do pedido"
             android:textColor="@color/grey11"
-            android:textSize="15sp" />
+            android:textSize="16sp" />
     </FrameLayout>
 
     <LinearLayout
@@ -302,7 +305,7 @@
                 android:layout_weight="1"
                 android:text="N° 152456"
                 android:textColor="@color/grey11"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="normal" />
 
             <TextView
@@ -327,7 +330,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/status"
-                android:textColor="@color/grey11" />
+                android:textColor="@color/grey11"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView34"
@@ -336,7 +340,8 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="@string/data"
-                android:textColor="@color/grey11" />
+                android:textColor="@color/grey11"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -365,7 +370,7 @@
                 android:layout_weight="1"
                 android:text="@string/subTotal"
                 android:textColor="@color/grey11"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewSubTotalView"
@@ -374,7 +379,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="R$ 0,00"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -393,7 +398,7 @@
                 android:layout_weight="1"
                 android:text="@string/taxa_entrega"
                 android:textColor="@color/grey11"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewTaxa_entregaView"
@@ -402,7 +407,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="R$ 0,00"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -421,7 +426,7 @@
                 android:layout_weight="1"
                 android:text="@string/total"
                 android:textColor="@color/grey11"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewTotalView"
@@ -431,7 +436,7 @@
                 android:gravity="right"
                 android:text="R$ 0,00"
                 android:textColor="@color/grey11"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -460,7 +465,7 @@
                 android:paddingRight="10dp"
                 android:text="@string/itens"
                 android:textColor="@color/grey11"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
         </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView

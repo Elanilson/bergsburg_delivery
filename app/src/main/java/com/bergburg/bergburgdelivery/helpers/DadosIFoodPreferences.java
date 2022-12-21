@@ -12,10 +12,11 @@ public class DadosIFoodPreferences {
 
 
 
-    private final String NOME_ARQUIVO = "rerere.preferencias";
+    private final String NOME_ARQUIVO = "ifood.preferencias";
     private  String CHAVE_ID_PEIDO = "PEDIDO";
     private  String CHAVE_LINK = "LINK";
     private  String CHAVE_TOKEN_IFOOD = "token";
+    private  String CHAVE_TOKEN_REFES_IFOOD = "token_refres";
 
 
 
@@ -35,8 +36,9 @@ public class DadosIFoodPreferences {
         editor.commit();
     }
 
-    public void salvarTokenIFood(String token){
+    public void salvarTokenIFood(String token,String refresh_token){
         editor.putString(CHAVE_TOKEN_IFOOD, token );
+        editor.putString(CHAVE_TOKEN_REFES_IFOOD, refresh_token );
         editor.commit();
     }
 
@@ -49,6 +51,9 @@ public class DadosIFoodPreferences {
     }
     public String recuperarToken(){
         return preferences.getString(CHAVE_TOKEN_IFOOD, "");
+    }
+    public String recuperarTokenRefresh(){
+        return preferences.getString(CHAVE_TOKEN_REFES_IFOOD, "");
     }
 
 

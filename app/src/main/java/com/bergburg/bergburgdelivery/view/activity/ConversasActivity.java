@@ -89,10 +89,14 @@ public class ConversasActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Conversas> conversas) {
                 if(conversas != null){
+                    System.out.println(conversas.toString());
                     if(conversas.size() > 0){
+                        System.out.println("Total de conversas "+conversas.size());
+                        binding.progressBarConversas.setVisibility(View.GONE);
                         binding.textViewSemUsuario.setVisibility(View.GONE);
                         adapter.attackConversas(conversas);
                     }else{
+                        binding.progressBarConversas.setVisibility(View.VISIBLE);
                         binding.textViewSemUsuario.setVisibility(View.VISIBLE);
                         if( contador_de_tentativa <= tentativa){
                             viewModel.getConversas();

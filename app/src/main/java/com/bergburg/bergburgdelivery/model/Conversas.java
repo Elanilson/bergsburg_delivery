@@ -7,8 +7,16 @@ public class Conversas{
     private String nome;
     private String data_create;
 
-
-
+    @Override
+    public String toString() {
+        return "Conversas{" +
+                "id=" + id +
+                ", idUsuario=" + idUsuario +
+                ", idReceptor=" + idReceptor +
+                ", nome='" + nome + '\'' +
+                ", data_create='" + data_create + '\'' +
+                '}';
+    }
 
     public Long getId() {
         return id;

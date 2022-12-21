@@ -153,8 +153,9 @@ public class CadastroViewModel extends AndroidViewModel {
         System.out.println("endereco: "+endereco.toString());
 
         if(nome != null && !nome.isEmpty()){
-            if(senha1 != null && !senha1.isEmpty() && senha2 != null && !senha2.isEmpty() && senha1.length() > 4){
+            if(senha1 != null && !senha1.isEmpty() && senha2 != null && !senha2.isEmpty() ){
                 if(senha1.equalsIgnoreCase(senha2)){
+                if(senha1.length() > 4){
                     if(telefone != null && !telefone.isEmpty()){
                     if(telefone.length() == 12){
                         if(endereco.getRua() != null && !endereco.getRua().isEmpty()){
@@ -195,43 +196,46 @@ public class CadastroViewModel extends AndroidViewModel {
                                                     }
 
                                                 }else{
-                                                    _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
+                                                    _Resposta.setValue(new Resposta("Informar  o número da casa."));
                                                 }
                                             }else {
-                                                _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
+                                                _Resposta.setValue(new Resposta("Informar  o estado."));
                                             }
                                         }else {
-                                            _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
+                                            _Resposta.setValue(new Resposta("Latitude e Longitude incorretos."));
                                         }
                                     }else {
-                                        _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
+                                        _Resposta.setValue(new Resposta("Informar  o CEP."));
                                     }
                                 }else {
-                                    _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
+                                    _Resposta.setValue(new Resposta("Informar  a cidade."));
                                 }
                             }else{
-                                _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
+                                _Resposta.setValue(new Resposta("Informar  o bairro."));
                             }
                         }else{
-                            _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
+                            _Resposta.setValue(new Resposta("Informar  o nome da rua."));
                         }
+                    }else{
+                        _Resposta.setValue(new Resposta("Informar  um número de telefone valido!"));
+                    }
 
                     }else{
-                        _Resposta.setValue(new Resposta("Informe um número valido!"));
+                        _Resposta.setValue(new Resposta("Informar  um número de telefone valido!"));
                     }
                     }else{
-                        _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
+                        _Resposta.setValue(new Resposta("A senha deve ter pelo menos 5 caracteres"));
                     }
                 }else{
                     _Resposta.setValue(new Resposta("As senhas não conferem"));
                 }
 
             }else{
-                _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
+                _Resposta.setValue(new Resposta("Informar  uma senha."));
             }
 
         }else{
-            _Resposta.setValue(new Resposta("Todos os campos são obrigatórios"));
+            _Resposta.setValue(new Resposta("Informar  o nome."));
         }
 
 

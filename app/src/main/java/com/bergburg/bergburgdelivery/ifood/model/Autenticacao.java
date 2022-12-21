@@ -7,6 +7,8 @@ public class Autenticacao {
     private String tipo;
     @SerializedName("accessToken")
     private String tokenDeAcesso;
+    @SerializedName("refreshToken")
+    private String refreshToken;
     @SerializedName("expiresIn")
     private String tempoDeExpiracao;
 
@@ -16,8 +18,17 @@ public class Autenticacao {
         return "Autenticacao{" +
                 "tipo='" + tipo + '\'' +
                 ", tokenDeAcesso='" + tokenDeAcesso + '\'' +
+                ", refreshToken='" + refreshToken + '\'' +
                 ", tempoDeExpiracao='" + tempoDeExpiracao + '\'' +
                 '}';
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     public String getTipo() {

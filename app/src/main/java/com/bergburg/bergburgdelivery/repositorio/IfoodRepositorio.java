@@ -45,6 +45,9 @@ public class IfoodRepositorio {
     private  String  grantType ;
     private  String  clientId ;
     private  String  clientSecret ;
+    private  String  authorizationCode ;
+  //  private  String  refresh_token ;
+    private  String  authorizationCodeVerifier ;
     private Cliente cliente = new Cliente();
     private EnderecoDeEntrega enderecoDeEntrega = new EnderecoDeEntrega();
     private Entrega entrega = new Entrega();
@@ -68,19 +71,55 @@ public class IfoodRepositorio {
          grantType = context.getString(R.string.grantType);
          clientId = context.getString(R.string.clientId);
          clientSecret = context.getString(R.string.clientSecret);
+       // refresh_token = context.getString(R.string.refresh_token);
+         authorizationCode = context.getString(R.string.authorizationCode);
+         authorizationCodeVerifier = context.getString(R.string.authorizationCodeVerifier);
     }
 
 
-    public void autenticar(APIListener<Autenticacao> listener){
+    public void autenticar(APIListener<Autenticacao> listener ){
         Call<Autenticacao> call = service.autenticar(grantType,clientId,clientSecret);
         call.enqueue(new Callback<Autenticacao>() {
             @Override
             public void onResponse(Call<Autenticacao> call, Response<Autenticacao> response) {
                 if(response.isSuccessful()){
                     listener.onSuccess(response.body());
+                    System.out.println("autenticar "+response.body().toString());
 
                 }else{
-                    System.out.println("apkdoandroid: "+response.errorBody());
+                    System.out.println("autenticar: "+response.errorBody());
+                    try {
+                        String json = response.errorBody().string();
+                        Gson gson = new GsonBuilder().create();
+                        Error obj = gson.fromJson(json, Error.class);
+                        listener.onFailures(obj.getMensagem() + " Tente novamente");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Autenticacao> call, Throwable t) {
+                listener.onFailures(t.getMessage());
+
+            }
+        });
+
+    }
+
+    public void renovarToken(APIListener<Autenticacao> listener,String refresh_token){
+        Call<Autenticacao> call = service.renovarToken(grantType,clientId,clientSecret,refresh_token);
+        call.enqueue(new Callback<Autenticacao>() {
+            @Override
+            public void onResponse(Call<Autenticacao> call, Response<Autenticacao> response) {
+                    System.out.println("renovarToken - Code "+response.code());
+                if(response.isSuccessful()){
+                    System.out.println("renovarToken "+response.body().toString());
+                    listener.onSuccess(response.body());
+
+                }else{
+                    System.out.println("renovarToken: "+response.errorBody());
                     try {
                         String json = response.errorBody().string();
                         Gson gson = new GsonBuilder().create();
@@ -107,11 +146,11 @@ public class IfoodRepositorio {
             @Override
             public void onResponse(Call<List<EventoPedido>> call, Response<List<EventoPedido>> response) {
                 if(response.isSuccessful()){
-                    System.out.println("resposta: "+response.code());
+                    System.out.println("verificarEventos : "+response.code());
                     listener.onSuccess(response.body());
 
                 }else{
-                    System.out.println("apkdoandroid: "+response.errorBody());
+                    System.out.println("verificarEventos: "+response.errorBody());
                     try {
                         String json = response.errorBody().string();
                         Gson gson = new GsonBuilder().create();
@@ -159,6 +198,42 @@ public class IfoodRepositorio {
             }
         });
     }*/
+
+
+    public void despachar(APIListener<Boolean> listener,String idPedido){
+        // String idPedido = "a0af51da-72ff-44dc-9950-a09912d00f12";
+        Call<Void> call = service.despachar(idPedido);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 202){
+                    listener.onSuccess(true);
+                }else{
+                    try {
+                        String json = response.errorBody().string();
+                        Gson gson = new GsonBuilder().create();
+                        Error obj = gson.fromJson(json, Error.class);
+                        listener.onFailures(obj.getMensagem() + " Tente novamente");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    listener.onSuccess(false);
+                }
+
+
+                System.out.println("Code: "+response.code());
+                System.out.println("Body: "+response.body());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                listener.onFailures(t.getMessage());
+            }
+        });
+
+    }
 
     public void confirmarPedido(APIListener<Boolean> listener,String idPedido){
        // String idPedido = "a0af51da-72ff-44dc-9950-a09912d00f12";
@@ -334,7 +409,7 @@ public class IfoodRepositorio {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
 
-                    if(response.code() == 202){
+                    if(response.code() == 202 || response.code() == 204 ){
                         listener.onSuccess(true);
                     }else{
                         listener.onSuccess(false);
@@ -377,7 +452,7 @@ public class IfoodRepositorio {
                       Gson gson = new GsonBuilder().create();
                       Error obj = gson.fromJson(json, Error.class);
                       listener.onFailures(obj.getMensagem() + " Tente novamente");
-                  } catch (IOException | IllegalStateException e) {
+                  } catch (Exception  e) {
                       e.printStackTrace();
                   }
 

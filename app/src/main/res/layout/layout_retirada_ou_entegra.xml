@@ -156,6 +156,15 @@
                 android:visibility="gone"
                 tools:visibility="visible" />
 
+            <ProgressBar
+                android:id="@+id/progressBarVerificandoDisponibilidade"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/grey11"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
             <LinearLayout
                 android:id="@+id/layoutInfoIfood"
                 android:layout_width="match_parent"

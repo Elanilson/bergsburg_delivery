@@ -28,6 +28,7 @@ import com.bergburg.bergburgdelivery.model.Mensagem;
 import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.model.Usuario;
 import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClient;
+import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClientIFood;
 import com.bergburg.bergburgdelivery.view.activity.LoginActivity;
 import com.bergburg.bergburgdelivery.view.fragment.ContaFragment;
 import com.bergburg.bergburgdelivery.view.fragment.HomeFragment;
@@ -95,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
         preferences = new DadosPreferences(MainActivity.this);
 
         viewModelIFood.verificarEvento();
+        if(preferencesIFood.recuperarToken() != null ){
+            RetrofitClientIFood.novoToken(preferencesIFood.recuperarToken());
+        }else{
+            viewModelIFood.renovarToken(preferencesIFood.recuperarTokenRefresh(),MainActivity.this);
+        }
 
 
 
@@ -184,8 +190,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Autenticacao autenticacao) {
                 if(autenticacao.getTokenDeAcesso() != null && !autenticacao.getTokenDeAcesso().isEmpty()){
-                    preferencesIFood.salvarTokenIFood(autenticacao.getTokenDeAcesso());
+                    preferencesIFood.salvarTokenIFood(autenticacao.getTokenDeAcesso(), autenticacao.getRefreshToken());
                     viewModelIFood.verificarEvento();
+                    System.out.println("Autenticado");
                 }
             }
         });
@@ -193,12 +200,8 @@ public class MainActivity extends AppCompatActivity {
         viewModelIFood.resposta.observe(this, new Observer<Resposta>() {
             @Override
             public void onChanged(Resposta resposta) {
-                if(!resposta.getStatus()){
-                    if(resposta.getMensagem().equalsIgnoreCase("token expired Tente novamente") || resposta.getMensagem().equalsIgnoreCase("no jwt token Tente novamente")){
-                        viewModelIFood.autenticar();
-                    }
-                    // Toast.makeText(getActivity(), resposta.getMensagem(), Toast.LENGTH_SHORT).show();
-                }
+                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "+resposta.getMensagem());
+
             }
         });
         mainViewModel.resposta.observe(this, new Observer<Resposta>() {
@@ -400,7 +403,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         ticker = false;
         statusActivity = false;
-        RetrofitClient.CancelarRequisicoes();
+      //  RetrofitClient.CancelarRequisicoes();
 
     }
 

@@ -44,6 +44,8 @@ import com.bergburg.bergburgdelivery.model.Estabelicimento;
 import com.bergburg.bergburgdelivery.model.ItensSacola;
 import com.bergburg.bergburgdelivery.model.Resposta;
 import com.bergburg.bergburgdelivery.model.Usuario;
+import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClientIFood;
+import com.bergburg.bergburgdelivery.view.activity.PaineliFoodActivity;
 import com.bergburg.bergburgdelivery.viewmodel.ExibirPedidoViewModel;
 import com.bergburg.bergburgdelivery.viewmodel.SacolaViewModel;
 import com.bergburg.bergburgdelivery.viewmodel.IFoodMainViewModel;
@@ -93,6 +95,8 @@ public class SacolaFragment extends Fragment {
     private TextView frete_pedido,total_pedido;
     private Float taxa_de_entregaTemporariaDoRestaurante = 0f;
     private DadosIFoodPreferences preferencesIFood ;
+    private ProgressBar progressBarFrete;
+    private AlertDialog alertToken;
 
 
     @Override
@@ -315,6 +319,7 @@ public class SacolaFragment extends Fragment {
         progressBarEnvioPedido = dialog.findViewById(R.id.progressBarPedidoEnviado);
          textViewInfoFreteIfood = dialog.findViewById(R.id.textViewInfoDoFrenteIfood);
          linearLayoutInfoIfood = dialog.findViewById(R.id.layoutInfoIfood);
+          progressBarFrete = dialog.findViewById(R.id.progressBarVerificandoDisponibilidade);
 
         cep.setText(enderecoUsuario.getCep());
         numeroCasa.setText(enderecoUsuario.getNumeroCasa());
@@ -355,6 +360,8 @@ public class SacolaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 viewModelIFood.verificarFreteIfood(enderecoUsuario);
+                progressBarFrete.setVisibility(View.VISIBLE);
+
 
             }
         });
@@ -395,9 +402,10 @@ public class SacolaFragment extends Fragment {
                     case R.id.radioButtonEntregaPeloIfood:
                         enderecoConfirmado = false;
                         confirmarEndereco.setChecked(false);
+                        confirmarEndereco.setVisibility(View.GONE);
                         total_pedido.setText("Carregando");
                         frete_pedido.setText("Carregando");
-                        viewModelIFood.verificarFreteIfood(enderecoUsuario);
+                      //  viewModelIFood.verificarFreteIfood(enderecoUsuario);
                         buttonVerificarDisponibilidadeEntregaIfood.setVisibility(View.VISIBLE);
                         linearLayoutInfoIfood.setVisibility(View.GONE);
                         opcaoEntrega = getString(R.string.entregador_Parceiro_do_ifood);
@@ -490,11 +498,14 @@ public class SacolaFragment extends Fragment {
             @Override
             public void onChanged(Autenticacao autenticacao) {
                 if(autenticacao.getTokenDeAcesso() != null && !autenticacao.getTokenDeAcesso().isEmpty()){
-                    preferencesIFood.salvarTokenIFood(autenticacao.getTokenDeAcesso());
+                    preferencesIFood.salvarTokenIFood(autenticacao.getTokenDeAcesso(), autenticacao.getRefreshToken());
+                    RetrofitClientIFood.novoToken(autenticacao.getTokenDeAcesso()); //inserindo o novo token de acesso
+                    Toast.makeText(getActivity(), "Autenticação renovada", Toast.LENGTH_SHORT).show();
+                    confirmarEndereco.setVisibility(View.VISIBLE);
+
                     //viewModelIFood.verificarEvento();
                    // preferencesIFood.salvarTokenIFood("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI1OGJmNmY4Yy02YmUxLTRiNTYtYjUxYi03MzYyMzUzMDhjOTkiLCJhdWQiOlsic2hpcHBpbmciLCJjYXRhbG9nIiwicmV2aWV3IiwiZmluYW5jaWFsIiwibWVyY2hhbnQiLCJvcmRlciIsIm9hdXRoLXNlcnZlciJdLCJhcHBfbmFtZSI6IjU4YmY2ZjhjLTZiZTEtNGI1Ni1iNTFiLTczNjIzNTMwOGM5OSIsIm93bmVyX25hbWUiOiIiLCJzY29wZSI6WyJzaGlwcGluZyIsImNhdGFsb2ciLCJyZXZpZXciLCJtZXJjaGFudCIsIm9yZGVyIiwiY29uY2lsaWF0b3IiXSwiaXNzIjoiaUZvb2QiLCJtZXJjaGFudF9zY29wZSI6WyJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6bWVyY2hhbnQiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6Y2F0YWxvZyIsImRmNmIwNDhkLTM1NzAtNDI4Ny05MjhhLTk0NmM1ZDBkMjc0MjpyZXZpZXciLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6b3JkZXIiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6Y29uY2lsaWF0b3IiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6c2hpcHBpbmciXSwiZXhwIjoxNjcxMTQ4Mjk1LCJpYXQiOjE2NzExMjY2OTUsImp0aSI6IjU4YmY2ZjhjLTZiZTEtNGI1Ni1iNTFiLTczNjIzNTMwOGM5OSIsIm1lcmNoYW50X3Njb3BlZCI6dHJ1ZSwiY2xpZW50X2lkIjoiNThiZjZmOGMtNmJlMS00YjU2LWI1MWItNzM2MjM1MzA4Yzk5In0.UKAgTCoeGc5RavqnQJ314dheP-2rE0EPs8e77_cw2hGUS2mqqS4kf5B3k3vrHDVdnJXF4rAKkZ0UoT32K4aYKWSy_YZ2C5DDEICKZZMIrwURfXWpAB6jsNNcFj48lY9lwW8rjPBl7j4ZOJTjFaYdheSsLXM3PWKtEAoPJogHVjQ");
-                    viewModelIFood.verificarFreteIfood(enderecoUsuario);
-                    Toast.makeText(getActivity(), "Autenticado!", Toast.LENGTH_SHORT).show();
+                    //viewModelIFood.verificarFreteIfood(enderecoUsuario);
                 }
             }
         });
@@ -502,6 +513,8 @@ public class SacolaFragment extends Fragment {
             @Override
             public void onChanged(RespostaDisponibilidadeDeEntrega respostaDisponibilidadeDeEntrega) {
                if(respostaDisponibilidadeDeEntrega != null){
+                   confirmarEndereco.setVisibility(View.VISIBLE);
+                   enderecoConfirmado = false;
                    Float valorDoFrete = respostaDisponibilidadeDeEntrega.getCitar().getValorLiquido();
                    taxa_de_entrega_IFOOD = valorDoFrete;
                    frete_pedido.setText("R$ "+String.format("%.2f", taxa_de_entrega_IFOOD));
@@ -510,10 +523,11 @@ public class SacolaFragment extends Fragment {
                    valor_do_frete = Float.parseFloat(formatCasaDecimal.format(taxa_de_entrega_IFOOD).replace(",",".")); //formatando
                    System.out.println("frete "+respostaDisponibilidadeDeEntrega.toString());
                    textViewInfoFreteIfood.setText("Há entregadores disponíveis  para sua localidade, o valor de frete será R$ "+valorDoFrete);
-                  // System.out.println("apkdoandroid: "+respostaDisponibilidadeDeEntrega.toString());
                    linearLayoutInfoIfood.setVisibility(View.VISIBLE);
 
+                  // System.out.println("apkdoandroid: "+respostaDisponibilidadeDeEntrega.toString());
                }
+                progressBarFrete.setVisibility(View.GONE);
             }
         });
         viewModelIFood.resposta.observe(getViewLifecycleOwner(), new Observer<Resposta>() {
@@ -524,14 +538,36 @@ public class SacolaFragment extends Fragment {
                     confirmarEndereco.setVisibility(View.GONE);
                     enderecoConfirmado = false;
                     textViewInfoFreteIfood.setText(resposta.getMensagem());
-                    if(resposta.getMensagem().equalsIgnoreCase("token expired Tente novamente") || resposta.getMensagem().equalsIgnoreCase("no jwt token Tente novamente")){
-                        viewModelIFood.autenticar();
+                    if(resposta.getMensagem().equalsIgnoreCase("token expired Tente novamente") ||
+                            resposta.getMensagem().equalsIgnoreCase("no jwt token Tente novamente") ||
+                            resposta.getMensagem().equalsIgnoreCase("null Tente novamente")
+                    ){
+                        alertToken =  new AlertDialog.Builder(binding.getRoot().getContext())
+                                .setTitle("Token expirado!")
+                                .setMessage("Por favor, é nescessário a renovação do token. Após renovação tente novamente!")
+                                .setPositiveButton("Renovar", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        viewModelIFood.renovarToken(preferencesIFood.recuperarTokenRefresh(), getActivity());
+                                        //viewModel.verificarEvento();
+
+                                    }
+                                })
+                                .setNegativeButton("Fechar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        alertToken = null;
+                                        viewModelIFood.verificarEvento();
+                                    }
+                                })
+                                .setIcon(R.drawable.ic_baseline_warning_24)
+                                .show();
                     }
                    // Toast.makeText(getActivity(), resposta.getMensagem(), Toast.LENGTH_SHORT).show();
                 }else{
                     confirmarEndereco.setVisibility(View.VISIBLE);
                     enderecoConfirmado = true;
                 }
+                progressBarFrete.setVisibility(View.GONE);
             }
         });
         viewModel.estabelicimento.observe(getViewLifecycleOwner(), new Observer<Estabelicimento>() {

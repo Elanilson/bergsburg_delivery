@@ -28,6 +28,15 @@ public interface IfoodService {
             @Field("clientSecret") String clientSecret
     );
 
+    @POST("authentication/v1.0/oauth/token")
+    @FormUrlEncoded
+    Call<Autenticacao> renovarToken(
+            @Field("grantType") String grantType,
+            @Field("clientId") String clientId,
+            @Field("clientSecret") String clientSecret,
+            @Field("refreshToken") String refresh_token
+    );
+
     @POST("order/v1.0/events/acknowledgment")
     Call<Void> reconhecerLimparEnventos(
             @Body List<EventoPedido> eventoPedidos
@@ -35,6 +44,10 @@ public interface IfoodService {
 
     @POST("order/v1.0/orders/{idPedido}/confirm")
     Call<Void> confirmarPedido(
+            @Path(value = "idPedido" , encoded = true) String idPedido
+    );
+    @POST("order/v1.0/orders/{idPedido}/dispatch")
+    Call<Void> despachar(
             @Path(value = "idPedido" , encoded = true) String idPedido
     );
 
