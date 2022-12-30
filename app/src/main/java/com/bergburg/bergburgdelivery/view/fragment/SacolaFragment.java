@@ -227,8 +227,7 @@ public class SacolaFragment extends Fragment {
             }
         };
 
-
-
+        viewModelIFood.renovarToken(preferencesIFood.recuperarTokenRefresh(), getActivity());
         sacolaAdapter.attackListener(onListenerAcao);
         observer();
 
@@ -500,8 +499,10 @@ public class SacolaFragment extends Fragment {
                 if(autenticacao.getTokenDeAcesso() != null && !autenticacao.getTokenDeAcesso().isEmpty()){
                     preferencesIFood.salvarTokenIFood(autenticacao.getTokenDeAcesso(), autenticacao.getRefreshToken());
                     RetrofitClientIFood.novoToken(autenticacao.getTokenDeAcesso()); //inserindo o novo token de acesso
-                    Toast.makeText(getActivity(), "Autenticação renovada", Toast.LENGTH_SHORT).show();
-                    confirmarEndereco.setVisibility(View.VISIBLE);
+                  //  Toast.makeText(getActivity(), "Autenticação renovada", Toast.LENGTH_SHORT).show();
+                    if(confirmarEndereco!= null){
+                         confirmarEndereco.setVisibility(View.VISIBLE);
+                    }
 
                     //viewModelIFood.verificarEvento();
                    // preferencesIFood.salvarTokenIFood("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI1OGJmNmY4Yy02YmUxLTRiNTYtYjUxYi03MzYyMzUzMDhjOTkiLCJhdWQiOlsic2hpcHBpbmciLCJjYXRhbG9nIiwicmV2aWV3IiwiZmluYW5jaWFsIiwibWVyY2hhbnQiLCJvcmRlciIsIm9hdXRoLXNlcnZlciJdLCJhcHBfbmFtZSI6IjU4YmY2ZjhjLTZiZTEtNGI1Ni1iNTFiLTczNjIzNTMwOGM5OSIsIm93bmVyX25hbWUiOiIiLCJzY29wZSI6WyJzaGlwcGluZyIsImNhdGFsb2ciLCJyZXZpZXciLCJtZXJjaGFudCIsIm9yZGVyIiwiY29uY2lsaWF0b3IiXSwiaXNzIjoiaUZvb2QiLCJtZXJjaGFudF9zY29wZSI6WyJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6bWVyY2hhbnQiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6Y2F0YWxvZyIsImRmNmIwNDhkLTM1NzAtNDI4Ny05MjhhLTk0NmM1ZDBkMjc0MjpyZXZpZXciLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6b3JkZXIiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6Y29uY2lsaWF0b3IiLCJkZjZiMDQ4ZC0zNTcwLTQyODctOTI4YS05NDZjNWQwZDI3NDI6c2hpcHBpbmciXSwiZXhwIjoxNjcxMTQ4Mjk1LCJpYXQiOjE2NzExMjY2OTUsImp0aSI6IjU4YmY2ZjhjLTZiZTEtNGI1Ni1iNTFiLTczNjIzNTMwOGM5OSIsIm1lcmNoYW50X3Njb3BlZCI6dHJ1ZSwiY2xpZW50X2lkIjoiNThiZjZmOGMtNmJlMS00YjU2LWI1MWItNzM2MjM1MzA4Yzk5In0.UKAgTCoeGc5RavqnQJ314dheP-2rE0EPs8e77_cw2hGUS2mqqS4kf5B3k3vrHDVdnJXF4rAKkZ0UoT32K4aYKWSy_YZ2C5DDEICKZZMIrwURfXWpAB6jsNNcFj48lY9lwW8rjPBl7j4ZOJTjFaYdheSsLXM3PWKtEAoPJogHVjQ");
@@ -513,7 +514,10 @@ public class SacolaFragment extends Fragment {
             @Override
             public void onChanged(RespostaDisponibilidadeDeEntrega respostaDisponibilidadeDeEntrega) {
                if(respostaDisponibilidadeDeEntrega != null){
-                   confirmarEndereco.setVisibility(View.VISIBLE);
+                   if(confirmarEndereco!= null){
+                         confirmarEndereco.setVisibility(View.VISIBLE);
+                   }
+
                    enderecoConfirmado = false;
                    Float valorDoFrete = respostaDisponibilidadeDeEntrega.getCitar().getValorLiquido();
                    taxa_de_entrega_IFOOD = valorDoFrete;

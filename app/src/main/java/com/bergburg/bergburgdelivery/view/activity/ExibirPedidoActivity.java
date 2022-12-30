@@ -250,8 +250,8 @@ public class ExibirPedidoActivity extends AppCompatActivity  {
             @Override
             public void onChanged(Resposta resposta) {
                 if(resposta.getStatus()){
-                    dialog.dismiss();
                 }
+                dialog.dismiss();
                 progressBarStatus.setVisibility(View.GONE);
                 Toast.makeText(ExibirPedidoActivity.this, resposta.getMensagem(), Toast.LENGTH_SHORT).show();
             }

@@ -4,12 +4,12 @@
     android:id="@+id/cardConversa"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
+    android:layout_marginLeft="5dp"
     android:layout_marginTop="5dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginRight="5dp"
     android:layout_marginBottom="5dp"
     app:cardCornerRadius="10dp"
-    app:cardElevation="5dp">
+    app:cardElevation="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:id="@+id/profile_imageContato"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:src="@drawable/perfil_padr"
+            android:src="@drawable/logoburgs_amarelo"
             app:civ_border_color="@android:color/transparent"
             app:civ_border_width="2dp" />
 

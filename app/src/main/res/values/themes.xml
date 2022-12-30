@@ -57,10 +57,7 @@
         <item name="android:textColor">@color/grey11</item>
     </style>
 
-    <style name="button_custom_laranja">
-        <item name="colorPrimary">@color/laranja</item>
-        <item name="android:textColor">@color/grey11</item>
-    </style>
+
 
     <style name="Theme.BergBurgDelivery.AppBarOverlay"
         parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
