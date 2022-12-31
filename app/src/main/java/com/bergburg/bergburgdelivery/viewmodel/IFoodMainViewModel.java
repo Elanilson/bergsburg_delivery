@@ -88,9 +88,11 @@ public class IFoodMainViewModel extends AndroidViewModel {
 
     public void renovarToken(String refresh_token, Context context){
         if(refresh_token != null){
+            System.out.println("apkdoandroid: token = "+refresh_token);
             if(!refresh_token.isEmpty()){
                 this.refresh_token = refresh_token;
             }else{
+                System.out.println("apkdoandroid: token =  vazio");
                 refresh_token = context.getString(R.string.refresh_token);
             }
         }else{
@@ -98,7 +100,7 @@ public class IFoodMainViewModel extends AndroidViewModel {
         }
 
 
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxx recebi "+refresh_token);
+      //  System.out.println("xxxxxxxxxxxxxxxxxxxxxx recebi "+refresh_token);
 
         APIListener<Autenticacao> listener = new APIListener<Autenticacao>() {
             @Override

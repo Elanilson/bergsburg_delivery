@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     private Boolean  btnDeslogado = false;
     public static Boolean statusActivity = false;
     private DadosIFoodPreferences preferencesIFood ;
+    private String status;
 
     private String[] permissoes = new String[]{
             Manifest.permission.ACCESS_FINE_LOCATION
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        String status = preferences.recuperarStatus();
+        status = preferences.recuperarStatus();
         System.out.println("Status recuperado: "+status);
         if(status != null){
             if(status.equalsIgnoreCase("Logado")){
@@ -117,21 +118,7 @@ public class MainActivity extends AppCompatActivity {
         idUsuario = preferences.recuperarID();
       //  System.out.println("Id_usuario.... "+idUsuario);
         bottomNavigationView = binding.bottomnavigation;
-        if(idUsuario != null && status != null){
-            if(idUsuario == Constantes.ADMIN && !status.equalsIgnoreCase(Constantes.DESLOGADO)){
-                bottomNavigationView.getMenu().clear(); //clear old inflated items.
-                bottomNavigationView.inflateMenu(R.menu.menu_admin);
-                getSupportFragmentManager().beginTransaction().replace(R.id.body_container,new PedidosFragment()).commit();
-            }else{
-                bottomNavigationView.getMenu().clear(); //clear old inflated items.
-                bottomNavigationView.inflateMenu(R.menu.menu_principal);
-                getSupportFragmentManager().beginTransaction().replace(R.id.body_container,new HomeFragment()).commit();
-            }
-        }else{
-            bottomNavigationView.getMenu().clear(); //clear old inflated items.
-            bottomNavigationView.inflateMenu(R.menu.menu_principal);
-            getSupportFragmentManager().beginTransaction().replace(R.id.body_container,new HomeFragment()).commit();
-        }
+        configFramgnts();
 
 
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -162,6 +149,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
         observe();
+    }
+    private void configFramgnts(){
+        System.out.println("apkdoandroid: idUsuario = "+preferences.recuperarID());
+        System.out.println("apkdoandroid: status = "+status);
+        if(idUsuario != null && status != null){
+            if(idUsuario == Constantes.ADMIN && !status.equalsIgnoreCase(Constantes.DESLOGADO)){
+                bottomNavigationView.getMenu().clear(); //clear old inflated items.
+                bottomNavigationView.inflateMenu(R.menu.menu_admin);
+                getSupportFragmentManager().beginTransaction().replace(R.id.body_container,new PedidosFragment()).commit();
+            }else{
+                bottomNavigationView.getMenu().clear(); //clear old inflated items.
+                bottomNavigationView.inflateMenu(R.menu.menu_principal);
+                getSupportFragmentManager().beginTransaction().replace(R.id.body_container,new HomeFragment()).commit();
+            }
+        }else{
+            bottomNavigationView.getMenu().clear(); //clear old inflated items.
+            bottomNavigationView.inflateMenu(R.menu.menu_principal);
+            getSupportFragmentManager().beginTransaction().replace(R.id.body_container,new HomeFragment()).commit();
+        }
     }
     private void startClock(){
         final Calendar calendar = Calendar.getInstance();
@@ -200,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         viewModelIFood.resposta.observe(this, new Observer<Resposta>() {
             @Override
             public void onChanged(Resposta resposta) {
-                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "+resposta.getMensagem());
+                System.out.println(resposta.getMensagem());
 
             }
         });
@@ -224,10 +230,18 @@ public class MainActivity extends AppCompatActivity {
                 usuarioAtual = usuario;
                 if(usuario != null){
                     if(usuario.getStatus() != null){
+                        System.out.println("apkdoandroid: status- "+usuario.getStatus());
                         if(usuario.getStatus().equalsIgnoreCase(Constantes.DESLOGADO)){
                             preferences.salvarContaAtivada("");
                             preferences.limpar();
                             logado = false;
+                            // voltando pro menu padrao
+                            if(idUsuario == Constantes.ADMIN){
+                                bottomNavigationView.getMenu().clear(); //clear old inflated items.
+                                bottomNavigationView.inflateMenu(R.menu.menu_principal);
+                                getSupportFragmentManager().beginTransaction().replace(R.id.body_container,new HomeFragment()).commit();
+                            }
+
                         }else{
                             preferences.salvarIdConversa(usuario.getIdConversa());
                             preferences.salvarIdUsuario(usuario.getId());
@@ -311,6 +325,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         this.menu = menu;
+        System.out.println("apkdoandroid: menu-logado "+logado);
         if(logado){
             menu.setGroupVisible(R.id.logado,true);
             menu.setGroupVisible(R.id.deslogado,false);
@@ -389,6 +404,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
+
     }
 
 

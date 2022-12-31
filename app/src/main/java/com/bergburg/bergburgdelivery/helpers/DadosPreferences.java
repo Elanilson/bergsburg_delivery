@@ -10,7 +10,7 @@ public class DadosPreferences {
     private SharedPreferences.Editor editor;
     private SharedPreferences.Editor editorEmail_Senha;
 
-    private final String NOME_ARQUIVO = "usuario.preferencias";
+    private final String NOME_ARQUIVO = "dados.preferencias";
     private final String ARQUIVO_EMAIL_SENHA = "login.preferencias";
     private final String CHAVE_ID = "idUsuario";
     private final String CHAVE_IDMENSAGEM = "idMensagem";
@@ -138,7 +138,9 @@ public class DadosPreferences {
         return preferencesEmail_Senha.getString(CHAVE_SENHA, "");
     }
     public void limpar(){
+        System.out.println("apkdoandroid: Limpando shared");
         context.deleteSharedPreferences(NOME_ARQUIVO);
+        editor.clear().commit();
      /*   context.deleteSharedPreferences(CHAVE_ID);
         context.deleteSharedPreferences(CHAVE_IDMENSAGEM);
         context.deleteSharedPreferences(CHAVE_IDConversa);

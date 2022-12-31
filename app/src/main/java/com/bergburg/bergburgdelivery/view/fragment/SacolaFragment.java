@@ -538,15 +538,19 @@ public class SacolaFragment extends Fragment {
             @Override
             public void onChanged(Resposta resposta) {
                 if(!resposta.getStatus()){
-                    linearLayoutInfoIfood.setVisibility(View.VISIBLE);
-                    confirmarEndereco.setVisibility(View.GONE);
-                    enderecoConfirmado = false;
-                    textViewInfoFreteIfood.setText(resposta.getMensagem());
+                    if(linearLayoutInfoIfood != null){
+                        linearLayoutInfoIfood.setVisibility(View.VISIBLE);
+                        confirmarEndereco.setVisibility(View.GONE);
+                        textViewInfoFreteIfood.setText(resposta.getMensagem());
+                    }
+                         enderecoConfirmado = false;
                     if(resposta.getMensagem().equalsIgnoreCase("token expired Tente novamente") ||
                             resposta.getMensagem().equalsIgnoreCase("no jwt token Tente novamente") ||
                             resposta.getMensagem().equalsIgnoreCase("null Tente novamente")
                     ){
-                        alertToken =  new AlertDialog.Builder(binding.getRoot().getContext())
+
+                        viewModelIFood.renovarToken(preferencesIFood.recuperarTokenRefresh(), getActivity());
+                     /*   alertToken =  new AlertDialog.Builder(binding.getRoot().getContext())
                                 .setTitle("Token expirado!")
                                 .setMessage("Por favor, é nescessário a renovação do token. Após renovação tente novamente!")
                                 .setPositiveButton("Renovar", new DialogInterface.OnClickListener() {
@@ -564,14 +568,17 @@ public class SacolaFragment extends Fragment {
                                     }
                                 })
                                 .setIcon(R.drawable.ic_baseline_warning_24)
-                                .show();
+                                .show();*/
                     }
                    // Toast.makeText(getActivity(), resposta.getMensagem(), Toast.LENGTH_SHORT).show();
                 }else{
                     confirmarEndereco.setVisibility(View.VISIBLE);
                     enderecoConfirmado = true;
                 }
-                progressBarFrete.setVisibility(View.GONE);
+
+                if(progressBarFrete != null){
+                      progressBarFrete.setVisibility(View.GONE);
+                }
             }
         });
         viewModel.estabelicimento.observe(getViewLifecycleOwner(), new Observer<Estabelicimento>() {
@@ -628,8 +635,8 @@ public class SacolaFragment extends Fragment {
             @Override
             public void onChanged(List<ItensSacola> itensSacola) {
 
-                if(itensSacola != null){
-                    if(itensSacola.size() > 0){
+                if(itensSacola != null && idUsuario != null){
+                    if(itensSacola.size() > 0 ){
                         binding.progressBarSacola.setVisibility(View.GONE);
                         binding.imageView3Lanches.setVisibility(View.GONE);
                         binding.textView3InfoLances.setVisibility(View.GONE);
@@ -787,6 +794,8 @@ public class SacolaFragment extends Fragment {
             binding.imageView3Lanches.setVisibility(View.VISIBLE);
             binding.textView3InfoLances.setVisibility(View.VISIBLE);
         }
+        System.out.println("apkdoandroid: usuario-status "+statusLogado);
+        System.out.println("apkdoandroid: usuario-id "+idUsuario);
     }
 
     @Override

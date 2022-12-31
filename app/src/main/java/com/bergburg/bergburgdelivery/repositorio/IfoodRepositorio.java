@@ -119,12 +119,12 @@ public class IfoodRepositorio {
                     listener.onSuccess(response.body());
 
                 }else{
-                    System.out.println("renovarToken: "+response.errorBody());
                     try {
                         String json = response.errorBody().string();
                         Gson gson = new GsonBuilder().create();
                         Error obj = gson.fromJson(json, Error.class);
                         listener.onFailures(obj.getMensagem() + " Tente novamente");
+                        System.out.println("renovarToken: errorBody = "+json);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
