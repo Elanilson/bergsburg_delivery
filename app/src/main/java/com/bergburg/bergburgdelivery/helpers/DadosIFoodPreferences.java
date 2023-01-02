@@ -42,6 +42,11 @@ public class DadosIFoodPreferences {
         editor.commit();
     }
 
+    public void salvarTokenIFoodRefresh(String refresh_token){
+        editor.putString(CHAVE_TOKEN_REFES_IFOOD, refresh_token );
+        editor.commit();
+    }
+
 
     public String recuperarLinkAcompanhamento(){
         return preferences.getString(CHAVE_LINK, "");

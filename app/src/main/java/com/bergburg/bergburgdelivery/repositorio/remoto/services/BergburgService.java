@@ -70,6 +70,14 @@ public interface BergburgService {
     Call<Dados> getToken(
             @Field("idUsuario") Long idUsuario);
 
+    @GET("getTokenRefreshiFood.php/")
+    Call<Dados> getTokenRefreshiFood();
+
+    @POST("salvarTokenRefreshIfood.php/")
+    @FormUrlEncoded
+    Call<Dados> salvarTokenRefreshIfood(
+            @Field("token") String token);
+
     @POST("getMensagens.php/")
     @FormUrlEncoded
     Call<Dados> getMensagens(

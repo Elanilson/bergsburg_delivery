@@ -91,30 +91,26 @@ public class IFoodMainViewModel extends AndroidViewModel {
             System.out.println("apkdoandroid: token = "+refresh_token);
             if(!refresh_token.isEmpty()){
                 this.refresh_token = refresh_token;
-            }else{
-                System.out.println("apkdoandroid: token =  vazio");
-                refresh_token = context.getString(R.string.refresh_token);
+                //  System.out.println("xxxxxxxxxxxxxxxxxxxxxx recebi "+refresh_token);
+
+                APIListener<Autenticacao> listener = new APIListener<Autenticacao>() {
+                    @Override
+                    public void onSuccess(Autenticacao result) {
+                        _Autenticacao.setValue(result);
+                    }
+
+                    @Override
+                    public void onFailures(String mensagem) {
+                        _Resposta.setValue(new Resposta(mensagem));
+
+                    }
+                };
+                repositorio.renovarToken(listener,refresh_token);
             }
-        }else{
-            refresh_token = context.getString(R.string.refresh_token);
         }
 
 
-      //  System.out.println("xxxxxxxxxxxxxxxxxxxxxx recebi "+refresh_token);
 
-        APIListener<Autenticacao> listener = new APIListener<Autenticacao>() {
-            @Override
-            public void onSuccess(Autenticacao result) {
-                _Autenticacao.setValue(result);
-            }
-
-            @Override
-            public void onFailures(String mensagem) {
-                _Resposta.setValue(new Resposta(mensagem));
-
-            }
-        };
-        repositorio.renovarToken(listener,refresh_token);
 
     }
     // Receber pedido

@@ -37,7 +37,7 @@ import java.util.UUID;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+//https://developer.ifood.com.br/pt-BR/docs/guides/authentication#expira%C3%A7%C3%A3o-de-c%C3%B3digos-e-tokens
 public class IfoodRepositorio {
     private Context context;
     private IfoodService service ;
@@ -108,6 +108,8 @@ public class IfoodRepositorio {
 
     }
 
+    // refresh_token é Valido por 7 dias.
+    // depois disso o token utilizado não for renovado tem que fazer o processo tudo de novo para ter o novo refresh_token
     public void renovarToken(APIListener<Autenticacao> listener,String refresh_token){
         Call<Autenticacao> call = service.renovarToken(grantType,clientId,clientSecret,refresh_token);
         call.enqueue(new Callback<Autenticacao>() {

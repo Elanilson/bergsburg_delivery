@@ -41,6 +41,7 @@ public class MainViewModel extends AndroidViewModel {
                 }else{
                     System.out.println("Não foi possível enviar o token");
                 }
+
             }
 
             @Override
@@ -76,6 +77,58 @@ public class MainViewModel extends AndroidViewModel {
             }
         };
         repositorio.getToken(listener,idUsuario);
+    }
+
+    public void getTokenRefreshIFood(){
+        APIListener<Dados> listener = new APIListener<Dados>() {
+            @Override
+            public void onSuccess(Dados result) {
+
+                if(result.getToken() != null){
+                    if(result.getToken().getId() != null){
+                        _Token.setValue(result.getToken());
+                        System.out.println("TokenRefresh recebido: "+result.getToken().getToken());
+                    }
+                }else{
+                    _Token.setValue(new Token());
+                    System.out.println("Token não recebido");
+                }
+
+            }
+
+            @Override
+            public void onFailures(String mensagem) {
+                _Resposta.setValue(new Resposta(mensagem));
+
+            }
+        };
+        repositorio.getTokenRefrshIFood(listener);
+    }
+
+    public void enviarTokenRefreshIfood( String token ){
+        if(token != null){
+            if(!token.isEmpty()){
+                APIListener<Dados> listener = new APIListener<Dados>() {
+                    @Override
+                    public void onSuccess(Dados result) {
+
+                        if(result.getStatus()){
+                            System.out.println("token refrest enviado");
+                        }else{
+                            System.out.println("Não foi possível enviar o token");
+                        }
+                    }
+
+                    @Override
+                    public void onFailures(String mensagem) {
+                        _Resposta.setValue(new Resposta(mensagem));
+
+                    }
+                };
+                repositorio.enviarTokenRefrshIFood(listener,token);
+            }
+        }
+
     }
 
     public void enviarNotificacao(String token,String titulo, String mensagem,Long idUsuario,Long idConversa ){

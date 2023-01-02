@@ -26,6 +26,7 @@ import com.bergburg.bergburgdelivery.helpers.DadosPreferences;
 import com.bergburg.bergburgdelivery.ifood.model.Autenticacao;
 import com.bergburg.bergburgdelivery.model.Mensagem;
 import com.bergburg.bergburgdelivery.model.Resposta;
+import com.bergburg.bergburgdelivery.model.Token;
 import com.bergburg.bergburgdelivery.model.Usuario;
 import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClient;
 import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClientIFood;
@@ -96,12 +97,13 @@ public class MainActivity extends AppCompatActivity {
 
         preferences = new DadosPreferences(MainActivity.this);
 
+        mainViewModel.getTokenRefreshIFood();
         viewModelIFood.verificarEvento();
-        if(preferencesIFood.recuperarToken() != null ){
+       /* if(preferencesIFood.recuperarToken() != null ){
             RetrofitClientIFood.novoToken(preferencesIFood.recuperarToken());
-        }else{
+        }else{*/
             viewModelIFood.renovarToken(preferencesIFood.recuperarTokenRefresh(),MainActivity.this);
-        }
+      //  }
 
 
 
@@ -192,10 +194,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void observe() {
+        mainViewModel.token.observe(this, new Observer<Token>() {
+            @Override
+            public void onChanged(Token token) {
+                if(token != null){
+                    if(token.getToken() != null){
+                        if(!token.getToken().isEmpty()){
+                            preferencesIFood.salvarTokenIFoodRefresh(token.getToken());
+                        }
+                    }
+                }
+            }
+        });
         viewModelIFood.autenticacao.observe(this, new Observer<Autenticacao>() {
             @Override
             public void onChanged(Autenticacao autenticacao) {
                 if(autenticacao.getTokenDeAcesso() != null && !autenticacao.getTokenDeAcesso().isEmpty()){
+                    mainViewModel.enviarTokenRefreshIfood(autenticacao.getRefreshToken());
                     preferencesIFood.salvarTokenIFood(autenticacao.getTokenDeAcesso(), autenticacao.getRefreshToken());
                     viewModelIFood.verificarEvento();
                     System.out.println("Autenticado");
