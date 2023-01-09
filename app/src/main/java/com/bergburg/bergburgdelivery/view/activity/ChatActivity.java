@@ -30,6 +30,7 @@ import com.bergburg.bergburgdelivery.model.Token;
 import com.bergburg.bergburgdelivery.repositorio.remoto.RetrofitClient;
 import com.bergburg.bergburgdelivery.viewmodel.ChatViewModel;
 import com.bergburg.bergburgdelivery.viewmodel.MainViewModel;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,6 +53,7 @@ public class ChatActivity extends AppCompatActivity {
     private String tituloMensagem = "Nova mensagem";
     private  String titulo = "";
     private Boolean verSacola = false;
+    private  String topico = "cliente";
 
 
     @Override
@@ -149,6 +151,7 @@ public class ChatActivity extends AppCompatActivity {
                     /*    Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             public void run() {*/
+                        System.out.println("Admin buscando o token do cliente");
                                 mainViewModel.getToken(idUsuario);
 
                           /*  }
@@ -163,6 +166,7 @@ public class ChatActivity extends AppCompatActivity {
                       /*  Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             public void run() {*/
+                        System.out.println("Cliente buscando o token do cliente");
                                 mainViewModel.getToken(Constantes.ADMIN);
 
                            /* }
@@ -171,7 +175,7 @@ public class ChatActivity extends AppCompatActivity {
                     }
 
                 }else{// quando não venho de uma tela de usuario ( quando rebo dados para quem enviar) aqui e sempre pro admin
-
+                    System.out.println("Admin buscando o token do cliente -2");
                         mainViewModel.getToken(Constantes.ADMIN);
 
                 }
@@ -262,7 +266,20 @@ public class ChatActivity extends AppCompatActivity {
                 if(resposta.getStatus()){
                     if(resposta.getMensagem().equalsIgnoreCase(Constantes.ENVIADO)){
                       binding.textViewInfo.setVisibility(View.GONE);
-                      mainViewModel.enviarNotificacao(tokenAtual.getToken(), tituloMensagem,mensagemEnviada,idUsuario,idConversa);
+                      
+                        if(preferences.recuperarID() != null){
+                            if(!preferences.recuperarID().equals(Constantes.ADMIN)){
+                                //FirebaseMessaging.getInstance().unsubscribeFromTopic("admin");
+                                topico = "admin";
+                            }
+                        }
+
+
+                        if(topico.equalsIgnoreCase("cliente")){
+                           mainViewModel.enviarNotificacao(tokenAtual.getToken(), tituloMensagem,mensagemEnviada,idUsuario,idConversa);
+                        }else{
+                           mainViewModel.enviarNotificacao("/topics/"+topico, tituloMensagem,mensagemEnviada,idUsuario,idConversa);
+                        }
                     }else{
                         binding.textViewInfo.setText("Aguardando conexão..");
                     }

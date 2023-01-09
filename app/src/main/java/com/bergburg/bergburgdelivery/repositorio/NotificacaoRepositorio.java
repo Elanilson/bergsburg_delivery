@@ -175,7 +175,7 @@ public class NotificacaoRepositorio {
                     }
 
                 }else{
-                    listener.onFailures("não recebir os dados "+mensagem+" - "+titulo+" - "+" - "+token);
+                    listener.onFailures(idUsuario+" ID Usuario não recebir os dados "+mensagem+" - "+titulo+" - "+" - "+token);
                 }
 
             }else{

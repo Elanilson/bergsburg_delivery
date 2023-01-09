@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
     private DadosIFoodPreferences preferencesIFood ;
     private String status;
 
+
     private String[] permissoes = new String[]{
             Manifest.permission.ACCESS_FINE_LOCATION
     };
@@ -252,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
                             logado = false;
                             // voltando pro menu padrao
                             if(idUsuario == Constantes.ADMIN){
+
                                 bottomNavigationView.getMenu().clear(); //clear old inflated items.
                                 bottomNavigationView.inflateMenu(R.menu.menu_principal);
                                 getSupportFragmentManager().beginTransaction().replace(R.id.body_container,new HomeFragment()).commit();
@@ -285,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(Resposta resposta) {
                 if(resposta.getStatus()){
                     if(resposta.getMensagem().equalsIgnoreCase(Constantes.DESLOGADO)){
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic("admin");
                         preferences.limpar();
                         menu.setGroupVisible(R.id.deslogado,true);
                     }
@@ -329,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deslogar() {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("admin");
         System.out.println("Quero deslogar");
         Long idUsuario = preferences.recuperarID();
         System.out.println("Deslogar: "+idUsuario);
@@ -373,11 +377,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String recuperarToken(){
+
+
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
             @Override
             public void onSuccess(String token) {
-                tokenUsuario = token;
-                System.out.println("token recuperado: "+token);
+                mainViewModel.enviarToken(idUsuario,token);
+                System.out.println("Token firebase recebido "+token);
+
             }
         });
         return tokenUsuario;
@@ -411,12 +418,21 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("id verificado usuario: "+idUsuario);
             loginViewModel.verificarUsuarioLogado(idUsuario);
         }
+
         if(idUsuario != null && logado != null){
             //  chatViewModel.getMensagens(idUsuario);
             if(logado.equalsIgnoreCase(Constantes.LOGADO)){
                 if(!btnDeslogado){
-                    mainViewModel.enviarToken(idUsuario,recuperarToken());
+                    recuperarToken();
+
                 }
+            }
+        }
+
+        //topico para todos os usuarios com conta admin receber notificação do chat
+        if(idUsuario != null){
+            if(idUsuario.equals(Constantes.ADMIN)){
+                FirebaseMessaging.getInstance().subscribeToTopic("admin");
             }
         }
 

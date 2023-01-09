@@ -32,7 +32,8 @@ public class MainViewModel extends AndroidViewModel {
         conversasRepositorio = new ConversasRepositorio(application.getBaseContext());
     }
 
-    public void enviarToken(Long idUsuario, String token ){
+    public void enviarToken(Long idUsuario, String token){
+        System.out.println("Dados para enviar token "+idUsuario+" token: "+token);
         APIListener<Dados> listener = new APIListener<Dados>() {
             @Override
             public void onSuccess(Dados result) {
@@ -65,7 +66,7 @@ public class MainViewModel extends AndroidViewModel {
                     }
                 }else{
                     _Token.setValue(new Token());
-                    System.out.println("Token não recebido");
+                    System.out.println("Token não recebido - idUSuario "+idUsuario);
                 }
 
             }

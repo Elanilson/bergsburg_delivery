@@ -599,6 +599,7 @@ public class SacolaFragment extends Fragment {
                     }else{
                         binding.buttonFazerPedido.setText(getString(R.string.continuar));
                         binding.buttonFazerPedido.setBackgroundColor(Color.YELLOW);
+                        binding.buttonFazerPedido.setTextColor(Color.BLACK);
                     }
                 }
                 System.out.println("Estabelicimento:2 "+estabelicimentoAtual.toString());
